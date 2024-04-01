@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jadwal_tab', function (Blueprint $table) {
+        Schema::create('menu_warung', function (Blueprint $table) {
             $table->id('id');
             $table->string('Kategori');
             $table->string('Nama');
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jadwal_tab');
+        Schema::dropIfExists('menu_warung');
     }
 };
