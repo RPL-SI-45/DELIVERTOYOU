@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\menu_warung;
+use App\Models\menu_warungs;
 
 class menuControl extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function seller_menu()
     {
-        $menu_warung = menu_warung::all();
+        $menu_warung = menu_warungs::all();
         return view('seller_menu',compact(['menu_warung']));
     }
 
@@ -21,16 +21,31 @@ class menuControl extends Controller
      */
     public function seller_menu_input()
     {
-        return view('/seller_menu_input');
+        return view('seller_menu_input');
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        menu_warung::create($request->except(['_token']));
-        return redirect('seller/menu');
+    {   
+    
+        menu_warungs::create($request->except(['_token']));
+      
+         if($request->hasfile('gambar')){
+            $request->file('gambar')->move('gambar_menu/', $request->file('gambar')->getClientOriginalName());
+            $menu_warung->gambar = $request->file('gambar')->getClientOriginalName();
+            $menu_warungs->save();
+
+
+         return redirect('seller/menu');
+
+         }
+
+        
+
+        
+        
     }
 
     /**

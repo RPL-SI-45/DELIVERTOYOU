@@ -5,35 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body>
-    <form action="/post" method='POST'>
+    <form action="/post" method='POST' enctype="multipart/form-data">
     @csrf
-    <h1> Keberangkatan </h1> 
+    <h1> Kategori </h1> 
     <input type="text" name="kategori" placeholder="Kategori"> <br>
-    <h1> Tujuan</h1> 
+    <h1> Nama</h1> 
     <input type="text" name="nama" placeholder="Nama">
-    <h1> Jam </h1> 
+    <h1> Harga </h1> 
     <input type="text" name="harga" placeholder="Harga">
-    <h1> Tanggal </h1> 
-    <input type="date" name="deskripsi" placeholder="Deskripsi"> <br>
+    <h1> Deskirpsi </h1> 
+    <input type="text" name="deskripsi" placeholder="Deskripsi"> <br>
     
-  
-
-    <form>
     <div class="form-group">
-        <label for="exampleFormControlFile1">Example file input</label>
-        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+        <label for="exampleFormControlFile1">Gambar menu</label>
+        <input type="file" class="form-control-file" id="exampleFormControlFile1" name="gambar">
     </div>
-  </form>
-
-    <br>
-    <br>
-    @section('content')
 
     <button type="submit" class="btn btn-success">Submit</button>
     <a href="/home" button type="button" class="btn btn-danger">Cancel</button>
     
+
+
 </body>
 </html>
 
