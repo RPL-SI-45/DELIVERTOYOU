@@ -12,15 +12,16 @@ class menuControl extends Controller
      */
     public function index()
     {
-        //
+        $menu_warung = menu_warung::all();
+        return view('seller_menu',compact(['menu_warung']));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function seller_menu_input()
     {
-        //
+        return view('/seller_menu_input');
     }
 
     /**
@@ -28,7 +29,8 @@ class menuControl extends Controller
      */
     public function store(Request $request)
     {
-        //
+        menu_warung::create($request->except(['_token']));
+        return redirect('seller/menu');
     }
 
     /**

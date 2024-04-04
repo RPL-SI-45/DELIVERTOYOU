@@ -21,4 +21,4 @@ Route::get('/', function () {
 
 #PENJUAL
 Route::get('/seller/menu', [menuControl::class,'seller_menu']);
-Route::get('/seller/menu/input', [menuControl::class,'Seller_menu_input']);
+Route::get('/seller/menu/input', [menuControl::class,'seller_menu_input']);

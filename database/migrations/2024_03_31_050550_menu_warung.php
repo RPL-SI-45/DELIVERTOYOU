@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('Nama');
             $table->string('Harga');
             $table->string('Deskripsi');
+            $table->string('gambar');
+
+
             $table->timestamps();
         });
     }
