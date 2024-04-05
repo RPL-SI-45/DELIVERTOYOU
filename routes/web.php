@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\menuControl;
+use App\Http\Controllers\statusControl;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,3 +27,7 @@ Route::post('/post',[menuControl::class,'store']);
 Route::get('/seller/{id}/menu/edit',[menuControl::class,'seller_menu_edit']);
 Route::put('seller/menu/{id}',[menuControl::class,'update']);
 Route::get('/menu/{id}',[menuControl::class,'destroy']);
+
+
+Route::get('/seller/status', [statusControl::class,'seller_status']);
+Route::get('/seller/status/detail', [statusControl::class,'seller_status_detail']);

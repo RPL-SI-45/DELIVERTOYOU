@@ -15,15 +15,18 @@
         <tr>
             <th>id</th>
             <th>kategori</th>
+            <th>nama</th>
             <th>harga</th>
             <th>deskirpsi</th>
             <th>gambar</th>
         </tr>
         @foreach($menu_warungs as $t)
+        
             <tr>
 
                 <td>{{$t->id}}</td>
                 <td>{{$t->kategori}}</td>
+                <td>{{$t->nama}}</td>
                 <td>{{$t->harga}}</td>
                 <td>{{$t->deskripsi}}</td>
                 <td>

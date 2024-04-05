@@ -12,8 +12,10 @@
     <form action="/seller/menu/{{$menu_warungs->id}}"  method='POST' enctype="multipart/form-data">
     @method('PUT')
     @csrf
-    <h1> Kategori </h1> 
-    <input type="text" name="kategori" placeholder="Kategori"> <br>
+    <select name="nama_kategori" class="form-control">
+    @foreach($kategori as $value)
+         <option value="{{ $value }}">{{ $value }}</option>
+     @endforeach
     <h1> Nama</h1> 
     <input type="text" name="nama" placeholder="Nama">
     <h1> Harga </h1> 

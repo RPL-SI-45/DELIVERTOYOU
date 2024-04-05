@@ -69,7 +69,9 @@ class menuControl extends Controller
     public function seller_menu_edit(int $id){
 
         $menu_warungs = menu_warungs::findOrFail($id);
-        return view('seller_menu_edit', compact('menu_warungs'));
+        $kategori = kategori::pluck('kategori')->toArray(); // Ubah nama_kolom dan id sesuai kebutuhan
+
+        return view('seller_menu_edit', compact('menu_warungs'))->with('kategori', $kategori);;
 
     }
 
@@ -97,7 +99,7 @@ class menuControl extends Controller
         }
 
         $menu_warungs->update([
-            'kategori' => $request->kategori,
+            'kategori' => $request->nama_kategori,
             'nama' => $request->nama,
             'harga' => $request->harga,
             'deskripsi' => $request->deskripsi,
