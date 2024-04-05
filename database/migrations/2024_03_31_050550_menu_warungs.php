@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('menu_warungs', function (Blueprint $table) {
             $table->id('id');
-            $table->string('Kategori');
-            $table->string('Nama');
-            $table->string('Harga');
-            $table->string('Deskripsi');
+            $table->string('kategori');
+            $table->string('nama');
+            $table->string('harga');
+            $table->string('deskripsi');
             $table->string('gambar');
 
 

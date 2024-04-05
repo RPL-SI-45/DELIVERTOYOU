@@ -19,7 +19,7 @@
             <th>deskirpsi</th>
             <th>gambar</th>
         </tr>
-        @foreach($menu_warung as $t)
+        @foreach($menu_warungs as $t)
             <tr>
 
                 <td>{{$t->id}}</td>
@@ -27,10 +27,12 @@
                 <td>{{$t->harga}}</td>
                 <td>{{$t->deskripsi}}</td>
                 <td>
-                    <img src ="{{ asset('gambar_menu/'.$t->gambar) }}" alt="">
+                    <img src ="{{ asset('gambar_menu/'.$t->gambar) }}" style="width: 70px; height:70px;" alt="">
                 </td>
-                <td><a href="{{$t->id}}/edit" button type="button" class="btn btn-primary">update</button></td>
-                <td><a href="/tiket/{{$t->id}}" button type="submit" class="btn btn-primary" value='delete'>delete</button> </td>
+                <td><a href="{{$t->id}}/menu/edit" button type="button" class="btn btn-primary">update</button></td>
+                
+                <td><a href="menu/{{$t->id}}" button type="submit" class="btn btn-primary" value='delete'>delete</button> </td>
+                
                 
             
             </tr>

@@ -10,5 +10,12 @@ class menu_warungs extends Model
 {
     use HasFactory;
     protected $table = 'menu_warungs';
-    protected $guarded= [];
+
+    protected $fillable = [
+        'kategori',
+        'nama',
+        'harga',
+        'deskripsi',
+        'gambar',  ];
+    protected $guarded= ['id'];
 }
