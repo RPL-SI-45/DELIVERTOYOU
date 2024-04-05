@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\menu_warungs;
+use App\Models\kategori;
 use Illuminate\Support\Facades\File;
+use Form;
 
 class menuControl extends Controller
 {
@@ -22,7 +24,11 @@ class menuControl extends Controller
      */
     public function seller_menu_input()
     {
-        return view('seller_menu_input');
+
+        $kategori = kategori::pluck('kategori')->toArray(); // Ubah nama_kolom dan id sesuai kebutuhan
+        return view('seller_menu_input')->with('kategori', $kategori);
+
+        
     }
 
     /**
@@ -47,14 +53,13 @@ class menuControl extends Controller
         }
 
         menu_warungs::create([
-            'kategori' => $request->kategori,
+            'kategori' => $request->nama_kategori,
             'nama' => $request->nama,
             'harga' => $request->harga,
             'deskripsi' => $request->deskripsi,
             'gambar' => $filename,
         ]);
-      
-
+        
 
          return redirect('seller/menu');
       
@@ -107,15 +112,18 @@ class menuControl extends Controller
       
 
     public function destroy(int $id){
-        {
-            $menu_warungs = menu_warungs::findOrFail($id);
+        
+        $menu_warungs = menu_warungs::findOrFail($id);
             if(File::exists($menu_warungs->gambar)){
                 File::delete($menu_warungs->gambar);
             }
     
-            $menu_warungs->delete();
+        $menu_warungs->delete();
 
-        }
+         return redirect('seller/menu');
+
+
+        
 
     }
 }

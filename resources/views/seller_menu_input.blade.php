@@ -9,11 +9,17 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body>
+
     <form action="/post" method='POST' enctype="multipart/form-data">
     @csrf
-    <h1> Kategori </h1> 
-    <input type="text" name="kategori" placeholder="Kategori"> <br>
-    <h1> Nama</h1> 
+
+    <h1> Kategori</h1>  
+    <select name="nama_kategori" class="form-control">
+    @foreach($kategori as $value)
+         <option value="{{ $value }}">{{ $value }}</option>
+     @endforeach
+    </select>
+    <h1> Nama</h1>  
     <input type="text" name="nama" placeholder="Nama">
     <h1> Harga </h1> 
     <input type="text" name="harga" placeholder="Harga">

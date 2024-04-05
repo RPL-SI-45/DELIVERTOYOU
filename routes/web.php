@@ -25,4 +25,4 @@ Route::get('/seller/menu/input', [menuControl::class,'seller_menu_input']);
 Route::post('/post',[menuControl::class,'store']);
 Route::get('/seller/{id}/menu/edit',[menuControl::class,'seller_menu_edit']);
 Route::put('seller/menu/{id}',[menuControl::class,'update']);
-Route::post('menu/{id}',[menuControl::class,'destroy']);
+Route::get('/menu/{id}',[menuControl::class,'destroy']);

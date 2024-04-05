@@ -31,7 +31,7 @@
                 </td>
                 <td><a href="{{$t->id}}/menu/edit" button type="button" class="btn btn-primary">update</button></td>
                 
-                <td><a href="menu/{{$t->id}}" button type="submit" class="btn btn-primary" value='delete'>delete</button> </td>
+                <td><a href="/menu/{{$t->id}}" button type="submit" class="btn btn-primary" value='delete'>delete</button> </td>
                 
                 
             
