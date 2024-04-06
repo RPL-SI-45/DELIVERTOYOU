@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Kategori extends Model
+class Kategori_Menu extends Model
 {
     use HasFactory;
     protected $table = 'kategori';
@@ -15,4 +15,3 @@ class Kategori extends Model
           ];
     protected $guarded= ['id'];
 }
-
