@@ -23,20 +23,24 @@
         </tr>
         @foreach($pemesanan as $t)
         
-            <tr>
+        <tr>
+        <td>{{ $t->id }}</td>
+        <td>{{ $t->menu }}</td>
+        <td>{{ $t->harga }}</td>
+        <td>{{ $t->quantity }}</td>
+        <td>{{ $t->total_harga }}</td>
+        <td>{{ $t->alamat }}</td>
+        <td>{{ $t->status_pemesanan }}</td>
 
-                <td>{{$t->id}}</td>
-                <td>{{$t->menu}}</td>
-                <td>{{$t->harga}}</td>
-                <td>{{$t->quantity}}</td>
-                <td>{{$t->total_harga}}</td>
-                <td>{{$t->alamat}}</td>
-                <td>{{$t->status_pemesanan}}</td>
+        <td>
+            <form action="{{ route('done_status') }}" method="POST">
+                @csrf
+                 <input type="hidden" name="id" value="{{ $t->id }}">
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </td>
+</tr>
 
-
-                <td><a href="{{$t->id}}/status/detail" button type="button" class="btn btn-primary">Detail</button></td>
-
-            </tr>
 
 
             

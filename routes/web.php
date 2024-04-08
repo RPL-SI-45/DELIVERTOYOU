@@ -30,4 +30,10 @@ Route::get('/menu/{id}',[menuControl::class,'destroy']);
 
 
 Route::get('/seller/status', [statusControl::class,'seller_status']);
-Route::get('/seller/status/detail', [statusControl::class,'seller_status_detail']);
+Route::get('seller/{id}/status/detail', [statusControl::class,'seller_status_detail']);
+Route::post('/up_to_cook', [statusControl::class,'up_to_cook'])->name('up_to_cook');
+Route::get('seller/{id}/status/detail/1', [statusControl::class,'seller_status_detail_1']);
+Route::post('/up_to_send', [statusControl::class,'up_to_send'])->name('up_to_send');
+Route::get('seller/{id}/status/detail/2', [statusControl::class,'seller_status_detail_2']);
+Route::post('/done_status', [statusControl::class,'done_status'])->name('done_status');
+Route::get('seller/{id}/status/detail/3', [statusControl::class,'seller_status_detail_3']);
