@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,4 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/pesananmasuk', [OrderController::class, "index"]);
+// Route::get('/pesananmasuk', [OrderController::class, "index"]);
+Route::get('/payment', [paymentController::class, "index"]);
+Route::get('/payment/store', [paymentController::class, "store"]);
