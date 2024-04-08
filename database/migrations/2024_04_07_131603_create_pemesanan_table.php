@@ -19,7 +19,6 @@ return new class extends Migration
             $table->decimal('total_harga', 10, 2);
             $table->string('alamat');
             $table->enum('jenis_pembayaran', ['QRIS','CASH']);
-            $table->string('bukti_pembayaran'); // Kolom string untuk menyimpan informasi gambar
             $table->timestamps();
         });
     }
