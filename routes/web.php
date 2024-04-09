@@ -19,5 +19,5 @@ Route::get('/', function () {
 });
 
 // Route::get('/pesananmasuk', [OrderController::class, "index"]);
-Route::get('/payment', [paymentController::class, "index"]);
-Route::get('/payment/store', [paymentController::class, "store"]);
+Route::get('/payment/{pemesananId}', [paymentController::class, "index"]);
+Route::post('/payment/store/{pemesananId}', [paymentController::class, "store"]);

@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('payment', function (Blueprint $table) {
             $table->id();
-            $table->string("metode");
-            $table->string("bukti");
+            $table->unsignedBigInteger('pemesanan_id');
+            $table->foreign('pemesanan_id')->references('id')->on('pemesanan')->onDelete('cascade');
+            $table->enum("metode", ['QRIS','CASH']);
+            $table->string("bukti")->nullable();
             $table->integer("total_bayar");
             $table->timestamps();
         });

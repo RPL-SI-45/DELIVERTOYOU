@@ -11,10 +11,7 @@
 </head>
 <body>
 <div class="container mt-5">
-        @if(session('success'))
-            <div class="alert alert-success">{{ session('payment success') }}</div>
-        @endif
-
+    
         <h2>Pilih Metode Pembayaran</h2>
         <form action="/payment/store" method="POST" enctype="multipart/form-data">
             @csrf
@@ -27,12 +24,14 @@
             </div>
             <div class="form-group">
                 <label for="total_amount">Total Bayar</label>
-                <input type="number" name="total_amount" id="total_amount" class="form-control" required>
+                <input type="number" name="total_amount" id="total_amount" class="form-control" value="{{ $pemesanan->total_harga }}" readonly>
             </div>
+            @if ($pemesanan->jenis_pembayaran == 'QRIS')
             <div class="form-group">
                 <label for="proof_of_payment">Unggah Bukti Pembayaran</label> <br>
                 <input type="file" name="proof_of_payment" id="proof_of_payment" class="form-control-file" required>
             </div>
+            @endif
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>

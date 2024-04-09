@@ -14,12 +14,11 @@ return new class extends Migration
         Schema::create('pemesanan', function (Blueprint $table) {
             $table->id();
             $table->string('menu');
-            $table->decimal('harga');
+            $table->decimal('harga', 10, 2);
             $table->integer('quantity');
-            $table->decimal('total_harga');
+            $table->decimal('total_harga', 10, 2);
             $table->string('alamat');
-            $table->enum('jenis_pembayaran');
-            $table->string('bukti_pembayaran');
+            $table->enum('jenis_pembayaran', ['QRIS','CASH']);
             $table->timestamps();
         });
     }
