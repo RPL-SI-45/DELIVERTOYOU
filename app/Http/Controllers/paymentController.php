@@ -10,7 +10,7 @@ class paymentController extends Controller
     public function index($pemesananId)
     {
         $pemesanan = Pemesanan::findOrFail($pemesananId);
-        $payment = Payment::all();
+        $payment = Payment::where('pemesanan_id', $pemesananId)->first();
         return view('payment.customerpayment', compact(['payment', 'pemesanan', 'pemesananId']));
     }
     public function store(Request $request, $pemesananId){

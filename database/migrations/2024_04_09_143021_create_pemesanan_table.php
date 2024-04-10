@@ -18,7 +18,6 @@ return new class extends Migration
             $table->integer('quantity');
             $table->decimal('total_harga', 10, 2);
             $table->string('alamat');
-            $table->enum('jenis_pembayaran', ['QRIS','CASH']);
             $table->timestamps();
         });
     }

@@ -26,11 +26,15 @@
                 <label for="total_amount">Total Bayar</label>
                 <input type="number" name="total_amount" id="total_amount" class="form-control" value="{{ $pemesanan->total_harga }}" readonly>
             </div>
-            @if ($pemesanan->jenis_pembayaran == 'QRIS')
+            @if (isset($payment) && $payment->metode == 'QRIS')
             <div class="form-group">
                 <label for="proof_of_payment">Unggah Bukti Pembayaran</label> <br>
                 <input type="file" name="proof_of_payment" id="proof_of_payment" class="form-control-file" required>
             </div>
+            <div class="form-group">
+            <label for="qris_image">Gambar QRIS</label> <br>
+            <img src="contoh qr.jpg" alt="QRIS Image" id="qris_image">
+        </div>
             @endif
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
