@@ -13,18 +13,22 @@ class paymentController extends Controller
         $payment = Payment::where('pemesanan_id', $pemesananId)->first();
         return view('payment.customerpayment', compact(['payment', 'pemesanan', 'pemesananId']));
     }
+
     public function store(Request $request, $pemesananId){
     
         // Validasi request
         $request->validate([
-            'metode' => 'required', 
-            'bukti' =>  'nullable|mimes:png,jpg,jpeg,webp',
+            'metode' => 'required',
         ]);
 
         $pemesanan = Pemesanan::findOrFail($pemesananId);
         $total_bayar = $pemesanan->total_harga;
-        
-        if ($request->metode == 'QRIS') {
+
+        if ($request->metode === 'QRIS') {
+            return redirect()->route('customer.qris', $pemesananId);
+        }
+
+        /*if ($request->metode == 'QRIS') {
             if ($request->has('bukti')) {
                 $file = $request->file('bukti');
                 $extension = $file->getClientOriginalExtension();
@@ -57,6 +61,42 @@ class paymentController extends Controller
             ]);
     
             return redirect()->back()->with('success', 'Pembayaran berhasil disimpan.');
-        }
-        }
+        }*/
+        Payment::create([
+            'pemesanan_id' => $pemesananId,
+            'metode' => $request->metode,
+            'total_bayar' => $total_bayar,
+        ]);
+    
+        return redirect("/payment/{$pemesananId}");
+    }
+
+    public function storeqris(Request $request, $pemesananId)
+    {
+        // Validasi request
+        $request->validate([
+            'bukti' =>  'required|mimes:png,jpg,jpeg,webp',
+        ]);
+
+        $pemesanan = Pemesanan::findOrFail($pemesananId);
+        $total_bayar = $pemesanan->total_harga;
+
+        $file = $request->file('bukti');
+        $extension = $file->getClientOriginalExtension();
+
+        $filename = time().'.'.$extension;
+
+        $path = 'bukti/bayar/';
+        $file->move($path, $filename);
+
+        // Simpan data pembayaran ke database
+        Payment::create([
+            'pemesanan_id' => $pemesananId,
+            'metode' => 'QRIS',
+            'total_bayar' => $total_bayar,
+            'bukti' => $filename,
+        ]);
+
+        return view('payment.customerqris', compact('pemesanan'));
+    }
 }

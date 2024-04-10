@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\paymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,4 +20,5 @@ Route::get('/', function () {
 
 // Route::get('/pesananmasuk', [OrderController::class, "index"]);
 Route::get('/payment/{pemesananId}', [paymentController::class, "index"]);
-Route::post('/payment/store/{pemesananId}', [paymentController::class, 'store']);
+Route::post('/payment/store/{pemesananId}', [paymentController::class, "store"]);
+Route::post('/payment/qris/{pemesananId}', [paymentController::class, "storeqris"])->name('customer.qris');
