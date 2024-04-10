@@ -13,7 +13,7 @@
             <th>ID</th>
             <th>Menu</th>
             <th>Harga</th>
-            <th>Quantity</th>
+            <th>Jumlah</th>
             <th>Total Harga</th>
             <th>Alamat</th>
             <th>Jenis Pembayaran</th>
@@ -27,6 +27,11 @@
                 <button class="btn-minus" data-id="{{$ps->id}}">-</button>
                 <span id="quantity_{{$ps->id}}" data-harga="{{$ps->harga}}">{{$ps->quantity}}</span>
                 <button class="btn-plus" data-id="{{$ps->id}}">+</button>
+                <form action="/pemesanan/{{$ps->id}}" method="POST">
+                    @csrf
+                    @method('delete')
+                    <button class="btn-delete" data-id="{{$ps->id}}">Hapus</button>
+                </form>
             </td>
             <td id="total_price_{{$ps->id}}">{{ number_format($ps->harga * $ps->quantity, 0, ',', '.') }}</td> <!-- Format total_harga Rupiah -->
             <td>{{$ps->alamat}}</td>
@@ -38,6 +43,7 @@
 </table>
 
 <script>
+    
     document.addEventListener("DOMContentLoaded", function() {
         // Mengambil semua tombol kurang dan tambah
         var btnMinus = document.querySelectorAll('.btn-minus');
@@ -80,5 +86,6 @@
         }
     });
 </script>
+
 </body>
 </html>
