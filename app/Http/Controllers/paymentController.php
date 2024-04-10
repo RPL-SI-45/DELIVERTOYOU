@@ -11,7 +11,7 @@ class paymentController extends Controller
     {
         $pemesanan = Pemesanan::findOrFail($pemesananId);
         $payment = Payment::all();
-        return view('payment.customerpayment', compact(['payment', 'pemesanan']));
+        return view('payment.customerpayment', compact(['payment', 'pemesanan', 'pemesananId']));
     }
     public function store(Request $request, $pemesananId){
     
@@ -31,7 +31,7 @@ class paymentController extends Controller
     
                 $filename = time().'.'.$extension;
     
-                $path = 'buktibayar/';
+                $path = 'bukti/bayar/';
                 $file->move($path, $filename);
 
         // Simpan bukti pembayaran
@@ -48,6 +48,7 @@ class paymentController extends Controller
             return redirect()->back()->with('success', 'Pembayaran berhasil disimpan.');
             }
         } else {
+
             // Simpan data pembayaran ke database
             Payment::create([
                 'pemesanan_id' => $pemesananId,

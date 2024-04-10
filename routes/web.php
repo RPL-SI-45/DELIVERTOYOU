@@ -20,4 +20,4 @@ Route::get('/', function () {
 
 // Route::get('/pesananmasuk', [OrderController::class, "index"]);
 Route::get('/payment/{pemesananId}', [paymentController::class, "index"]);
-Route::post('/payment/store/{pemesananId}', [paymentController::class, "store"]);
+Route::post('/payment/store/{pemesananId}', [paymentController::class, 'store']);

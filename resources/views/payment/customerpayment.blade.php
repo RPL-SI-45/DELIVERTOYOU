@@ -12,14 +12,14 @@
 <body>
 <div class="container mt-5">
     
-        <h2>Pilih Metode Pembayaran</h2>
-        <form action="/payment/store" method="POST" enctype="multipart/form-data">
+        <h2>Pembayaran</h2>
+        <form action="/payment/store/{{ $pemesananId }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label for="payment_method">Pilih Metode Pembayaran</label>
-                <select name="payment_method" id="payment_method" class="form-control">
-                    <option value="qris">QRIS</option>
-                    <option value="cash">Tunai</option>
+                <label for="metode">Pilih Metode Pembayaran</label>
+                <select name="metode" id="metode" class="form-control">
+                <option value="qris">QRIS</option>
+                <option value="cash">Tunai</option>
                 </select>
             </div>
             <div class="form-group">
