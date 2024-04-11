@@ -30,18 +30,27 @@
                 <form action="/pemesanan/{{$ps->id}}" method="POST">
                     @csrf
                     @method('delete')
-                    <button class="btn-delete" data-id="{{$ps->id}}">Hapus</button>
+                    <button class="btn-delete" style="background-color: red; color: white;" data-id="{{$ps->id}}">Hapus</button>
                 </form>
             </td>
             <td id="total_price_{{$ps->id}}">{{ number_format($ps->harga * $ps->quantity, 0, ',', '.') }}</td> <!-- Format total_harga Rupiah -->
-            <td>{{$ps->alamat}}</td>
-            <td>{{$ps->jenis_pembayaran}}</td>
+            <td>
+                <label for=" ">Alamat:</label>
+                <input type="text" id=" " value=" ">
+            </td>
+
+            <td>
+                <select id="jenis_pembayaran{{$ps->id}}">
+                    <option value="QRIS">QRIS</option>
+                    <option value="CASH">CASH</option>
+                </select>
+            </td>
         </tr>
         @endforeach
     </thead>
     <tbody>
 </table>
-
+<button id="btnPembayaran" style="background-color:green; color: white;">Lanjut Ke Pembayaran</button>
 <script>
     
     document.addEventListener("DOMContentLoaded", function() {
