@@ -9,4 +9,6 @@ use App\Http\Controllers\OrderController;
 class Order extends Model
 {
     use HasFactory;
+    protected $table = "pesananmasuk";
+    protected $guarded =[];
 }

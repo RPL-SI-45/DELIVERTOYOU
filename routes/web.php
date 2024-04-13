@@ -21,4 +21,7 @@ Route::get('/', function () {
 // Route::get('/pesananmasuk', [OrderController::class, "index"]);
 Route::get('/payment/{pemesananId}', [paymentController::class, "index"]);
 Route::post('/payment/store/{pemesananId}', [paymentController::class, "store"]);
-Route::post('/payment/qris/{pemesananId}', [paymentController::class, "storeqris"])->name('customer.qris');
+Route::post('/payment/qris/{pemesananId}', [paymentController::class, "storeqris"])->name('customerqris');
+
+Route::get('/seller/pesanan', [statusControl::class,'seller_pesanan']);
+Route::get('seller/{id}/pesanan/detail', [statusControl::class,'seller_pesanan_detail']);
