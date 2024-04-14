@@ -14,23 +14,23 @@
         <tr>
             <th>No</th>
             <th>Nama Pelanggan</th>
-            <th>Total Pesanan</th>
-            <th>Total Harga</th>
+            <th>Order</th>
             <th>Metode Pembayaran</th>
+            <th>Detail Pesanan</th>
+            <th>Status Pesanan</th>
         </tr>
         @foreach($pemesanan as $pm)
         <tr>
-            <td>{{$pm->id}}</td>
-            <td>{{$pm->nama_pelanggan}}</td>
-            <td>{{$pm->total_harga}}</td>
-            @foreach($payment as $py)
-            <td>{{$pm->metode}}</td>
-            @endforeach
+            <td>{{ $pm->payment->id }}</td>
+            <td>{{ $pm->nama_pelanggan }}</td>
+            <td>{{ $pm->menu }}</td>
+            <td>{{ $pm->payment->metode }}</td>
+            <td>{{ $pm->status_pesananmasuk }}</td>
             <td>
-                <a href="{{$pm->id}}/pesanan/detail" button type="button" class="btn btn-primary">Detail</button>
+                <a href="{{ route('seller.detail', ['id' => $pm->id]) }}" button type="button" class="btn btn-primary">Detail</button>
             </td>
         </tr>
-    @endforeach
+        @endforeach
     </table>
 </div>
 </body>

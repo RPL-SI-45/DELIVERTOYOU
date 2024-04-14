@@ -8,15 +8,17 @@ use App\Models\Pemesanan;
 
 class OrderController extends Controller
 {
-    public function index()
+    public function sellerOrder()
     {
-        $orders = Order::all();
-        return view('pesananmasuk.index', compact('orders')); 
+        $pemesanan = Pemesanan::all();
+        $payment = Payment::all();
+    
+        return view('pesananmasuk.sellerorder', compact('pemesanan', 'payment'));
     }
-
-    public function show(Order $order)
+    public function sellerDetail($id)
     {
-        return view('pesananmasuk.show', compact('order'));
+        $pemesanan = Pemesanan::find($id);
+        return view('pesananmasuk.sellerdetail', compact('pemesanan'));
     }
 
 }
