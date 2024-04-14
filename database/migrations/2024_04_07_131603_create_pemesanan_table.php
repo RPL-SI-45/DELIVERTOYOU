@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('pemesanan', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_pelanggan');
             $table->string('menu');
             $table->decimal('harga', 10, 2);
             $table->integer('quantity');
             $table->decimal('total_harga', 10, 2);
-            $table->string('alamat');
+            $table->string('alamat_pelanggan'); // Kolom baru untuk alamat pelanggan
             $table->enum('jenis_pembayaran', ['QRIS','CASH']);
             $table->timestamps();
         });
