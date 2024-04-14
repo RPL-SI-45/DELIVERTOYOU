@@ -13,7 +13,7 @@
 <div class="container mt-5">
     
         <h2>Pembayaran</h2>
-        <form action="/payment/store/{{ $pemesananId }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('payment.store', ['pemesananId' => $pemesanan->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="metode">Pilih Metode Pembayaran</label>

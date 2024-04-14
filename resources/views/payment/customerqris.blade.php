@@ -12,16 +12,16 @@
     <div class="container mt-5">
     
         <h2>Pembayaran QRIS</h2>
-        <form action="/payment/qris/{{ $pemesananId }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('payment.storeQris', ['pemesananId' => $pemesanan->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
             <label for="qris_image">Payment QRIS</label> <br>
-            <img src="cthqr.jpg" alt="QRIS Image" id="qris_image">
-            </div>
+            <img src="{{ asset('storage/cthqr.jpg') }}" alt="QRIS Image" id="qris_image">
+            </div><br>
             <div class="form-group">
                 <label for="proof_of_payment">Unggah Bukti Pembayaran</label> <br>
                 <input type="file" name="bukti" id="bukti" class="form-control-file" required>
-            </div>
+            </div><br>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
