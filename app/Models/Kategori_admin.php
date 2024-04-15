@@ -9,4 +9,5 @@ class Kategori_admin extends Model
 {
     use HasFactory;
     protected $table = 'kategori_admin';
+    protected $guarded = [];
 }

@@ -19,4 +19,9 @@ Route::get('/', function () {
 });
 
 Route::get('/kategori_admin',[KategoriAdminController::class,'index']);
+Route::get('/kategori_admin/create',[KategoriAdminController::class,'create']);
+Route::post('/kategori_admin/store',[KategoriAdminController::class,'store']);
+Route::get('/kategori_admin/{id}/edit',[KategoriAdminController::class,'edit']);
+Route::put('/kategori_admin/{id}',[KategoriAdminController::class,'update']);
+Route::delete('/kategori_admin/{id}',[KategoriAdminController::class,'destroy']);
 
