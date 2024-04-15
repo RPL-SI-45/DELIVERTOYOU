@@ -17,4 +17,9 @@ class Payment extends Model
         'bukti',
         'total_bayar',
     ];
+
+    public function pemesanan()
+    {
+        return $this->belongsTo(Pemesanan::class);
+    }
 }

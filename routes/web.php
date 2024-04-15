@@ -27,4 +27,4 @@ Route::get('/customer/status/{pemesananId}', [PaymentController::class, 'showSta
 
 
 Route::get('/seller/order', [OrderController::class, 'sellerOrder'])->name('seller.order');
-Route::get('/seller/detail/{id}', [OrderController::class, 'sellerDetail'])->name('seller.detail');
+Route::get('/seller/orders/{id}/detail', [OrderController::class, 'sellerDetail'])->name('seller.detail');
