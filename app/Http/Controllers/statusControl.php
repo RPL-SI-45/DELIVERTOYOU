@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\pemesanan;
+use App\Models\acc_pemesanan;
 use Illuminate\Http\Request;
 
 class statusControl extends Controller
@@ -12,8 +12,8 @@ class statusControl extends Controller
      */
     public function seller_status()
     {
-        $pemesanan = pemesanan::all();
-        return view('seller_status',compact(['pemesanan']));
+        $acc_pemesanan = acc_pemesanan::all();
+        return view('seller_status',compact(['acc_pemesanan']));
     }
 
     /**
@@ -21,8 +21,8 @@ class statusControl extends Controller
      */
     public function seller_status_detail()
     {
-        $pemesanan = pemesanan::all();
-        return view('seller_status_detail',compact(['pemesanan']));
+        $acc_pemesanan = acc_pemesanan::all();
+        return view('seller_status_detail',compact(['acc_pemesanan']));
     }
 
     /**
@@ -32,11 +32,11 @@ class statusControl extends Controller
     {
     
         $id = $request->input('id');
-        $diproses = $request->input('status_pemesanan');
+        $diproses = $request->input('status_acc_pemesanan');
         
         // Lakukan pembaruan dalam kolom tabel
         $diproses = 'Sedang Dimasak oleh Ahlinya';
-        $update = pemesanan::where('id', $id)->update(['status_pemesanan' => $diproses]);
+        $update = acc_pemesanan::where('id', $id)->update(['status_pemesanan' => $diproses]);
         
         // Periksa apakah pembaruan berhasil
         if ($update) {
@@ -44,14 +44,14 @@ class statusControl extends Controller
             return redirect('seller/{id}/status/detail/1');
         } else {
             // Redirect ke halaman lain jika pembaruan gagal
-            return redirect()->back()->with('error', 'Gagal memperbarui status pemesanan.');
+            return redirect()->back()->with('error', 'Gagal memperbarui status acc_pemesanan.');
         }
     }
         
     public function seller_status_detail_1()
     {
-        $pemesanan = pemesanan::all();
-        return view('seller_status_detail_1',compact(['pemesanan']));
+        $acc_pemesanan = acc_pemesanan::all();
+        return view('seller_status_detail_1',compact(['acc_pemesanan']));
 
     }
     
@@ -66,7 +66,7 @@ class statusControl extends Controller
         
         // Lakukan pembaruan dalam kolom tabel
         $diproses = 'Sedang diantar oleh driver professional';
-        $update = pemesanan::where('id', $id)->update(['status_pemesanan' => $diproses]);
+        $update = acc_pemesanan::where('id', $id)->update(['status_pemesanan' => $diproses]);
         
         // Periksa apakah pembaruan berhasil
         if ($update) {
@@ -80,8 +80,8 @@ class statusControl extends Controller
 
     public function seller_status_detail_2()
     {
-        $pemesanan = pemesanan::all();
-        return view('seller_status_detail_2',compact(['pemesanan']));
+        $acc_pemesanan = acc_pemesanan::all();
+        return view('seller_status_detail_2',compact(['acc_pemesanan']));
 
     }
     /**
@@ -94,20 +94,20 @@ class statusControl extends Controller
         
         // Lakukan pembaruan dalam kolom tabel
         $diproses = 'Pesanan Diterima dan selesai';
-        $update = pemesanan::where('id', $id)->update(['status_pemesanan' => $diproses]);
+        $update = acc_pemesanan::where('id', $id)->update(['status_pemesanan' => $diproses]);
         
 
         if ($update) {
             return redirect('seller/{id}/status/detail/3');
         } else {
-            return redirect()->back()->with('error', 'Gagal memperbarui status pemesanan.');
+            return redirect()->back()->with('error', 'Gagal memperbarui status acc_pemesanan.');
         }
     }
 
     public function seller_status_detail_3()
     {
-        $pemesanan = pemesanan::all();
-        return view('seller_status_detail_3',compact(['pemesanan']));
+        $acc_pemesanan = acc_pemesanan::all();
+        return view('seller_status_detail_3',compact(['acc_pemesanan']));
 
     }
 

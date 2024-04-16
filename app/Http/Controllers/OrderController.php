@@ -11,12 +11,10 @@ class OrderController extends Controller
 {
     public function sellerOrder()
     {
-        // Mengambil data pemesanan yang sedang berlangsung atau menunggu konfirmasi
-        $pemesanan = Pemesanan::whereHas('pesananmasuk', function ($query) {
-            $query->whereIn('status_pesananmasuk', ['menunggu konfirmasi', 'pesanan sedang berlangsung']);
-        })->get();
-        
+
+        $pemesanan = Pemesanan::all();
         return view('pesananmasuk.sellerorder', compact('pemesanan'));
+       
         
         // Mengambil data pembayaran
         $payment = Payment::all();

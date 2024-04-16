@@ -21,7 +21,7 @@
             <th>Status Pemesanan</th>
             
         </tr>
-        @foreach($pemesanan as $t)
+        @foreach($acc_pemesanan as $t)
         
         <tr>
         <td>{{ $t->id }}</td>
