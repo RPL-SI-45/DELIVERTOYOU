@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KategoriAdminController;
 use App\Http\Controllers\menuControl;
 use App\Http\Controllers\statusControl;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,15 @@ use App\Http\Controllers\OrderController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+#KATEGORI ADMIN
+Route::get('/kategori_admin',[KategoriAdminController::class,'index']);
+Route::get('/kategori_admin/create',[KategoriAdminController::class,'create']);
+Route::post('/kategori_admin/store',[KategoriAdminController::class,'store']);
+Route::get('/kategori_admin/{id}/edit',[KategoriAdminController::class,'edit']);
+Route::put('/kategori_admin/{id}',[KategoriAdminController::class,'update']);
+Route::delete('/kategori_admin/{id}',[KategoriAdminController::class,'destroy']);
+
 
 
 Route::get('/payment/{pemesananId}', [PaymentController::class, "index"]);
@@ -49,3 +59,4 @@ Route::post('/up_to_send', [statusControl::class,'up_to_send'])->name('up_to_sen
 Route::get('seller/{id}/status/detail/2', [statusControl::class,'seller_status_detail_2']);
 Route::post('/done_status', [statusControl::class,'done_status'])->name('done_status');
 Route::get('seller/{id}/status/detail/3', [statusControl::class,'seller_status_detail_3']);
+
