@@ -17,9 +17,11 @@
             background-color: #B49852;
         }
 
-        .navbar-logo {
-            float: left;
-            height: 10px;
+        .navbar-logo img{
+            height: 40px;
+            margin-top: 10px;
+            margin-right: 15px;
+
         }
 
         .search-container {
@@ -63,8 +65,8 @@
         }
 
         .card .card-img-top {
-        height: 200px; 
-        object-fit: cover; 
+        height: 50px; 
+        object-fit: contain; 
         
         }
 
@@ -96,7 +98,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="#" class="navbar-logo"><img src="" alt="logo"></a>
+                <a href="#" class="navbar-logo"><img src="img_example/logo.png" alt="logo"></a>
                 <div class="search-container">
                     <input type="text" placeholder="Search...">
                     <button type="submit">Search</button>
@@ -115,11 +117,11 @@
     </div>
 
     <div>
-        <img src="img_example/5.jpeg" class="content-img" alt="Content Image">
+        <img src="img_example/makanan.jpeg" class="content-img" alt="Content Image">
     </div>
     
     <div class="card">
-        <img src="img_example/1.jpeg" class="card-img-top">
+        <a href="#" class="car-img"><img src="img_example/makanan.jpeg" class="card-img-top"></a>
         <div>
             <h2>Card Title</h2>
             <p>This is a simple card component.</p>
@@ -127,7 +129,7 @@
     </div>
     
     <div class="card">
-        <img src="img_example/1.jpeg" class="card-img-top">
+        <a href="#" class="car-img"><img src="img_example/makanan.jpeg" class="card-img-top"></a>
         <div>
             <h2>Card 2</h2>
             <p>This is the content of Card 2.</p>
@@ -135,7 +137,7 @@
     </div>
 
     <div class="card">
-        <img src="img_example/3.jpeg" class="card-img-top">
+        <a href="#" class="car-img"><img src="img_example/makanan.jpeg" class="card-img-top"></a>
         <div>
             <h2>Card 3</h2>
             <p>This is the content of Card 3.</p>
