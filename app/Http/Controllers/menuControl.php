@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\menu_warungs;
-use App\Models\kategori;
+use App\Models\Kategori_admin;
 use Illuminate\Support\Facades\File;
 use Form;
 
@@ -25,8 +25,8 @@ class menuControl extends Controller
     public function seller_menu_input()
     {
 
-        $kategori = kategori::pluck('kategori')->toArray(); // Ubah nama_kolom dan id sesuai kebutuhan
-        return view('seller_menu_input')->with('kategori', $kategori);
+        $Kategori_admin = Kategori_admin::pluck('jenis_kategori')->toArray(); // Ubah nama_kolom dan id sesuai kebutuhan
+        return view('seller_menu_input')->with('jenis_kategori', $Kategori_admin);
 
         
     }
@@ -111,7 +111,6 @@ class menuControl extends Controller
 
 
     }
-      
 
     public function destroy(int $id){
         

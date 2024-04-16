@@ -33,12 +33,33 @@
                 <td>{{$t->alamat}}</td>
                 <td>{{$t->status_pemesanan}}</td>
 
+                <?php
+                $diproses = $t->status_pemesanan;
+                $id = $t->id;
 
-                <td><a href="{{$t->id}}/status/detail" button type="button" class="btn btn-primary">Detail</button></td>
+                switch ($diproses) {
+                    case 'Menunggu konfirmasi':
+                        $route = "{$id}/status/detail";
+                        break;
+                    case 'Sedang Dimasak oleh Ahlinya':
+                        $route = "{$id}/status/detail/1";
+                        break;
+                    case 'Sedang diantar oleh driver professional':
+                        $route = "{$id}/status/detail/2";
+                        break;
+                    case 'Pesanan Diterima dan selesai':
+                        $route = "{$id}/status/detail/3";
+                    default:
+                        // Rute default jika tidak ada kecocokan
+                        $route = "/home";
+                        break;  
+                    } 
+                ?>  
+            <td>
+                <a href="<?= $route ?>" button type="button" class="btn btn-primary">Detail</button></td>
 
+            </td>
             </tr>
-
-
             
             @endforeach
     </table>

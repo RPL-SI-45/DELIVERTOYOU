@@ -96,12 +96,10 @@ class statusControl extends Controller
         $diproses = 'Pesanan Diterima dan selesai';
         $update = pemesanan::where('id', $id)->update(['status_pemesanan' => $diproses]);
         
-        // Periksa apakah pembaruan berhasil
+
         if ($update) {
-            // Redirect ke halaman yang sesuai jika pembaruan berhasil
             return redirect('seller/{id}/status/detail/3');
         } else {
-            // Redirect ke halaman lain jika pembaruan gagal
             return redirect()->back()->with('error', 'Gagal memperbarui status pemesanan.');
         }
     }

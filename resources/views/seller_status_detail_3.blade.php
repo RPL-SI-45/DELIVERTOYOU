@@ -37,6 +37,7 @@
                 @csrf
                  <input type="hidden" name="id" value="{{ $t->id }}">
             <button type="submit" class="btn btn-primary">Update</button>
+
         </form>
     </td>
 </tr>
