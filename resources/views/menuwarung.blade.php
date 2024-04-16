@@ -88,7 +88,6 @@
     </style>
 </head>
 <body>
-
 <div class="navbar navbar-inverse navbar-static-top">
         <div class="container">
             <div class="navbar-header">
@@ -116,37 +115,6 @@
         </div>
     </div>
 
-    <div>
-        <img src="img_example/makanan.jpeg" class="content-img" alt="Content Image">
-    </div>
-    
-    <div class="card" style="width: 18rem;">
-        <a href="/customer/menu" class="car-img"><img src="img_example/makanan.jpeg" class="card-img-top"></a>
-        <div class="card-body">
-            <p class="card-text"></p>
-        </div>
-    </div>
-    
-    <div class="card" style="width: 18rem;">
-        <a href="/customer/menu" class="car-img"><img src="img_example/makanan.jpeg" class="card-img-top"></a>
-        <div class="card-body">
-            <p class="card-text"></p>
-        </div>
-    </div>
-
-    <div class="card" style="width: 18rem;">
-        <a href="/customer/menu" class="car-img"><img src="img_example/makanan.jpeg" class="card-img-top"></a>
-        <div class="card-body">
-            <p class="card-text"></p>
-        </div>
-    </div>
-
-    <div class="card" style="width: 18rem;">
-        <a href="/customer/menu" class="car-img"><img src="img_example/makanan.jpeg" class="card-img-top"></a>
-        <div class="card-body">
-            <p class="card-text"></p>
-        </div>
-    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
