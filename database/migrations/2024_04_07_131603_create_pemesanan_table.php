@@ -18,8 +18,8 @@ return new class extends Migration
             $table->decimal('harga', 10, 2);
             $table->integer('quantity');
             $table->decimal('total_harga', 10, 2);
+            $table->integer("total_bayar");
             $table->string('alamat_pelanggan'); // Kolom baru untuk alamat pelanggan
-            $table->enum('jenis_pembayaran', ['QRIS','CASH']);
             $table->timestamps();
         });
     }
