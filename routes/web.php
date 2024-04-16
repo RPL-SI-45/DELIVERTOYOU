@@ -3,6 +3,8 @@
 use App\Http\Controllers\menuControl;
 use App\Http\Controllers\statusControl;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,18 +22,15 @@ Route::get('/', function () {
 });
 
 
+Route::get('/payment/{pemesananId}', [PaymentController::class, "index"]);
+Route::post('/payment/store/{pemesananId}', [PaymentController::class, 'store'])->name('payment.store');
+Route::get('/payment/qris/{pemesananId}', [PaymentController::class, "showQrisForm"])->name('payment.qris');
+Route::post('/payment/qris/store/{pemesananId}', [PaymentController::class, "storeQris"])->name('payment.storeQris');
+Route::get('/customer/status/{pemesananId}', [PaymentController::class, 'showStatus'])->name('customer.status');
 
 
-
-
-
-
-
-
-
-
-
-
+Route::get('/seller/order', [OrderController::class, 'sellerOrder'])->name('seller.order');
+Route::get('/seller/orders/{id}/detail', [OrderController::class, 'sellerDetail'])->name('seller.detail');
 
 
 #PENJUAL
@@ -41,7 +40,6 @@ Route::post('/post',[menuControl::class,'store']);
 Route::get('/seller/{id}/menu/edit',[menuControl::class,'seller_menu_edit']);
 Route::put('seller/menu/{id}',[menuControl::class,'update']);
 Route::get('/menu/{id}',[menuControl::class,'destroy']);
-
 
 Route::get('/seller/status', [statusControl::class,'seller_status']);
 Route::get('seller/{id}/status/detail', [statusControl::class,'seller_status_detail']);
