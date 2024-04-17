@@ -1,3 +1,5 @@
+ht
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,53 +12,23 @@
     
 </head>
 <body>
-    <table class="table table-hover">
 
-        @foreach($menu_warungs as $t)
-         <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                <img src="{{ asset('gambar_menu/'.$t->gambar) }}" class="img-fluid rounded-start" alt="...">
-                </div>
-                <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title"> {{$t->nama}}</h5>
-                    <p class="card-text">Kategori : {{$t->kategori}}</p> </br><p class="card-text">Harga Rp.{{$t->harga}}</p>  <p class="card-text">Deskripsi :{{$t->deskripsi}}</p>
-                    <p class="card-text"><small class="text-body-secondary"></small></p>
-                    <a href="{{$t->id}}/menu/edit"><button class="btn btn-primary">Update</button></a>
-                    <div class="container text-center">
-                    <div class="row">
-                        <div class="col">
-                        </div>
-                        <div class="col">
-                        <div class="col">
-                        <!-- <button> <a href="{{$t->id}}/menu/edit" button type="button" class="btn btn-primary">update</button> -->
-                        </div>
-                        <div class="col">
-                        <form action="/menu/{{$t->id}}" method="POST">
-                        @csrf 
-                        @method('DELETE') 
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-         </div>
-        @endforeach
-    </table>
+@foreach($menu_warungs as $t)
+</div>
+ <div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="{{ asset('gambar_menu/'.$t->gambar) }}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">{{$t->nama}} Kategori : {{$t->kategori}}  Harga Rp.{{$t->harga}} Deskripsi :{{$t->deskripsi}}</p>
+    <a href="/seller/{{$t->id}}/menu/edit" class="btn btn-primary">Ubah data menu kamu</a>
+  </div>
+</div>
+</div>
+@endforeach
 
-    <div class="d-grid gap-2">
-    <a href="/seller/menu/input"> <!-- Perhatikan penambahan / di depan rute -->
+<a href="/seller/menu/input"> <!-- Perhatikan penambahan / di depan rute -->
         <button class="btn btn-primary" type="button">Tambah Menu Baru</button>
-    </a>
-
-</div>
-
-
-</div>
+</a>
 
 </body>
 </html>
