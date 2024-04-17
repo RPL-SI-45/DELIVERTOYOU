@@ -39,4 +39,17 @@ class OrderController extends Controller
 
         return redirect()->route('seller.order')->with('berhasil', 'Order dikonfirmasi');
     }
+
+
+    public function acc_konfirmasi(Request $request)
+    {
+        $id = $request->input('id');
+        $acc = $request->input('status_pemesanan');
+        
+        $acc = 'Sudah dikonfirmasi';
+        $update = pemesanan::where('id', $request->id)->update(['status_pemesanan' => $acc]);
+
+        return redirect('/seller/status');
+    }
+
 }

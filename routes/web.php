@@ -5,6 +5,7 @@ use App\Http\Controllers\KategoriAdminController;
 use App\Http\Controllers\menuControl;
 use App\Http\Controllers\statusControl;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CardController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\OrderController;
 
@@ -24,8 +25,12 @@ Route::get('/pemesanan', [PemesananController::class, 'index']);
 Route::delete('/pemesanan/{id}', [PemesananController::class, 'destroy']);
 Route::get('/pembayaran', [PemesananController::class, 'store']);
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
+
+#HALAMAN UTAMA
+Route::get('/customer/menu', [CardController::class, 'menuwarung']);
+
 
 #KATEGORI ADMIN
 Route::get('/kategori_admin',[KategoriAdminController::class,'index']);
@@ -46,7 +51,7 @@ Route::get('/customer/status/{pemesananId}', [PaymentController::class, 'showSta
 #PESANAN MASUK
 Route::get('/seller/order', [OrderController::class, 'sellerOrder'])->name('seller.order');
 Route::get('/seller/orders/{id}/detail', [OrderController::class, 'sellerDetail'])->name('seller.detail');
-
+Route::get('/seller/status/{id}/update', [OrderController::class, 'acc_konfirmasi'])->name('seller_status_update');
 
 #MENU INPUT PENJUAL
 Route::get('/seller/menu', [menuControl::class,'seller_menu']);
@@ -65,4 +70,5 @@ Route::post('/up_to_send', [statusControl::class,'up_to_send'])->name('up_to_sen
 Route::get('seller/{id}/status/detail/2', [statusControl::class,'seller_status_detail_2']);
 Route::post('/done_status', [statusControl::class,'done_status'])->name('done_status');
 Route::get('seller/{id}/status/detail/3', [statusControl::class,'seller_status_detail_3']);
+
 

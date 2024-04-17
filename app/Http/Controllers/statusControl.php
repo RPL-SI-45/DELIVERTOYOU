@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\acc_pemesanan;
+use App\Models\pemesanan;
 use Illuminate\Http\Request;
 
 class statusControl extends Controller
@@ -10,22 +10,22 @@ class statusControl extends Controller
 
     public function seller_status()
     {
-        $acc_pemesanan = acc_pemesanan::all();
-        return view('kelola_status.seller_status',compact(['acc_pemesanan']));
+        $pemesanan = pemesanan::where('status_pemesanan', 'Sudah dikonfirmasi')->get();
+        return view('kelola_status.seller_status',compact(['pemesanan']));
     }
 
 
     public function seller_status_detail()
     {
-        $acc_pemesanan = acc_pemesanan::all();
-        return view('kelola_status.seller_status_detail',compact(['acc_pemesanan']));
+        $pemesanan = pemesanan::all();
+        return view('kelola_status.seller_status_detail',compact(['pemesanan']));
     }
 
     public function up_to_cook(Request $request)
     {
     
         $id = $request->input('id');
-        $diproses = $request->input('status_acc_pemesanan');
+        $diproses = $request->input('status_pemesanan');
         
         
         $diproses = 'Sedang Dimasak oleh Ahlinya';
@@ -41,8 +41,8 @@ class statusControl extends Controller
         
     public function seller_status_detail_1()
     {
-        $acc_pemesanan = acc_pemesanan::all();
-        return view('kelola_status.seller_status_detail_1',compact(['acc_pemesanan']));
+        $pemesanan = pemesanan::all();
+        return view('kelola_status.seller_status_detail_1',compact(['pemesanan']));
 
     }
     
@@ -54,7 +54,7 @@ class statusControl extends Controller
         
   
         $diproses = 'Sedang diantar oleh driver professional';
-        $update = acc_pemesanan::where('id', $id)->update(['status_pemesanan' => $diproses]);
+        $update = pemesanan::where('id', $id)->update(['status_pemesanan' => $diproses]);
         
         if ($update) {
             return redirect('kelola_status.seller/{id}/status/detail/2');
@@ -65,7 +65,7 @@ class statusControl extends Controller
 
     public function seller_status_detail_2()
     {
-        $acc_pemesanan = acc_pemesanan::all();
+        $pemesanan = _pemesanan::all();
         return view('kelola_status.seller_status_detail_2',compact(['acc_pemesanan']));
 
     }
@@ -76,7 +76,7 @@ class statusControl extends Controller
         $diproses = $request->input('status_pemesanan');
         
         $diproses = 'Pesanan Diterima dan selesai';
-        $update = acc_pemesanan::where('id', $id)->update(['status_pemesanan' => $diproses]);
+        $update = pemesanan::where('id', $id)->update(['status_pemesanan' => $diproses]);
         
 
         if ($update) {
@@ -88,8 +88,7 @@ class statusControl extends Controller
 
     public function seller_status_detail_3()
     {
-        $acc_pemesanan = acc_pemesanan::all();
-        return view('kelola_status.seller_status_detail_3',compact(['acc_pemesanan']));
+        $pemesanan = pemesanan::all();
 
     }
 
