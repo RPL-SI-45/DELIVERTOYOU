@@ -29,6 +29,7 @@ Route::get('/', function () {
 });
 
 #HALAMAN UTAMA
+Route::get('/', [CardController::class, 'halamanutama']);
 Route::get('/customer/menu', [CardController::class, 'menuwarung']);
 
 
