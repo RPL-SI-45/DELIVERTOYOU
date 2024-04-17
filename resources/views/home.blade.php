@@ -64,7 +64,7 @@
         .content-text {
             position: absolute;
             bottom: 0;
-            left: 150px;
+            left: 300px;
             background-color: white;
             padding: 10px;
             text-align: center;
@@ -152,22 +152,23 @@
 </div>
 
 <div class="content-container">
-    <img src="img_example/makanan.jpeg" class="content-img" alt="Content Image">
+    <img src="img_example/makanan.png" class="content-img" alt="Content Image">
     <div class="content-text">
-        <p class="about"></p></br>
+        <p class="about">lorem ipsum</p></br>
             <button type="button" class="button-pesan">PESAN</button>
     </div>
 </div>
 
 @foreach($menu_warungs as $m)
-<div class="card-container">
-    <div class="card">
-        <a href=""><img src="{{ asset('gambar_menu/'.$m->gambar) }}" class="card-img-top"></a>
-        <div class="{{$t->nama}}">
-            <p class="Harga Rp.{{$t->harga}}"></p>
-        </div>
-    </div>
+<div class="card" style="width: 18rem;">
+  <a href="/customer/menu"><img src="{{ asset('gambar_menu/'.$m->gambar) }}" class="card-img-top" alt="..."></a>
+  <div class="card-body">
+    <p class="card-text">{{$m->nama}}</p>
+    <p class="card-text">Harga Rp.{{$m->harga}}</p>
+    <p class="card-text">{{$m->deskripsi}}</p>
+  </div>
 </div>
+
 @endforeach
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
