@@ -16,8 +16,10 @@
             <th>No</th>
             <th>Nama Pelanggan</th>
             <th>Order</th>
-            <th>Metode Pembayaran</th>
             <th>Harga</th>
+            <th>Total Harga</th>
+            <th>Alamat</th>
+
         </tr>
         @foreach($pemesanan as $p)
          <tr>
@@ -25,12 +27,10 @@
             <td>{{$p->nama_pelanggan}}</td>
             <td>{{$p->menu}}</td>
             <td>{{$p->harga}}</td>
+            <td>{{$p->total_harga}}</td>
+            <td>{{$p->alamat}}</td>
             <td>
-                <form action="{{ route('seller.orders.update', $p->id) }}" method="POST">
-                    @csrf
-                    @method('PUT')
-                    <button type="submit" class="btn btn-primary">Confirm</button>
-                </form>
+            <a href="/seller/status/{{$p->id}}/update" type="button" class="btn btn-primary">Konfirmasi Pesanan</a>
             </td>
             <td>
                 <a href="{{ route('seller.detail', $p->id) }}" class="btn btn-primary">Detail</a>

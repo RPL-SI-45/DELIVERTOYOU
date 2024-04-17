@@ -16,7 +16,11 @@ class Pemesanan extends Model
 }
 
     protected $guarded =[];
+<<<<<<< Updated upstream
 
+=======
+    
+>>>>>>> Stashed changes
     public function payment()
     {
         return $this->hasOne(Payment::class);
@@ -24,7 +28,10 @@ class Pemesanan extends Model
     public function pesananmasuk() { 
         return $this->belongsTo(PesananMasuk::class, 'pesananmasuk_id'); 
     }
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     // public function payment()
     // {
     //     return $this->hasOne(Payment::class);

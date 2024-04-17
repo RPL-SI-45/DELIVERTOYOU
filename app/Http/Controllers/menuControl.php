@@ -21,7 +21,7 @@ class menuControl extends Controller
     public function seller_menu_input()
     {
 
-        $Kategori_admin = Kategori_admin::pluck('jenis_kategori')->toArray(); // Ubah nama_kolom dan id sesuai kebutuhan
+        $Kategori_admin = Kategori_admin::pluck('jenis_kategori')->toArray(); 
         return view('menu_input_pejual.seller_menu_input')->with('Kategori_admin', $Kategori_admin);
 
         
