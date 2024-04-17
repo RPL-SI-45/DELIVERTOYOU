@@ -10,30 +10,24 @@ use Form;
 
 class menuControl extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function seller_menu()
     {
         $menu_warungs = menu_warungs::all();
-        return view('seller_menu',compact(['menu_warungs']));
+        return view('menu_input_pejual.seller_menu',compact(['menu_warungs']));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function seller_menu_input()
     {
 
         $Kategori_admin = Kategori_admin::pluck('jenis_kategori')->toArray(); // Ubah nama_kolom dan id sesuai kebutuhan
-        return view('seller_menu_input')->with('jenis_kategori', $Kategori_admin);
+        return view('menu_input_pejual.seller_menu_input')->with('Kategori_admin', $Kategori_admin);
 
         
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {   
     
@@ -61,7 +55,7 @@ class menuControl extends Controller
         ]);
         
 
-         return redirect('seller/menu');
+         return redirect('menu_input_pejual.seller/menu');
       
     }
 
@@ -69,9 +63,9 @@ class menuControl extends Controller
     public function seller_menu_edit(int $id){
 
         $menu_warungs = menu_warungs::findOrFail($id);
-        $kategori = kategori::pluck('kategori')->toArray(); // Ubah nama_kolom dan id sesuai kebutuhan
+        $Kategori_admin = Kategori_admin::pluck('jenis_kategori')->toArray();
 
-        return view('seller_menu_edit', compact('menu_warungs'))->with('kategori', $kategori);;
+        return view('menu_input_pejual.seller_menu_edit', compact('menu_warungs'))->with('Kategori_admin', $Kategori_admin);
 
     }
 
@@ -106,7 +100,7 @@ class menuControl extends Controller
             'gambar' => $filename,]);
 
 
-         return redirect('seller/menu');
+         return redirect('menu_input_pejual.seller/menu');
 
 
 
@@ -121,7 +115,7 @@ class menuControl extends Controller
     
         $menu_warungs->delete();
 
-         return redirect('seller/menu');
+         return redirect('menu_input_pejual.seller/menu');
 
 
         

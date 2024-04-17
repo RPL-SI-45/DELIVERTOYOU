@@ -14,7 +14,7 @@
     @csrf
 
     <h1> Kategori</h1>  
-    <select name="jenis_kategori" class="form-control">
+    <select name="nama_kategori" class="form-control">
     @foreach($Kategori_admin as $value)
          <option value="{{ $value }}">{{ $value }}</option>
      @endforeach
