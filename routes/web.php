@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+#PEMESANAN
 Route::get('/pemesanan', [PemesananController::class, 'index']);
 Route::delete('/pemesanan/{id}', [PemesananController::class, 'destroy']);
 Route::get('/pembayaran', [PemesananController::class, 'store']);
