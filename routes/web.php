@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\KategoriAdminController;
 use App\Http\Controllers\menuControl;
 use App\Http\Controllers\statusControl;
@@ -18,6 +19,10 @@ use App\Http\Controllers\OrderController;
 |
 */
 
+#PEMESANAN
+Route::get('/pemesanan', [PemesananController::class, 'index']);
+Route::delete('/pemesanan/{id}', [PemesananController::class, 'destroy']);
+Route::get('/pembayaran', [PemesananController::class, 'store']);
 Route::get('/', function () {
     return view('welcome');
 });
