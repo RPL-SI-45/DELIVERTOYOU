@@ -75,7 +75,7 @@
       display: block;
       width: 100%;
       margin-top: 20px;
-      padding: 10px 15px;  /* Increased padding for better look */
+      padding: 10px 15px; 
       background-color: green;
       color: white;
       border-radius: 5px;
@@ -137,18 +137,18 @@
             @endforeach
           </tbody>
         </table>
+        <h4>Nama Penerima : {{$ps->nama_pelanggan}}</h4>
       </div>
       <div class="form-box">
         <!-- Bagian lain dari form di sini -->
         <h4 id="total_harga">Total Harga : 0</h4>
         <!-- Bagian lain dari form di sini -->
-    </div>
-      <h4>Nama Penerima : {{$ps->nama_pelanggan}} </h4>
+      </div>
       <label for="alamat">Alamat Penerima:</label>
       <div class="table-responsive">
         <textarea id="alamat" name="alamat" rows="4" cols="50"></textarea>
       </div>
-      <a href="/pembayaran"><button id="btnPembayaran">Lanjut Ke Pembayaran</button></a>
+      <a href="/payment/1"><button id="btnPembayaran">Lanjut Ke Pembayaran</button></a>
     
       
 
