@@ -154,7 +154,7 @@
 <div class="content-container">
     <img src="img_example/makanan.jpeg" class="content-img" alt="Content Image">
     <div class="content-text">
-        <p class="about">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi facilisis sapien non tristique pharetra.</p></br>
+        <p class="about"></p></br>
             <button type="button" class="button-pesan">PESAN</button>
     </div>
 </div>
@@ -164,8 +164,7 @@
     <div class="card">
         <a href="/customer/menu"><img src="" class="card-img-top"></a>
         <div class="card-body">
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi facilisis sapien non tristique pharetra.</p>
-        </div>
+            <p class="card-text">
     </div>
 </div>
 @endforeach

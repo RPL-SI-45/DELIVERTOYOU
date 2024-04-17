@@ -159,7 +159,7 @@
     <div class="card">
         <a href=""><img src="" class="card-img-top"></a>
         <div class="card-body">
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi facilisis sapien non tristique pharetra.</p>
+            <p class="card-text"></p>
         </div>
     </div>
 </div>
