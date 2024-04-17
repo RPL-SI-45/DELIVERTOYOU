@@ -22,10 +22,6 @@ use App\Http\Controllers\OrderController;
 #PEMESANAN
 Route::get('/pemesanan', [PemesananController::class, 'index']);
 Route::delete('/pemesanan/{id}', [PemesananController::class, 'destroy']);
-Route::get('/pembayaran', [PemesananController::class, 'store']);
-Route::get('/', function () {
-    return view('welcome');
-});
 
 #KATEGORI ADMIN
 Route::get('/kategori_admin',[KategoriAdminController::class,'index']);
@@ -37,6 +33,7 @@ Route::delete('/kategori_admin/{id}',[KategoriAdminController::class,'destroy'])
 
 
 #PAYMET
+Route::get('/payment', [PaymentController::class, 'index']);
 Route::get('/payment/{pemesananId}', [PaymentController::class, "index"]);
 Route::post('/payment/store/{pemesananId}', [PaymentController::class, 'store'])->name('payment.store');
 Route::get('/payment/qris/{pemesananId}', [PaymentController::class, "showQrisForm"])->name('payment.qris');

@@ -13,21 +13,13 @@ return new class extends Migration
     {
         Schema::create('acc_pemesanan', function (Blueprint $table) {
             $table->id();
-<<<<<<< Updated upstream
             $table->string('nama_pelanggan');
             $table->string('menu');
             $table->decimal('harga', 10, 2);
             $table->integer('quantity');
             $table->decimal('total_harga', 10, 2);
             $table->string('alamat');
-=======
-            $table->string('menu');
-            $table->integer('harga');
-            $table->integer('quantity');
-            $table->integer('total_harga');
-            $table->string('alamat');
             $table->string('bukti_pembayaran');
->>>>>>> Stashed changes
             $table->string('status_pemesanan');
             $table->timestamps();
         });
