@@ -154,12 +154,12 @@
     </div>
 </div>
 
-@foreach()
+@foreach($menu_warungs as $m)
 <div class="card-container">
     <div class="card">
-        <a href=""><img src="" class="card-img-top"></a>
-        <div class="card-body">
-            <p class="card-text"></p>
+        <a href=""><img src="{{ asset('gambar_menu/'.$m->gambar) }}" class="card-img-top"></a>
+        <div class="{{$t->nama}}">
+            <p class="Harga Rp.{{$t->harga}}"></p>
         </div>
     </div>
 </div>
