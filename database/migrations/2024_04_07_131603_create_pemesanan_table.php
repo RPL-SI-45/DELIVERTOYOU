@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->decimal('total_harga', 10, 2);
             $table->integer("total_bayar");
-            $table->string('alamat_pelanggan'); // Kolom baru untuk alamat pelanggan
+            $table->string('alamat'); // Kolom baru untuk alamat pelanggan
             $table->timestamps();
         });
     }
