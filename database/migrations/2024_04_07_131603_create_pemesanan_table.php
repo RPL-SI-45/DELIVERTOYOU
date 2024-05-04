@@ -18,8 +18,8 @@ return new class extends Migration
             $table->decimal('harga', 10, 2);
             $table->integer('quantity');
             $table->decimal('total_harga', 10, 2);
-            $table->string('alamat');
-            $table->string('status_pemesanan')->default('Menunggu konfirmasi');;
+            $table->integer("total_bayar");
+            $table->string('alamat'); // Kolom baru untuk alamat pelanggan
             $table->timestamps();
         });
     }

@@ -29,6 +29,7 @@
         </tr>
     </table>
     <a href="{{route('seller.order')}}" class="btn btn-primary">Kembali</a>
+    <a href="{{route('seller.order')}}" class="btn btn-primary">Terima</a>
 </div>
 </body>
 </html>

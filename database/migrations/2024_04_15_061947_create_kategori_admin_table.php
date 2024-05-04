@@ -11,15 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pemesanan', function (Blueprint $table) {
+        Schema::create('kategori_admin', function (Blueprint $table) {
             $table->id();
-            $table->string('menu');
-            $table->integer('harga');
-            $table->integer('quantity');
-            $table->integer('total_harga');
-            $table->string('alamat');
-            $table->string('bukti_pembayaran');
-            $table->string('status_pemesanan');
+            $table->string('jenis_kategori');
             $table->timestamps();
         });
     }
@@ -29,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pemesanan');
+        Schema::dropIfExists('kategori_admin');
     }
 };
