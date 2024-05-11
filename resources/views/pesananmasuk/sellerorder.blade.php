@@ -33,7 +33,7 @@
             <a href="/seller/status/{{$p->id}}/update" type="button" class="btn btn-primary">Konfirmasi Pesanan</a>
             </td>
             <td>
-                <a href="/seller/orders/{id}/detail" class="btn btn-primary">Detail</a>
+                <a href="{{route('seller.detail', ['id' => $p->id])}}" class="btn btn-primary">Detail</a>
             </td>
          </tr>
         @endforeach

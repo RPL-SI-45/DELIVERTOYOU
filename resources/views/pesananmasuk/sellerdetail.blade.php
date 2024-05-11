@@ -23,9 +23,12 @@
             <td>{{ $pemesanan->nama_pelanggan }}</td>
             <td>{{ $pemesanan->menu }}</td>
             <td>{{ $pemesanan->quantity }}</td>
-            <td>{{ $pemesanan->payment->metode }}</td>
+            <td> @if($pemesanan->payment)
+                    {{ $pemesanan->payment->metode }}
+                @endif
+            </td>
             <td>{{ $pemesanan->total_harga }}</td>
-            <td>{{ $pemesanan->status }}</td>
+            <td>{{ $pemesanan->status_pemesanan }}</td>
         </tr>
     </table>
     <a href="{{route('seller.order')}}" class="btn btn-primary">Kembali</a>
