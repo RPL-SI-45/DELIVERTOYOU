@@ -137,7 +137,6 @@
             @endforeach
           </tbody>
         </table>
-        <h4>Nama Penerima : {{$ps->nama_pelanggan}}</h4>
       </div>
       <div class="form-box">
         <!-- Bagian lain dari form di sini -->
@@ -148,11 +147,27 @@
       <div class="table-responsive">
         <textarea id="alamat" name="alamat" rows="4" cols="50"></textarea>
       </div>
-      <a href="/payment/1"><button id="btnPembayaran">Lanjut Ke Pembayaran</button></a>
+      <button id="btnPembayaran">Lanjut Ke Pembayaran</button>
     
       
 
     <script>
+      const btnPembayaran = document.getElementById('btnPembayaran');
+      const alamatInput = document.getElementById('alamat');
+      
+        btnPembayaran.addEventListener('click', function() {
+          const alamatValue = alamatInput.value.trim();
+
+          if (alamatValue === '') {
+            alert('Isi Alamat Terlebih Dahulu');
+            return false; // Mencegah pengiriman form
+          }
+
+          // Jika alamat valid, lanjutkan ke halaman pembayaran
+          // (Anda dapat mengganti `/payment/1` dengan URL pembayaran yang sebenarnya)
+          window.location.href = '/payment/1';
+        });
+      
         document.addEventListener("DOMContentLoaded", function() {
             var btnMinus = document.querySelectorAll('.btn-minus');
             var btnPlus = document.querySelectorAll('.btn-plus');
