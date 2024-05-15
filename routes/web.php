@@ -54,6 +54,8 @@ Route::get('/customer/status/{pemesananId}', [PaymentController::class, 'showSta
 Route::get('/seller/order', [OrderController::class, 'sellerOrder'])->name('seller.order');
 Route::get('/seller/orders/{id}/detail', [OrderController::class, 'sellerDetail'])->name('seller.detail');
 Route::get('/seller/status/{id}/update', [OrderController::class, 'acc_konfirmasi'])->name('seller_status_update');
+Route::get('/seller/reject/{id}', [OrderController::class, 'reject'])->name('seller.reject');
+
 
 #MENU INPUT PENJUAL
 Route::get('/seller/menu', [menuControl::class,'seller_menu']);

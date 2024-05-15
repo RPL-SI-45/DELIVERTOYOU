@@ -19,7 +19,7 @@
             <th>Harga</th>
             <th>Total Harga</th>
             <th>Alamat</th>
-
+            <th>Status Pesanan</th>
         </tr>
         @foreach($pemesanan as $p)
          <tr>
@@ -30,7 +30,11 @@
             <td>{{$p->total_harga}}</td>
             <td>{{$p->alamat}}</td>
             <td>
-            <a href="/seller/status/{{$p->id}}/update" type="button" class="btn btn-primary">Konfirmasi Pesanan</a>
+                @if($p->status_pemesanan == 'Pesanan Ditolak')
+                    <span class="badge bg-danger">Pesanan ditolak</span>
+                @else
+                    <a href="/seller/status/{{ $p->id }}/update" type="button" class="btn btn-primary">Konfirmasi Pesanan</a>
+                @endif
             </td>
             <td>
                 <a href="{{route('seller.detail', ['id' => $p->id])}}" class="btn btn-primary">Detail</a>
@@ -39,5 +43,5 @@
         @endforeach
     </table>
 </div>
-
-
+</body>
+</html>

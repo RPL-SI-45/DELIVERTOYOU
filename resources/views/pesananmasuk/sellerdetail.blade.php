@@ -15,6 +15,7 @@
             <th>Pesanan</th>
             <th>Quantity</th>
             <th>Metode Pembayaran</th>
+            <th>Bukti Bayar</th>
             <th>Total Harga</th>
             <th>Status Pesanan</th>
         </tr>
@@ -27,12 +28,19 @@
                     {{ $pemesanan->payment->metode }}
                 @endif
             </td>
+            <td>
+                @if($pemesanan->payment && $pemesanan->payment->metode == 'QRIS' && $pemesanan->payment->bukti)
+                    <img src="{{ asset('bukti/bayar/' . $pemesanan->payment->bukti) }}" alt="Bukti Pembayaran QRIS" style="max-width: 200px;">
+                @else
+                    Tidak ada
+                @endif
+            </td>
             <td>{{ $pemesanan->total_harga }}</td>
             <td>{{ $pemesanan->status_pemesanan }}</td>
         </tr>
     </table>
     <a href="{{route('seller.order')}}" class="btn btn-primary">Kembali</a>
-    <a href="{{route('seller.order')}}" class="btn btn-primary">Terima</a>
+    <a href="{{ route('seller.reject', ['id' => $pemesanan->id]) }}" class="btn btn-primary">Tolak</a>
 </div>
 </body>
 </html>
