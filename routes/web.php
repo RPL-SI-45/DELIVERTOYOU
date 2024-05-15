@@ -7,6 +7,7 @@ use App\Http\Controllers\statusControl;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\CardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,13 @@ use App\Http\Controllers\OrderController;
 |
 */
 
+
+Route::get('login', 'App\Http\Controllers\Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'App\Http\Controllers\Auth\LoginController@login')->name('login.post');
+Route::get('register', 'App\Http\Controllers\Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('register', 'App\Http\Controllers\Auth\RegisterController@register');
+
+
 #PEMESANAN
 Route::get('/pemesanan', [PemesananController::class, 'index']);
 Route::delete('/pemesanan/{id}', [PemesananController::class, 'destroy']);
@@ -30,6 +38,12 @@ Route::post('/kategori_admin/store',[KategoriAdminController::class,'store']);
 Route::get('/kategori_admin/{id}/edit',[KategoriAdminController::class,'edit']);
 Route::put('/kategori_admin/{id}',[KategoriAdminController::class,'update']);
 Route::delete('/kategori_admin/{id}',[KategoriAdminController::class,'destroy']);
+
+#HALAMAN UTAMA
+Route::get('/home', [CardController::class, 'halamanutama']);
+Route::get('/customer/menu', [CardController::class, 'menuwarung']);
+Route::get('/home', [CardController::class, 'halamanutama'])->name('home');
+
 
 
 #PAYMET
