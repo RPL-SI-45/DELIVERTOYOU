@@ -158,8 +158,8 @@
 <div class="card-container">
     <div class="card">
         <a href=""><img src="{{ asset('gambar_menu/'.$m->gambar) }}" class="card-img-top"></a>
-        <div class="{{$t->nama}}">
-            <p class="Harga Rp.{{$t->harga}}"></p>
+        <div class="{{$m->nama}}">
+            <p class="Harga Rp.{{$m->harga}}"></p>
         </div>
     </div>
 </div>

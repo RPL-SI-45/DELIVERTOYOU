@@ -160,13 +160,13 @@
 </div>
 
 @foreach($menu_warungs as $m)
-<div class="card" style="width: 18rem;">
-  <a href="/customer/menu"><img src="{{ asset('gambar_menu/'.$m->gambar) }}" class="card-img-top" alt="..."></a>
-  <div class="card-body">
-    <p class="card-text">{{$m->nama}}</p>
-    <p class="card-text">Harga Rp.{{$m->harga}}</p>
-    <p class="card-text">{{$m->deskripsi}}</p>
-  </div>
+<div class="card-container">
+    <div class="card">
+        <a href=""><img src="{{ asset('gambar_menu/'.$m->gambar) }}" class="card-img-top"></a>
+        <div class="{{$m->nama}}">
+            <p class="Harga Rp.{{$m->harga}}"></p>
+        </div>
+    </div>
 </div>
 
 @endforeach
