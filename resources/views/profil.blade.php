@@ -55,72 +55,7 @@
         .search-container button:hover {
             background: #ccc;
         }
-
-        .content-container {
-            position: relative;
-            display: inline-block;
-        }
-
-        .content-text {
-            position: absolute;
-            bottom: 0;
-            left: 300px;
-            background-color: white;
-            padding: 10px;
-            text-align: center;
-        }
-
-        .about {
-            margin: 0;
-        }
-
-        .card-container {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            margin-top: 20px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .content-img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin-top: -50px; 
-            z-index: -1;
-        }
-
-        .button-pesan {
-            background-color: #E1AB24;
-            border-radius: 7px;
-        }
-
-        .card .card-img-top {
-            height: 50px; 
-            object-fit: contain; 
-        }
-
-        .card {
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            transition: 0.3s;
-            width: 15rem;
-            margin: 7px;
-            padding: 20px;
-            text-align: center;
-            background-color: #E7E4DC;
-
-        }
-
-        .card:hover {
-            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-        }
-
-        .card-text {
-            margin-top: 10px;
-        }
-
-    </style>
+        </style>
 </head>
 <body>
 
@@ -150,25 +85,6 @@
     </div>
 </div>
 
-<div class="content-container">
-    <img src="img_example/makanan.png" class="content-img" alt="Content Image">
-    <div class="content-text">
-        <p class="about">lorem ipsum</p></br>
-            <button type="button" class="button-pesan">PESAN</button>
-    </div>
-</div>
-
-@foreach($menu_warungs as $t)
-<div class="card-container">
-    <div class="card">
-        <a href="/customer/menu"><img src="{{ asset('gambar_menu/'.$t->gambar) }}" class="card-img-top"></a>
-        <div class="{{$t->nama}}">
-            <p class="Harga Rp.{{$t->harga}}"></p>
-        </div>
-    </div>
-</div>
-
-@endforeach
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

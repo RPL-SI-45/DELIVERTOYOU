@@ -9,6 +9,8 @@ use App\Http\Controllers\CardController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderHistoryController;
+use App\Http\Controllers\ProfileController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -30,9 +32,11 @@ Route::get('/', function () {
 });
 
 #HALAMAN UTAMA
-Route::get('/', [CardController::class, 'halamanutama']);
+Route::get('/home', [CardController::class, 'halamanutama']);
 Route::get('/customer/menu', [CardController::class, 'menuwarung']);
 
+#PROFIL
+Route::get('/profil', [ProfileController::class, 'index']);
 
 #KATEGORI ADMIN
 Route::get('/kategori_admin',[KategoriAdminController::class,'index']);
@@ -42,10 +46,6 @@ Route::get('/kategori_admin/{id}/edit',[KategoriAdminController::class,'edit']);
 Route::put('/kategori_admin/{id}',[KategoriAdminController::class,'update']);
 Route::delete('/kategori_admin/{id}',[KategoriAdminController::class,'destroy']);
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 #PAYMENT
 Route::get('/payment', [PaymentController::class, 'index']);
 Route::get('/payment/{pemesananId}', [PaymentController::class, "index"]);
@@ -78,12 +78,9 @@ Route::get('seller/{id}/status/detail/2', [statusControl::class,'seller_status_d
 Route::post('/done_status', [statusControl::class,'done_status'])->name('done_status');
 Route::get('seller/{id}/status/detail/3', [statusControl::class,'seller_status_detail_3']);
 
-<<<<<<< Updated upstream
 
 #KELOLA STATUS CUSTOMER
 Route::get('/order/status', [statusControl::class,'order_status']);
 Route::get('/order/{id}/status/detail', [statusControl::class,'order_status_detail']);
-=======
 #RIWAYAT PENJUAL
 Route::get('/seller/orderhistory', [OrderHistoryController::class, 'index'])->name('order.history');
->>>>>>> Stashed changes
