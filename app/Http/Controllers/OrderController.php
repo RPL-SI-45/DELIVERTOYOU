@@ -11,12 +11,10 @@ class OrderController extends Controller
 {
     public function sellerOrder()
     {
-        // Mengambil data pemesanan yang sedang berlangsung atau menunggu konfirmasi
-        $pemesanan = Pemesanan::whereHas('pesananmasuk', function ($query) {
-            $query->whereIn('status_pesananmasuk', ['menunggu konfirmasi', 'pesanan sedang berlangsung']);
-        })->get();
-        
+
+        $pemesanan = Pemesanan::all();
         return view('pesananmasuk.sellerorder', compact('pemesanan'));
+       
         
         // Mengambil data pembayaran
         $payment = Payment::all();
@@ -40,5 +38,30 @@ class OrderController extends Controller
         $order->save();
 
         return redirect()->route('seller.order')->with('berhasil', 'Order dikonfirmasi');
+    }
+
+
+    public function acc_konfirmasi(Request $request)
+    {
+        $id = $request->input('id');
+        $acc = $request->input('status_pemesanan');
+        
+        $acc = 'Sudah dikonfirmasi';
+        $update = pemesanan::where('id', $request->id)->update(['status_pemesanan' => $acc]);
+
+        return redirect('/seller/status');
+    }
+
+    public function reject($id)
+    {
+        // Temukan pesanan berdasarkan ID
+        $pemesanan = Pemesanan::findOrFail($id);
+
+        // Ubah status pesanan menjadi "Ditolak"
+        $pemesanan->status_pemesanan = 'Pesanan Ditolak';
+        $pemesanan->save();
+
+        // Redirect kembali ke halaman sebelumnya (misalnya, halaman menunggu konfirmasi)
+        return redirect()->route('seller.order')->with('status', 'Pesanan ditolak');
     }
 }

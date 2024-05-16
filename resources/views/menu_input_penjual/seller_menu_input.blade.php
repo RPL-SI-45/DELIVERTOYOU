@@ -1,17 +1,22 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Biryani' rel='stylesheet'>
-    <title>DeliverToYou</title>
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
     <style>
-        body {
+
+        .font-style {
             margin: 0;
-            font-family: Biryani; size: 14px;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            color: black;
         }
+
 
         .navbar {
             overflow: hidden;
@@ -64,7 +69,7 @@
         .content-text {
             position: absolute;
             bottom: 0;
-            left: 300px;
+            left: 150px;
             background-color: white;
             padding: 10px;
             text-align: center;
@@ -135,70 +140,55 @@
             </button>
             <a href="#" class="navbar-logo"><img src="img_example/logo.png" alt="logo"></a>
             <div class="search-container">
-
-                <input type="text" id="search-input" placeholder="Search...">
-                <button type="submit" id="search-input">Search</button>
-
+                <input type="text" placeholder="Search...">
+                <button type="submit">Search</button>
             </div>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="home">HOME</a></li>
                 <li><a href="menu">MENU</a></li>
-
                 <li><a href="categories">CATEGORIES</a></li>
                 <li><a href="about">ABOUT</a></li>
-
-                <li><a href="/profil">PROFIL</a></li>
-
                 <li><a href="login">LOGIN</a></li>
             </ul>
         </div>
     </div>
 </div>
 
-<div class="content-container">
-    <img src="img_example/makanan.png" class="content-img" alt="Content Image">
-    <div class="content-text">
-        <p class="about">lorem ipsum</p></br>
-            <button type="button" class="button-pesan">PESAN</button>
+
+    <form action="/post" method='POST' enctype="multipart/form-data">
+    @csrf
+
+    <h1> Kategori</h1>  
+    <select name="nama_kategori" class="form-control">
+    @foreach($Kategori_admin as $value)
+         <option value="{{ $value }}">{{ $value }}</option>
+     @endforeach
+    </select>
+    <h1> Nama</h1>  
+    <input type="text" name="nama" placeholder="Nama">
+    <h1> Harga </h1> 
+    <input type="text" name="harga" placeholder="Harga">
+    <h1> Deskirpsi </h1> 
+    <input type="text" name="deskripsi" placeholder="Deskripsi"> <br>
+    <br>
+    
+    <div class="form-group">
+        <label for="exampleFormControlFile1">Gambar menu</label>
+        <input type="file" class="form-control-file" id="exampleFormControlFile1" name="gambar">
     </div>
-</div>
 
-@foreach($menu_warungs as $t)
-<div class="card-container">
-    <div class="card">
+    <br>
 
-        <a href="/customer/menu"><img src="{{ asset('gambar_menu/'.$t->gambar) }}" class="card-img-top" alt="{{ $t->nama }}></a>
-        
-        <div class="{{$t->nama}}">
-            <p class="Harga Rp.{{$t->harga}}"></p>
-        </div>
-    </div>
-</div>
-
-@endforeach
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<script>
-    $(document).ready(function() {
-        $('#search-button').on('click', function(e) {
-            e.preventDefault();
-            var query = $('#search-input').val().toLowerCase();
-            $('.card-container .card').each(function() {
-                var itemName = $(this).find('.card-img-top').attr('alt').toLowerCase();
-                if (itemName.includes(query)) {
-                    $(this).show();
-                } else {
-                    $(this).hide();
-                }
-            });
-        });
-    });
-</script>
+    <button type="submit" class="btn btn-success">Submit</button>
+    <a href="/seller/menu" button type="button" class="btn btn-danger">Cancel</button>
+    
 
 
 </body>
 </html>
+
+
+
+

@@ -22,8 +22,15 @@ class PaymentController extends Controller
         if ($request->metode === 'qris') {
             return redirect()->route('payment.qris', ['pemesananId' => $pemesananId]);
         } else {
+            Payment::create([
+                'pemesanan_id' => $pemesananId,
+                'metode' => 'Tunai',
+                'total_bayar' => $total_bayar,
+            ]);
+    
             return redirect()->route('customer.status', ['pemesananId' => $pemesananId]);
         }
+    
     }
 
     public function showQrisForm($pemesananId)

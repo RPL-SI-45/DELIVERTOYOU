@@ -13,7 +13,7 @@
     @method('PUT')
     @csrf
     <select name="nama_kategori" class="form-control">
-    @foreach($kategori as $value)
+    @foreach($Kategori_admin  as $value)
          <option value="{{ $value }}">{{ $value }}</option>
      @endforeach
     <h1> Nama</h1> 

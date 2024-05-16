@@ -22,6 +22,7 @@
             height: 40px;
             margin-top: 10px;
             margin-right: 15px;
+
         }
 
         .search-container {
@@ -56,6 +57,14 @@
             background: #ccc;
         }
 
+        .content-img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin-top: -150px; 
+            z-index: -1;
+        }
+
         .content-container {
             position: relative;
             display: inline-block;
@@ -64,10 +73,12 @@
         .content-text {
             position: absolute;
             bottom: 0;
-            left: 300px;
+            left: 0;
             background-color: white;
             padding: 10px;
-            text-align: center;
+            text-align: left;
+            
+            
         }
 
         .about {
@@ -80,50 +91,35 @@
             justify-content: center;
             margin-top: 20px;
             flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .content-img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin-top: -50px; 
-            z-index: -1;
-        }
-
-        .button-pesan {
-            background-color: #E1AB24;
-            border-radius: 7px;
+            align-items: flex-start;
         }
 
         .card .card-img-top {
             height: 50px; 
             object-fit: contain; 
+            margin-right: 300px;
         }
 
         .card {
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
             transition: 0.3s;
-            width: 15rem;
-            margin: 7px;
+            width: 50rem;
+            margin: 15px;
             padding: 20px;
-            text-align: center;
+            text-align: right;
             background-color: #E7E4DC;
-
-        }
-
-        .card:hover {
-            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
         }
 
         .card-text {
-            margin-top: 10px;
+            text-align: right;
+            margin-left: 50px;
+            margin-top: -50px;
         }
 
+    
     </style>
 </head>
 <body>
-
 <div class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
@@ -133,24 +129,17 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="#" class="navbar-logo"><img src="img_example/logo.png" alt="logo"></a>
+            <a href="#" class="navbar-logo"><img src="/img_example/logo.png" alt="logo"></a>
             <div class="search-container">
-
-                <input type="text" id="search-input" placeholder="Search...">
-                <button type="submit" id="search-input">Search</button>
-
+                <input type="text" placeholder="Search...">
+                <button type="submit">Search</button>
             </div>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="home">HOME</a></li>
                 <li><a href="menu">MENU</a></li>
-
-                <li><a href="categories">CATEGORIES</a></li>
-                <li><a href="about">ABOUT</a></li>
-
                 <li><a href="/profil">PROFIL</a></li>
-
                 <li><a href="login">LOGIN</a></li>
             </ul>
         </div>
@@ -158,47 +147,25 @@
 </div>
 
 <div class="content-container">
-    <img src="img_example/makanan.png" class="content-img" alt="Content Image">
+    <img src="/img_example/makanan.png" class="content-img" alt="Content Image">
     <div class="content-text">
-        <p class="about">lorem ipsum</p></br>
-            <button type="button" class="button-pesan">PESAN</button>
+        <p class="about">NAMA WARUNG, ALAMAT</p></br>
     </div>
 </div>
 
 @foreach($menu_warungs as $t)
 <div class="card-container">
     <div class="card">
-
-        <a href="/customer/menu"><img src="{{ asset('gambar_menu/'.$t->gambar) }}" class="card-img-top" alt="{{ $t->nama }}></a>
-        
+        <a href=""><img src="{{ asset('gambar_menu/'.$t->gambar) }}" class="card-img-top"></a>
         <div class="{{$t->nama}}">
             <p class="Harga Rp.{{$t->harga}}"></p>
         </div>
     </div>
 </div>
-
 @endforeach
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<script>
-    $(document).ready(function() {
-        $('#search-button').on('click', function(e) {
-            e.preventDefault();
-            var query = $('#search-input').val().toLowerCase();
-            $('.card-container .card').each(function() {
-                var itemName = $(this).find('.card-img-top').attr('alt').toLowerCase();
-                if (itemName.includes(query)) {
-                    $(this).show();
-                } else {
-                    $(this).hide();
-                }
-            });
-        });
-    });
-</script>
-
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
