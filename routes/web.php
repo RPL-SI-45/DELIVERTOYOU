@@ -41,8 +41,7 @@ Route::get('/kategori_admin/{id}/edit',[KategoriAdminController::class,'edit']);
 Route::put('/kategori_admin/{id}',[KategoriAdminController::class,'update']);
 Route::delete('/kategori_admin/{id}',[KategoriAdminController::class,'destroy']);
 
-
-#PAYMET
+#PAYMENT
 Route::get('/payment', [PaymentController::class, 'index']);
 Route::get('/payment/{pemesananId}', [PaymentController::class, "index"]);
 Route::post('/payment/store/{pemesananId}', [PaymentController::class, 'store'])->name('payment.store');
@@ -74,3 +73,9 @@ Route::post('/done_status', [statusControl::class,'done_status'])->name('done_st
 Route::get('seller/{id}/status/detail/3', [statusControl::class,'seller_status_detail_3']);
 
 
+#KELOLA STATUS CUSTOMER
+Route::get('/order/status', [statusControl::class,'order_status']);
+Route::get('/order/{id}/status/detail', [statusControl::class,'order_status_detail']);
+
+#RIWAYAT PENJUAL
+Route::get('/seller/orderhistory', [OrderHistoryController::class, 'index'])->name('order.history');
