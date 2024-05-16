@@ -11,7 +11,7 @@
 <body>
 <div class="container mt-5">
     <h2>Status Pesanan</h2>
-    <p>Pembayaran diterima. Status pesanan Anda sedang diproses.</p>
+    <p>Pemesanan sedang menunggu dikonfimasi. Tunggu sebentar ya.</p>
 </div>
 </body>
 </html>
