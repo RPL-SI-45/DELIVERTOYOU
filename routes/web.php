@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderHistoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +42,10 @@ Route::get('/kategori_admin/{id}/edit',[KategoriAdminController::class,'edit']);
 Route::put('/kategori_admin/{id}',[KategoriAdminController::class,'update']);
 Route::delete('/kategori_admin/{id}',[KategoriAdminController::class,'destroy']);
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 #PAYMENT
 Route::get('/payment', [PaymentController::class, 'index']);
 Route::get('/payment/{pemesananId}', [PaymentController::class, "index"]);
@@ -50,12 +54,11 @@ Route::get('/payment/qris/{pemesananId}', [PaymentController::class, "showQrisFo
 Route::post('/payment/qris/store/{pemesananId}', [PaymentController::class, "storeQris"])->name('payment.storeQris');
 Route::get('/customer/status/{pemesananId}', [PaymentController::class, 'showStatus'])->name('customer.status');
 
-#PESANAN MASUK
+#PESANAN MASUK PENJUAL
 Route::get('/seller/order', [OrderController::class, 'sellerOrder'])->name('seller.order');
 Route::get('/seller/orders/{id}/detail', [OrderController::class, 'sellerDetail'])->name('seller.detail');
 Route::get('/seller/status/{id}/update', [OrderController::class, 'acc_konfirmasi'])->name('seller_status_update');
 Route::get('/seller/reject/{id}', [OrderController::class, 'reject'])->name('seller.reject');
-
 
 #MENU INPUT PENJUAL
 Route::get('/seller/menu', [menuControl::class,'seller_menu']);
@@ -75,7 +78,12 @@ Route::get('seller/{id}/status/detail/2', [statusControl::class,'seller_status_d
 Route::post('/done_status', [statusControl::class,'done_status'])->name('done_status');
 Route::get('seller/{id}/status/detail/3', [statusControl::class,'seller_status_detail_3']);
 
+<<<<<<< Updated upstream
 
 #KELOLA STATUS CUSTOMER
 Route::get('/order/status', [statusControl::class,'order_status']);
 Route::get('/order/{id}/status/detail', [statusControl::class,'order_status_detail']);
+=======
+#RIWAYAT PENJUAL
+Route::get('/seller/orderhistory', [OrderHistoryController::class, 'index'])->name('order.history');
+>>>>>>> Stashed changes
