@@ -40,7 +40,6 @@ Route::put('/kategori_admin/{id}',[KategoriAdminController::class,'update']);
 Route::delete('/kategori_admin/{id}',[KategoriAdminController::class,'destroy']);
 
 #HALAMAN UTAMA
-Route::get('/home', [CardController::class, 'halamanutama']);
 Route::get('/customer/menu', [CardController::class, 'menuwarung']);
 Route::get('/home', [CardController::class, 'halamanutama'])->name('home');
 

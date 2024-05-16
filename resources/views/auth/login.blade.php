@@ -20,6 +20,10 @@
             padding: 30px;
             box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
         }
+        .register-link {
+            text-align: center;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -40,6 +44,9 @@
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">Login</button>
                     </form>
+                    <div class="register-link">
+                        <p>Don't have an account? <a href="{{ route('register') }}">Register</a></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -51,5 +58,3 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-
