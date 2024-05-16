@@ -135,15 +135,22 @@
             </button>
             <a href="#" class="navbar-logo"><img src="img_example/logo.png" alt="logo"></a>
             <div class="search-container">
-                <input type="text" placeholder="Search...">
-                <button type="submit">Search</button>
+
+                <input type="text" id="search-input" placeholder="Search...">
+                <button type="submit" id="search-input">Search</button>
+
             </div>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="home">HOME</a></li>
                 <li><a href="menu">MENU</a></li>
+
+                <li><a href="categories">CATEGORIES</a></li>
+                <li><a href="about">ABOUT</a></li>
+
                 <li><a href="/profil">PROFIL</a></li>
+
                 <li><a href="login">LOGIN</a></li>
             </ul>
         </div>
@@ -161,7 +168,9 @@
 @foreach($menu_warungs as $t)
 <div class="card-container">
     <div class="card">
-        <a href="/customer/menu"><img src="{{ asset('gambar_menu/'.$t->gambar) }}" class="card-img-top"></a>
+
+        <a href="/customer/menu"><img src="{{ asset('gambar_menu/'.$t->gambar) }}" class="card-img-top" alt="{{ $t->nama }}></a>
+        
         <div class="{{$t->nama}}">
             <p class="Harga Rp.{{$t->harga}}"></p>
         </div>
@@ -172,5 +181,24 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#search-button').on('click', function(e) {
+            e.preventDefault();
+            var query = $('#search-input').val().toLowerCase();
+            $('.card-container .card').each(function() {
+                var itemName = $(this).find('.card-img-top').attr('alt').toLowerCase();
+                if (itemName.includes(query)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+    });
+</script>
+
+
 </body>
 </html>
