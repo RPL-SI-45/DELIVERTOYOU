@@ -184,49 +184,19 @@
                  <div class="table-container">
                   <div class="table-column">
                      <img src="{{ asset('img_example/makanan.png') }}" alt="Image 3" class="custom-img-size">
-                    <div class="table-cell font-weight-bold">"nama CUSTOMER"</div>
+                    <div class="table-cell font-weight-bold">CRISBAR</div>
                     <div class="table-cell">ID : {{ $t->id }}</div>
+                    <div class="table-cell">Menu : {{ $t->menu }}</div>
                     <div class="table-cell">Status : {{ $t->status_pemesanan }}</div>
                     <div class="table-cell">Total  : {{ $t->total_harga }}</div>
 
-                    <?php
-                    $diproses = $t->status_pemesanan;
-                    $id = $t->id;
-
-                    switch ($diproses) {
-                        case 'Sudah dikonfirmasi':
-                            $route = "{$id}/status/detail";
-                            break;
-                        case 'Sedang Dimasak oleh Ahlinya':
-                            $route = "{$id}/status/detail/1";
-                            break;
-                        case 'Sedang diantar oleh driver professional':
-                            $route = "{$id}/status/detail/2";
-                            break;
-                        case 'Pesanan Diterima dan selesai':
-                            $route = "{$id}/status/detail/3";
-                        default:
-                            // Rute default jika tidak ada kecocokan
-                            $route = "/home";
-                            break;  
-                        } 
-                    ?>  
-                
-                    <a href="<?= $route ?>" a type="button" class="btn btn-dark">Detail</a>   
+                    <a href="/order/{{$t->id}}/status/detail" a type="button" class="btn btn-dark">Detail</a>   
 
                 @endforeach
                     
                   </div>
                  </div>
-                </div>
-            
-
-               
-        </table>
-    </div>
-    
-
-
-    
+                </div>   
+      
 </body>
 </html>

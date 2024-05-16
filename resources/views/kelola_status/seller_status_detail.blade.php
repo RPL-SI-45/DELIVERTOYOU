@@ -9,6 +9,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     
     <style>
+        body {
+      font-family: Arial, sans-serif;
+
+    }
     .card-container {
         display: flex;
         flex-wrap: wrap;
@@ -32,6 +36,11 @@
         background-color: #B49852;
     }
 
+    .navbar-logo img{
+        height: 40px;
+        margin-top: 10px;
+        margin-right: 15px;
+    }
 
     .search-container {
         display: inline-block;
@@ -79,56 +88,39 @@
         text-align: center;
     }
 
-    .about {
-        margin: 0;
+    .table-container {
+      display: flex;
+      border: 1px solid #dee2e6;
+    }
+    .table-column {
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid #dee2e6;
+      padding: 10px;
+    }
+    .table-column:last-child {
+      border-right: none;
+    }
+    .table-cell {
+      display: flex;
+      align-items: center;
+      padding: 8px;
+      border-bottom: 1px solid #dee2e6;
+    }
+    .table-cell:last-child {
+      border-bottom: none;
+    }
+    .table-cell img {
+      max-width: 50px;
+      height: auto;
+      margin-right: 10px;
     }
 
-    .card-container {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        margin-top: 20px;
-        flex-wrap: wrap;
-        align-items: center;
+    .custom-img-size {
+      width: 100px;
+      height: auto; 
     }
-
-    .content-img {
-        max-width: 100%;
-        height: auto;
-        display: block;
-        margin-top: -50px; 
-        z-index: -1;
-    }
-
-    .button-pesan {
-        background-color: #E1AB24;
-        border-radius: 7px;
-    }
-
-    .card .card-img-top {
-        height: 50px; 
-        object-fit: contain; 
-    }
-
-    .card {
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        transition: 0.3s;
-        width: 15rem;
-        margin: 7px;
-        padding: 20px;
-        text-align: center;
-        background-color: #E7E4DC;
-
-    }
-
-    .card:hover {
-        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-    }
-
-    .card-text {
-        margin-top: 10px;
-    }
-
+  
 </style>
 
     
@@ -145,7 +137,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="#" class="navbar-logo"><img src="img_example/logo.png" alt="logo"></a>
+            <a href="#" class="navbar-logo"><img src="{{ asset('img_example/logo.png') }}" alt="logo"></a>
             <div class="search-container">
                 <input type="text" placeholder="Search...">
                 <button type="submit">Search</button>
@@ -163,43 +155,32 @@
     </div>
 </div>
 
-    <table class="table table-hover">
-        <tr>
-            <th>ID</th>
-            <th>Menu</th>
-            <th>Harga</th>
-            <th>Quantity</th>
-            <th>Total Harga</th>
-            <th>Alamat</th>
-            <th>Status Pemesanan</th>
-            
-        </tr>
-        @foreach($pemesanan as $t)
-        
-        <tr>
-        <td>{{ $t->id }}</td>
-        <td>{{ $t->menu }}</td>
-        <td>{{ $t->harga }}</td>
-        <td>{{ $t->quantity }}</td>
-        <td>{{ $t->total_harga }}</td>
-        <td>{{ $t->alamat }}</td>
-        <td>{{ $t->status_pemesanan }}</td>
+@foreach($pemesanan as $t)
+<div class="container mt-5">
+    <div class="table-container">
+        <div class="table-column">
+        <img src="{{ asset('img_example/makanan.png') }}" alt="Image 3" class="custom-img-size">
+        <div class="table-cell font-weight-bold">"nama Customer"</div>
+        <div class="table-cell">ID : {{ $t->id }}</div>
+        <div class="table-cell">Status : {{ $t->status_pemesanan }}</div>
+        <div class="table-cell">Alamat : {{ $t->alamat }}</div>
+        <div class="table-cell">Menu   : {{ $t->menu }}</div>
+        <div class="table-cell">Harga   : {{ $t->harga }}</div>
+        <div class="table-cell">Quantity   : {{ $t->Quantity }}</div>
+        <div class="table-cell">Total  : {{ $t->total_harga }}</div>
+        <br>
 
-        <td>
-            <form action="{{ route('up_to_cook') }}" method="POST">
-                @csrf
-                 <input type="hidden" name="id" value="{{ $t->id }}">
-            <button type="submit" class="btn btn-primary">Update</button>
+        <form action="{{ route('up_to_cook') }}" method="POST">
+        @csrf
+        <input type="hidden" name="id" value="{{ $t->id }}">
+         <a type="submit" class="btn btn-dark">Update</a>
         </form>
-    </td>
-</tr>
+        <a href="/seller/status" a type="button" class="btn btn-dark">Back</a>   
+        </div>
+    </div>
+</div>
+ @endforeach
 
-
-
-            
-            @endforeach
-    </table>
-    
 
 
     

@@ -14,8 +14,22 @@ class statusControl extends Controller
         return view('kelola_status.seller_status',compact(['pemesanan']));
     }
 
+    public function order_status(Request $request)
+    {
+        $pemesanan = pemesanan::all();
+        return view('kelola_status.cust_status',compact(['pemesanan']));
+    }
 
-    public function seller_status_detail()
+    
+    public function order_status_detail(Request $request)
+    {
+        $pemesanan = Pemesanan::findOrFail($request->id); 
+        return view('kelola_status.cust_status_detail', compact('pemesanan'));
+    }
+    
+
+
+    public function seller_status_detail($id)
     {
         $pemesanan = pemesanan::all();
         return view('kelola_status.seller_status_detail',compact(['pemesanan']));
@@ -80,7 +94,7 @@ class statusControl extends Controller
         
 
         if ($update) {
-            return redirect('seller/status');
+            return redirect('seller/{id}/status/detail/3');
         } else {
             return redirect()->back()->with('error', 'Gagal memperbarui status pemesanan.');
         }
@@ -92,13 +106,4 @@ class statusControl extends Controller
 
     }
 
-    public function update(Request $request, status_pesan $status_pesan)
-    {
-        
-    }
-
-    public function destroy(status_pesan $status_pesan)
-    {
-        
-    }
 }
