@@ -23,7 +23,7 @@
             padding: 20px;
             border: 1px solid #ddd;
             border-radius: 5px;
-            background-color: #f9f9f9;
+            background-color: #B49852;
         }
 
         h2 {
