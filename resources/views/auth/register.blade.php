@@ -1,154 +1,142 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <style> 
-    body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
+    <title>Register</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- CSS styles -->
+    <style>
+        /* CSS styles */
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
 
-.container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 400px;
-}
+        .container {
+            max-width: 400px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
 
-h1 {
-    margin: 0 0 10px;
-    font-size: 24px;
-    text-align: center;
-}
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold; /* Menjadikan teks menjadi tebal (bold) */
+        }
 
-p {
-    margin: 0 0 20px;
-    text-align: center;
-    color: #666;
-}
+        .form-group {
+            margin-bottom: 20px;
+        }
 
-.form-group {
-    margin-bottom: 15px;
-}
+        label {
+            display: block;
+            font-weight: bold;
+        }
 
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box; /* Ensures padding and border are included in width */
+        }
 
-.form-group input,
-.form-group select {
-    width: calc(100% - 20px);
-    padding: 8px;
-    margin-bottom: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
+        .btn-primary {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
 
-.form-group input[type="text"] {
-    width: calc(50% - 10px);
-}
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
 
-.form-group input[type="email"],
-.form-group input[type="tel"],
-.form-group input[type="text"] {
-    width: 100%;
-}
+        .alert {
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 5px;
+        }
 
-.form-group select {
-    width: calc(33.33% - 14px);
-}
+        .alert-danger {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
 
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
+        .login-link {
+            text-align: center;
+            font-size: 14px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Register</h1>
-        <p>Selamat Datang Di Web DeliveryToYou</p>
-        <form>
+        <h2>Register</h2>
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+        <form method="POST" action="{{ route('register') }}">
+            @csrf
             <div class="form-group">
-                <label for="nama">Nama Lengkap</label>
-                <input type="text" id="nama" placeholder="Masukkan Nama">
+                <label for="name">Nama Lengkap:</label>
+                <input type="text" name="name" id="name" class="form-control" placeholder="Masukkan Nama" value="{{ old('name') }}" required autofocus>
             </div>
-
             <div class="form-group">
-                <label for="gender">Gender</label>
-                <select id="gender">
-                    <option value="" disabled selected>Pilih</option>
-                    <option value="male">Pria</option>
-                    <option value="female">Perempuan</option>
-                    <option value="other">Non-Binary</option>
-                </select>
+                <label for="tanggal_lahir">Tanggal Lahir:</label>
+                <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control" value="{{ old('tanggal_lahir') }}" required>
             </div>
-
             <div class="form-group">
-                <label for="btt_lahir">Tanggal Lahir</label>
-                <select id="bulan_lahir">
-                    <option value="" disabled selected>Bulan</option>
-                    <!-- Add month options here -->
-                </select>
-                <select id="tanggal_lahir">
-                    <option value="" disabled selected>Tanggal</option>
-                    <!-- Add day options here -->
-                </select>
-                <select id="tahun_lahir">
-                    <option value="" disabled selected>Tahun</option>
-                    <!-- Add year options here -->
-                </select>
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" class="form-control" placeholder="example@gmail.com" value="{{ old('email') }}" required>
             </div>
-
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" placeholder="example@example.com">
+                <label for="nomor_telepon">Nomor Telepon:</label>
+                <input type="text" name="nomor_telepon" id="nomor_telepon" class="form-control" placeholder="+62" value="{{ old('nomor_telepon') }}" required>
             </div>
-
             <div class="form-group">
-                <label for="nomor_telepom">Nomor Telepon</label>
-                <input type="tel" id="nomor_telepon" placeholder="+62">
+                <label for="alamat">Alamat:</label>
+                <input type="text" name="alamat" id="alamat" class="form-control" placeholder="Masukkan Alamat" value="{{ old('alamat') }}" required>
             </div>
-
             <div class="form-group">
-                <label for="alamat">Alamat</label>
-                <input type="text" id="alamat" placeholder="Masukkan Alamat">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" class="form-control" required>
             </div>
-
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="text" id="password" placeholder="Masukkan Password">
+                <label for="password_confirmation">Konfirmasi Password:</label>
+                <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" required>
             </div>
-
-            <button type="submit">Submit</button>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Register</button>
+            </div>
         </form>
         <div class="login-link">
-            Already have an account? <a href="{{ route('login') }}">Login</a>
+            Sudah Mempunyai Akun? <a href="{{ route('login') }}">Login</a>
         </div>
-
     </div>
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

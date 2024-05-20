@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
@@ -14,22 +15,41 @@ class RegisterController extends Controller
         return view('auth.register');
     }
 
+    /**
+     * Handle a registration request for the application.
+     */
     public function register(Request $request)
     {
-        $request->validate([
+        // Validate the incoming request data
+        $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
+            'tanggal_lahir' => 'required|date',
             'email' => 'required|string|email|max:255|unique:users',
+            'nomor_telepon' => 'required|string|max:20',
+            'alamat' => 'required|string|max:255',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
+        // Check if validation fails
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        // Create a new user instance and save it to the database
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'name' => $request->input('name'),
+            'tanggal_lahir' => $request->input('tanggal_lahir'),
+            'email' => $request->input('email'),
+            'nomor_telepon' => $request->input('nomor_telepon'),
+            'alamat' => $request->input('alamat'),
+            'password' => Hash::make($request->input('password')),
         ]);
 
-        // Jika Anda ingin melakukan autentikasi langsung setelah pendaftaran, Anda dapat menambahkan logika autentikasi di sini.
+        // Optionally, you can log the user in automatically after registration
+        // auth()->login($user);
 
-        return redirect()->route('login')->with('success', 'Registration successful. Please login.');
+        return redirect()->route('home')->with('success', 'Registration successful. Please log in.');
     }
 }
