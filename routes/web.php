@@ -29,9 +29,11 @@ Route::get('/', function () {
 });
 
 #HALAMAN UTAMA
-Route::get('/', [CardController::class, 'halamanutama']);
+Route::get('/home', [CardController::class, 'halamanutama']);
 Route::get('/customer/menu', [CardController::class, 'menuwarung']);
 
+#PROFIL
+Route::get('/profil', [ProfileController::class, 'index']);
 
 #KATEGORI ADMIN
 Route::get('/kategori_admin',[KategoriAdminController::class,'index']);
@@ -49,10 +51,11 @@ Route::get('/payment/qris/{pemesananId}', [PaymentController::class, "showQrisFo
 Route::post('/payment/qris/store/{pemesananId}', [PaymentController::class, "storeQris"])->name('payment.storeQris');
 Route::get('/customer/status/{pemesananId}', [PaymentController::class, 'showStatus'])->name('customer.status');
 
-#PESANAN MASUK
+#PESANAN MASUK PENJUAL
 Route::get('/seller/order', [OrderController::class, 'sellerOrder'])->name('seller.order');
 Route::get('/seller/orders/{id}/detail', [OrderController::class, 'sellerDetail'])->name('seller.detail');
 Route::get('/seller/status/{id}/update', [OrderController::class, 'acc_konfirmasi'])->name('seller_status_update');
+Route::get('/seller/reject/{id}', [OrderController::class, 'reject'])->name('seller.reject');
 
 #MENU INPUT PENJUAL
 Route::get('/seller/menu', [menuControl::class,'seller_menu']);

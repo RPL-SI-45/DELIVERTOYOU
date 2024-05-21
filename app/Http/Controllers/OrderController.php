@@ -52,4 +52,13 @@ class OrderController extends Controller
         return redirect('/seller/status');
     }
 
+    public function reject($id)
+    {
+        $pemesanan = Pemesanan::findOrFail($id);
+
+        $pemesanan->status_pemesanan = 'Pesanan Ditolak';
+        $pemesanan->save();
+
+        return redirect()->route('seller.order')->with('status', 'Pesanan ditolak');
+    }
 }
