@@ -10,12 +10,26 @@ class statusControl extends Controller
 
     public function seller_status()
     {
-        $pemesanan = pemesanan::where('status_pemesanan', 'Sudah dikonfirmasi')->get();
+        $pemesanan = pemesanan::all();
         return view('kelola_status.seller_status',compact(['pemesanan']));
     }
 
+    public function order_status(Request $request)
+    {
+        $pemesanan = pemesanan::all();
+        return view('kelola_status.cust_status',compact(['pemesanan']));
+    }
 
-    public function seller_status_detail()
+    
+    public function order_status_detail(Request $request)
+    {
+        $pemesanan = Pemesanan::findOrFail($request->id); 
+        return view('kelola_status.cust_status_detail', compact('pemesanan'));
+    }
+    
+
+
+    public function seller_status_detail($id)
     {
         $pemesanan = pemesanan::all();
         return view('kelola_status.seller_status_detail',compact(['pemesanan']));
@@ -29,11 +43,11 @@ class statusControl extends Controller
         
         
         $diproses = 'Sedang Dimasak oleh Ahlinya';
-        $update = acc_pemesanan::where('id', $id)->update(['status_pemesanan' => $diproses]);
+        $update = pemesanan::where('id', $id)->update(['status_pemesanan' => $diproses]);
         
 
         if ($update) {
-            return redirect('kelola_status.seller/{id}/status/detail/1');
+            return redirect('seller/{id}/status/detail/1');
         } else {
             return redirect()->back()->with('error', 'Gagal memperbarui status acc_pemesanan.');
         }
@@ -57,7 +71,7 @@ class statusControl extends Controller
         $update = pemesanan::where('id', $id)->update(['status_pemesanan' => $diproses]);
         
         if ($update) {
-            return redirect('kelola_status.seller/{id}/status/detail/2');
+            return redirect('seller/{id}/status/detail/2');
         } else {
             return redirect()->back()->with('error', 'Gagal memperbarui status pemesanan.');
         }
@@ -65,8 +79,8 @@ class statusControl extends Controller
 
     public function seller_status_detail_2()
     {
-        $pemesanan = _pemesanan::all();
-        return view('kelola_status.seller_status_detail_2',compact(['acc_pemesanan']));
+        $pemesanan = pemesanan::all();
+        return view('kelola_status.seller_status_detail_2',compact(['pemesanan']));
 
     }
 
@@ -80,9 +94,9 @@ class statusControl extends Controller
         
 
         if ($update) {
-            return redirect('kelola_status.seller/{id}/status/detail/3');
+            return redirect('seller/{id}/status/detail/3');
         } else {
-            return redirect()->back()->with('error', 'Gagal memperbarui status acc_pemesanan.');
+            return redirect()->back()->with('error', 'Gagal memperbarui status pemesanan.');
         }
     }
 
@@ -92,13 +106,4 @@ class statusControl extends Controller
 
     }
 
-    public function update(Request $request, status_pesan $status_pesan)
-    {
-        
-    }
-
-    public function destroy(status_pesan $status_pesan)
-    {
-        
-    }
 }
