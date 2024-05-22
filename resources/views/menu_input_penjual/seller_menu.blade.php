@@ -134,6 +134,38 @@
         margin-top: 10px;
     }
 
+    .delete-button {
+        background-color: #dc3545; /* warna latar belakang */
+        color: #fff; /* warna teks */
+        border: none; /* menghilangkan border */
+        padding: 8px 16px; /* padding di dalam tombol */
+        border-radius: 4px; /* sudut lengkungan */
+        cursor: pointer; /* mengubah kursor saat di atas tombol */
+    }
+
+    .delete-button:hover {
+        background-color: #c82333; /* warna latar belakang saat hover */
+    }
+
+
+    .action-button {
+    padding: 10px 20px; /* Sesuaikan padding sesuai kebutuhan */
+    margin: 5px; /* Sesuaikan margin sesuai kebutuhan */
+    font-size: 16px; /* Sesuaikan ukuran font sesuai kebutuhan */
+    border-radius: 5px; /* Sesuaikan border-radius sesuai kebutuhan */
+    }
+
+    .btn-primary {
+    background-color: #007bff; /* Warna latar belakang */
+    color: white; /* Warna teks */
+    border: none; /* Hapus border default */
+    cursor: pointer; /* Ubah cursor menjadi pointer saat hover */
+    }
+
+    .btn-primary:hover {
+    background-color: #0056b3; /* Warna latar belakang saat di-hover */
+    }
+
 </style>
 
     
@@ -170,12 +202,18 @@
 @foreach($menu_warungs as $t)
 <div class="card-container">
     <div class="custom-card">
-        <div class="card card-style" style="background-color: rgba(128, 128, 128, 0.5);">
+        <div class="card card-style" style="background-color: #B49852; border: 1px solid gray; padding: 10px; margin: 10px; border-radius: 5px;">
             <img class="card-img-top" src="{{ asset('gambar_menu/'.$t->gambar) }}" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">{{$t->nama}} </h5>
-                <p class="card-text">Kategori : {{$t->kategori}}  Harga Rp.{{$t->harga}} Deskripsi :{{$t->deskripsi}}</p>
-                <a href="/seller/{{$t->id}}/menu/edit" class="btn btn-primary">Ubah data menu kamu</a>
+                <p class="card-text">Kategori : {{$t->kategori}} <br> Harga Rp.{{$t->harga}} <br> Deskripsi :{{$t->deskripsi}}</p>
+                <a href="/seller/{{$t->id}}/menu/edit" class="btn btn-dark action-button">Ubah data menu kamu</a>
+                <form action="/menu/{{$t->id}}" method="post" style="display: inline;"></form>
+                <button type="submit" class="btn btn-primary action-button" style="background-color: black; color: white; border: none; padding: 10px 20px; border-radius: 5px;" value="delete">Delete</button>
+            
+                
+
+    
             </div>
         </div>
     </div>
