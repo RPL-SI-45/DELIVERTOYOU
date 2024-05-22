@@ -142,6 +142,7 @@
             </div>
         </form>
         <div class="login-link">
+            
             Sudah Mempunyai Akun? <a href="{{ route('login') }}">Login</a>
         </div>
     </div>
