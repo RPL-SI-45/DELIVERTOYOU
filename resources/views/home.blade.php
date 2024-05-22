@@ -144,8 +144,7 @@
                 <li><a href="home">HOME</a></li>
                 <li><a href="menu">MENU</a></li>
                 <li><a href="categories">CATEGORIES</a></li>
-                <li><a href="register">REGISTER</a></li>
-                <li><a href="login">LOGIN</a></li>
+                <li><a href="/">LOGOUT</a></li>
             </ul>
         </div>
     </div>

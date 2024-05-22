@@ -10,15 +10,18 @@
     <style>
         /* CSS styles */
         body {
-        font-family: sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
+            font-family: 'Roboto', sans-serif;
+            height: 100vh;
+            margin: 0;
+            background: url('/img_example/landing.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .login-container {
+            width: 100%;
             max-width: 400px;
             padding: 20px;
             border: 1px solid #ddd;
@@ -29,8 +32,9 @@
         h2 {
             text-align: center;
             margin-bottom: 20px;
-            font-weight: bold; /* Menjadikan teks menjadi tebal (bold) */
+            font-weight: bold;
         }
+
         .form-group {
             margin-bottom: 20px;
         }
@@ -46,10 +50,8 @@
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 5px;
-            box-sizing: border-box; /* Ensures padding and border are included in width */
+            box-sizing: border-box;
         }
-
-       
 
         .btn-primary {
             display: block;
@@ -90,31 +92,25 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-6">
-                <div class="login-container">
-                    <h2 class="text-center mb-4">Login</h2>
-                    <form class="login-form" action="{{ route('login') }}" method="post">
-                        @csrf
-                        <div class="form-group">
-                            <label for="email">Email:</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
-                            <div class="invalid-feedback">Fill out this field</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password:</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
-                            <input type="checkbox" onclick="myFunction()">Show Password
-                            <div class="invalid-feedback">Fill out this field</div>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block">Login</button>
-                    </form>
-                    <div class="register-link">
-                        <p>Belum Punya Akun? <a href="{{ route('register') }}">Register</a></p>
-                    </div>
-                </div>
+    <div class="login-container">
+        <h2 class="text-center mb-4">Login</h2>
+        <form class="login-form" action="{{ route('login') }}" method="post">
+            @csrf
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+                <div class="invalid-feedback">Fill out this field</div>
             </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+                <input type="checkbox" onclick="myFunction()">Show Password
+                <div class="invalid-feedback">Fill out this field</div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+        <div class="register-link">
+            <p>Belum Punya Akun? <a href="{{ route('register') }}">Register</a></p>
         </div>
     </div>
 
@@ -128,7 +124,7 @@
             } else {
                 x.type = "password";
             }
-            }
+        }
     </script>
 </body>
 </html>

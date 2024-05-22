@@ -16,6 +16,8 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            background: url('/img_example/landing.jpg') no-repeat center center fixed;
+            background-size: cover;
         }
 
         .container {
