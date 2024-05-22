@@ -30,12 +30,12 @@
 
         h2 {
             text-align: center;
-            margin-bottom: 20px;
-            font-weight: bold; /* Menjadikan teks menjadi tebal (bold) */
+            margin-bottom: 10px; /* Kurangi margin-bottom */
+            font-weight: bold;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 10px; /* Kurangi margin-bottom */
         }
 
         label {
@@ -51,7 +51,7 @@
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 5px;
-            box-sizing: border-box; /* Ensures padding and border are included in width */
+            box-sizing: border-box;
         }
 
         .btn-primary {
@@ -70,7 +70,7 @@
         }
 
         .alert {
-            margin-bottom: 20px;
+            margin-bottom: 10px; /* Kurangi margin-bottom */
             padding: 10px;
             border-radius: 5px;
         }
@@ -84,7 +84,7 @@
         .login-link {
             text-align: center;
             font-size: 14px;
-            margin-top: 20px;
+            margin-top: 10px; /* Kurangi margin-top */
         }
     </style>
 </head>
