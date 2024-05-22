@@ -28,7 +28,9 @@ Route::post('login', 'App\Http\Controllers\Auth\LoginController@login')->name('l
 Route::get('register', 'App\Http\Controllers\Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('register', 'App\Http\Controllers\Auth\RegisterController@register');
 
-
+Route::middleware(['auth', 'redirectIfNotCustomerOrSeller'])->group(function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+});
 
 Route::get('/', [LandingPageController::class, 'index'])->name('landing');
 

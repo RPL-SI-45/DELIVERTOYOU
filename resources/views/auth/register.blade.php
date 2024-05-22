@@ -131,6 +131,13 @@
                 <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" required>
             </div>
             <div class="form-group">
+                <label for="role">Peran:</label>
+                <select name="role" id="role" class="form-control" required>
+                    <option value="customer">Customer</option>
+                    <option value="seller">Seller</option>
+                </select>
+            </div>
+            <div class="form-group">
                 <button type="submit" class="btn btn-primary">Register</button>
             </div>
         </form>

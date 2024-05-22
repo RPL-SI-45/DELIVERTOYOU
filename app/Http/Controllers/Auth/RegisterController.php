@@ -28,6 +28,7 @@ class RegisterController extends Controller
             'nomor_telepon' => 'required|string|max:20',
             'alamat' => 'required|string|max:255',
             'password' => 'required|string|min:8|confirmed',
+            'role' => 'required|in:customer,seller', // Validate the role
         ]);
 
         // Check if validation fails
@@ -45,6 +46,7 @@ class RegisterController extends Controller
             'nomor_telepon' => $request->input('nomor_telepon'),
             'alamat' => $request->input('alamat'),
             'password' => Hash::make($request->input('password')),
+            'role' => $request->input('role'), // Save the role to database
         ]);
 
         // Optionally, you can log the user in automatically after registration

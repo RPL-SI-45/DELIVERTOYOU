@@ -24,6 +24,7 @@ class User extends Authenticatable
         'nomor_telepon',
         'alamat',
         'tanggal_lahir',
+        'role',
         
     ];
 

@@ -145,6 +145,15 @@
                 <li><a href="menu">MENU</a></li>
                 <li><a href="categories">CATEGORIES</a></li>
                 <li><a href="/">LOGOUT</a></li>
+                <li>
+                    @if(auth()->check())
+                        @if(auth()->user()->role == 'seller')
+                            <p class="navbar-text">Halo Seller</p>
+                        @elseif(auth()->user()->role == 'customer')
+                            <p class="navbar-text">Halo {{ auth()->user()->name }}</p>
+                        @endif
+                    @endif
+                </li>
             </ul>
         </div>
     </div>
