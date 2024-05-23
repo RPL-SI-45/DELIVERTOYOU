@@ -64,7 +64,7 @@
         .content-text {
             position: absolute;
             bottom: 0;
-            left: 150px;
+            left: 300px;
             background-color: white;
             padding: 10px;
             text-align: center;
@@ -133,7 +133,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="#" class="navbar-logo"><img src="img_example/logo.png" alt="logo"></a>
+            <li>
+                @if(auth()->check())
+                    @if(auth()->user()->role == 'seller')
+                        <p class="navbar-text">Halo Seller</p>
+                    @elseif(auth()->user()->role == 'customer')
+                        <p class="navbar-text">Halo {{ auth()->user()->name }}</p>
+                    @endif
+                @endif
+            </li>
             <div class="search-container">
                 <input type="text" placeholder="Search...">
                 <button type="submit">Search</button>
@@ -144,32 +152,60 @@
                 <li><a href="home">HOME</a></li>
                 <li><a href="menu">MENU</a></li>
                 <li><a href="categories">CATEGORIES</a></li>
-                <li><a href="about">ABOUT</a></li>
-                <li><a href="login">LOGIN</a></li>
+                <li><a href="{{ route('cart.index') }}">KERANJANG</a></li>
+                <li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">LOGOUT</a>
+                </li>
             </ul>
         </div>
     </div>
 </div>
 
 <div class="content-container">
-    <img src="img_example/makanan.jpeg" class="content-img" alt="Content Image">
+    <img src="img_example/makanan.png" class="content-img" alt="Content Image">
     <div class="content-text">
-        <p class="about"></p></br>
+        <p class="about">lorem ipsum</p></br>
             <button type="button" class="button-pesan">PESAN</button>
     </div>
 </div>
 
-@foreach($menuwarungs as $t)
+@foreach($menu_warungs as $t)
 <div class="card-container">
     <div class="card">
-        <a href="/customer/menu"><img src="" class="card-img-top"></a>
-        <div class="card-body">
-            <p class="card-text">
+
+        <a href="/customer/menu"><img src="{{ asset('gambar_menu/'.$t->gambar) }}" class="card-img-top" alt="{{ $t->nama }}></a>
+        
+        <div class="{{$t->nama}}">
+            <p class="Harga Rp.{{$t->harga}}"></p>
+        </div>
     </div>
 </div>
+
 @endforeach
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#search-button').on('click', function(e) {
+            e.preventDefault();
+            var query = $('#search-input').val().toLowerCase();
+            $('.card-container .card').each(function() {
+                var itemName = $(this).find('.card-img-top').attr('alt').toLowerCase();
+                if (itemName.includes(query)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+    });
+</script>
+
+
 </body>
 </html>

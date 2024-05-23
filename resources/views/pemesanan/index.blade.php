@@ -75,7 +75,7 @@
       display: block;
       width: 100%;
       margin-top: 20px;
-      padding: 10px 15px;  /* Increased padding for better look */
+      padding: 10px 15px; 
       background-color: green;
       color: white;
       border-radius: 5px;
@@ -142,17 +142,32 @@
         <!-- Bagian lain dari form di sini -->
         <h4 id="total_harga">Total Harga : 0</h4>
         <!-- Bagian lain dari form di sini -->
-    </div>
-      <h4>Nama Penerima : {{$ps->nama_pelanggan}} </h4>
+      </div>
       <label for="alamat">Alamat Penerima:</label>
       <div class="table-responsive">
         <textarea id="alamat" name="alamat" rows="4" cols="50"></textarea>
       </div>
-      <a href="/pembayaran"><button id="btnPembayaran">Lanjut Ke Pembayaran</button></a>
+      <button id="btnPembayaran">Lanjut Ke Pembayaran</button>
     
       
 
     <script>
+      const btnPembayaran = document.getElementById('btnPembayaran');
+      const alamatInput = document.getElementById('alamat');
+      
+        btnPembayaran.addEventListener('click', function() {
+          const alamatValue = alamatInput.value.trim();
+
+          if (alamatValue === '') {
+            alert('Isi Alamat Terlebih Dahulu');
+            return false; // Mencegah pengiriman form
+          }
+
+          // Jika alamat valid, lanjutkan ke halaman pembayaran
+          // (Anda dapat mengganti `/payment/1` dengan URL pembayaran yang sebenarnya)
+          window.location.href = '/payment/1';
+        });
+      
         document.addEventListener("DOMContentLoaded", function() {
             var btnMinus = document.querySelectorAll('.btn-minus');
             var btnPlus = document.querySelectorAll('.btn-plus');

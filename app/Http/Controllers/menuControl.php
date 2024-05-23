@@ -14,15 +14,15 @@ class menuControl extends Controller
     public function seller_menu()
     {
         $menu_warungs = menu_warungs::all();
-        return view('menu_input_pejual.seller_menu',compact(['menu_warungs']));
+        return view('menu_input_penjual.seller_menu', compact('menu_warungs'));
     }
 
 
     public function seller_menu_input()
     {
 
-        $Kategori_admin = Kategori_admin::pluck('jenis_kategori')->toArray(); // Ubah nama_kolom dan id sesuai kebutuhan
-        return view('menu_input_pejual.seller_menu_input')->with('Kategori_admin', $Kategori_admin);
+        $Kategori_admin = Kategori_admin::pluck('jenis_kategori')->toArray(); 
+        return view('menu_input_penjual.seller_menu_input')->with('Kategori_admin', $Kategori_admin);
 
         
     }
@@ -55,7 +55,7 @@ class menuControl extends Controller
         ]);
         
 
-         return redirect('menu_input_pejual.seller/menu');
+         return redirect('seller/menu');
       
     }
 
@@ -65,7 +65,7 @@ class menuControl extends Controller
         $menu_warungs = menu_warungs::findOrFail($id);
         $Kategori_admin = Kategori_admin::pluck('jenis_kategori')->toArray();
 
-        return view('menu_input_pejual.seller_menu_edit', compact('menu_warungs'))->with('Kategori_admin', $Kategori_admin);
+        return view('menu_input_penjual.seller_menu_edit', compact('menu_warungs'))->with('Kategori_admin', $Kategori_admin);
 
     }
 

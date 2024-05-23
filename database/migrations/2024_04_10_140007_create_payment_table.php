@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('pemesanan_id');
             $table->foreign('pemesanan_id')->references('id')->on('pemesanan')->onDelete('cascade');
-            $table->enum("metode", ['QRIS','CASH']);
+            $table->enum("metode", ['QRIS','Tunai']);
             $table->string("bukti")->nullable();
             $table->integer("total_bayar");
             $table->timestamps();

@@ -39,4 +39,29 @@ class OrderController extends Controller
 
         return redirect()->route('seller.order')->with('berhasil', 'Order dikonfirmasi');
     }
+
+
+    public function acc_konfirmasi(Request $request)
+    {
+        $id = $request->input('id');
+        $acc = $request->input('status_pemesanan');
+        
+        $acc = 'Sudah dikonfirmasi';
+        $update = pemesanan::where('id', $request->id)->update(['status_pemesanan' => $acc]);
+
+        return redirect('/seller/status');
+    }
+
+    public function reject($id)
+    {
+        // Temukan pesanan berdasarkan ID
+        $pemesanan = Pemesanan::findOrFail($id);
+
+        // Ubah status pesanan menjadi "Ditolak"
+        $pemesanan->status_pemesanan = 'Pesanan Ditolak';
+        $pemesanan->save();
+
+        // Redirect kembali ke halaman sebelumnya (misalnya, halaman menunggu konfirmasi)
+        return redirect()->route('seller.order')->with('status', 'Pesanan ditolak');
+    }
 }

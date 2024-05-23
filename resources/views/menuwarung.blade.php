@@ -121,6 +121,33 @@
 </head>
 <body>
 <div class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#" class="navbar-logo"><img src="/img_example/logo.png" alt="logo"></a>
+            <div class="search-container">
+                <input type="text" placeholder="Search...">
+                <button type="submit">Search</button>
+            </div>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="home">HOME</a></li>
+                <li><a href="menu">MENU</a></li>
+                <li><a href="/profil">PROFIL</a></li>
+                <li><a href="login">LOGIN</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="content-container">
+    <img src="/img_example/makanan.png" class="content-img" alt="Content Image">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -154,12 +181,12 @@
     </div>
 </div>
 
-@foreach()
+@foreach($menu_warungs as $t)
 <div class="card-container">
     <div class="card">
-        <a href=""><img src="" class="card-img-top"></a>
-        <div class="card-body">
-            <p class="card-text"></p>
+        <a href=""><img src="{{ asset('gambar_menu/'.$t->gambar) }}" class="card-img-top"></a>
+        <div class="{{$t->nama}}">
+            <p class="Harga Rp.{{$t->harga}}"></p>
         </div>
     </div>
 </div>
