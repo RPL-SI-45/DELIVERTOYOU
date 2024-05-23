@@ -152,7 +152,7 @@
                 <li><a href="home">HOME</a></li>
                 <li><a href="menu">MENU</a></li>
                 <li><a href="categories">CATEGORIES</a></li>
-                <li><a href="cart">KERANJANG</a></li>
+                <li><a href="{{ route('cart.index') }}">KERANJANG</a></li>
                 <li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf

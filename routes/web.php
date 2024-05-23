@@ -10,6 +10,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,8 @@ Route::middleware(['auth', 'redirectIfNotCustomerOrSeller'])->group(function () 
 
 Route::get('/', [LandingPageController::class, 'index'])->name('landing');
 
+#KERANJANG
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 
 #PEMESANAN
 Route::get('/pemesanan', [PemesananController::class, 'index']);
