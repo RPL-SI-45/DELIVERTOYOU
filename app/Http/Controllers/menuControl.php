@@ -115,7 +115,7 @@ class menuControl extends Controller
     
         $menu_warungs->delete();
 
-         return redirect('menu_input_pejual.seller/menu');
+         return redirect('seller/menu');
 
 
         

@@ -19,7 +19,8 @@ return new class extends Migration
             $table->integer('quantity');
             $table->decimal('total_harga', 10, 2);
             $table->string('alamat');
-            $table->string('status_pemesanan')->default('Menunggu konfirmasi');;
+            $table->string('status_pemesanan')->default('Menunggu konfirmasi');
+            $table->timestamp('confirmation_at')->nullable();
             $table->timestamps();
         });
     }
