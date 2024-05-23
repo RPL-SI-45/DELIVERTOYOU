@@ -148,6 +148,34 @@
 
 <div class="content-container">
     <img src="/img_example/makanan.png" class="content-img" alt="Content Image">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="#" class="navbar-logo"><img src="/img_example/logo.png" alt="logo"></a>
+                <div class="search-container">
+                    <input type="text" placeholder="Search...">
+                    <button type="submit">Search</button>
+                </div>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="home">HOME</a></li>
+                    <li><a href="menu">MENU</a></li>
+                    <li><a href="categories">CATEGORIES</a></li>
+                    <li><a href="about">ABOUT</a></li>
+                    <li><a href="login">LOGIN</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+<div class="content-container">
+    <img src="/img_example/makanan.jpeg" class="content-img" alt="Content Image">
     <div class="content-text">
         <p class="about">NAMA WARUNG, ALAMAT</p></br>
     </div>

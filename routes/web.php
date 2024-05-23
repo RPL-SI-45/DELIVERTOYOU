@@ -12,6 +12,10 @@ use App\Http\Controllers\OrderHistoryController;
 use App\Http\Controllers\ProfileController;
 
 
+use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CartController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +26,26 @@ use App\Http\Controllers\ProfileController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
+Route::get('login', 'App\Http\Controllers\Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'App\Http\Controllers\Auth\LoginController@login')->name('login.post');
+Route::get('register', 'App\Http\Controllers\Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('register', 'App\Http\Controllers\Auth\RegisterController@register');
+Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
+
+
+
+Route::middleware(['auth', 'redirectIfNotCustomerOrSeller'])->group(function () {
+   Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
+});
+
+Route::get('/', [LandingPageController::class, 'index'])->name('landing');
+
+#KERANJANG
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 
 #PEMESANAN
 Route::get('/pemesanan', [PemesananController::class, 'index']);
@@ -47,6 +71,13 @@ Route::put('/kategori_admin/{id}',[KategoriAdminController::class,'update']);
 Route::delete('/kategori_admin/{id}',[KategoriAdminController::class,'destroy']);
 
 #PAYMENT
+#HALAMAN UTAMA
+Route::get('/customer/menu', [CardController::class, 'menuwarung']);
+Route::get('/home', [CardController::class, 'halamanutama'])->name('home');
+
+
+
+#PAYMET
 Route::get('/payment', [PaymentController::class, 'index']);
 Route::get('/payment/{pemesananId}', [PaymentController::class, "index"]);
 Route::post('/payment/store/{pemesananId}', [PaymentController::class, 'store'])->name('payment.store');

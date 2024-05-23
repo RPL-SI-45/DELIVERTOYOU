@@ -133,25 +133,32 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="#" class="navbar-logo"><img src="img_example/logo.png" alt="logo"></a>
+            <li>
+                @if(auth()->check())
+                    @if(auth()->user()->role == 'seller')
+                        <p class="navbar-text">Halo Seller</p>
+                    @elseif(auth()->user()->role == 'customer')
+                        <p class="navbar-text">Halo {{ auth()->user()->name }}</p>
+                    @endif
+                @endif
+            </li>
             <div class="search-container">
-
-                <input type="text" id="search-input" placeholder="Search...">
-                <button type="submit" id="search-input">Search</button>
-
+                <input type="text" placeholder="Search...">
+                <button type="submit">Search</button>
             </div>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="home">HOME</a></li>
                 <li><a href="menu">MENU</a></li>
-
                 <li><a href="categories">CATEGORIES</a></li>
-                <li><a href="about">ABOUT</a></li>
-
-                <li><a href="/profil">PROFIL</a></li>
-
-                <li><a href="login">LOGIN</a></li>
+                <li><a href="{{ route('cart.index') }}">KERANJANG</a></li>
+                <li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">LOGOUT</a>
+                </li>
             </ul>
         </div>
     </div>
