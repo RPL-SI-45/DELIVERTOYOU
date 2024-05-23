@@ -12,6 +12,10 @@ use App\Http\Controllers\OrderHistoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FeedbackController;
 
+use App\Http\Controllers\SellerDashController;
+use App\Http\Controllers\SearchFilterMenu;
+
+
 
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\HomeController;
@@ -68,6 +72,7 @@ Route::get('/home', function () {
 #HALAMAN UTAMA
 Route::get('/home', [CardController::class, 'halamanutama']);
 Route::get('/customer/menu', [CardController::class, 'menuwarung']);
+Route::get('/customer/menu/search', [SearchFilterMenu::class, 'index'])->name('search.filter');
 
 #PROFIL
 Route::get('/profil', [ProfileController::class, 'index']);
@@ -107,7 +112,7 @@ Route::get('/seller/menu/input', [menuControl::class,'seller_menu_input']);
 Route::post('/post',[menuControl::class,'store']);
 Route::get('/seller/{id}/menu/edit',[menuControl::class,'seller_menu_edit']);
 Route::put('seller/menu/{id}',[menuControl::class,'update']);
-Route::DELETE('/menu/{id}',[menuControl::class,'destroy']);
+Route::get('/menu/{id}',[menuControl::class,'destroy']);
 
 #KELOLA STATUS PENJUAL
 Route::get('/seller/status', [statusControl::class,'seller_status']);
@@ -125,3 +130,7 @@ Route::get('/order/status', [statusControl::class,'order_status']);
 Route::get('/order/{id}/status/detail', [statusControl::class,'order_status_detail']);
 #RIWAYAT PENJUAL
 Route::get('/seller/orderhistory', [OrderHistoryController::class, 'index'])->name('order.history');
+
+
+#DASHBOARD
+Route::get('/seller/dash', [SellerDashController::class,'index']);

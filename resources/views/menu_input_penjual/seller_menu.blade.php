@@ -5,9 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Biryani' rel='stylesheet'>
+
     <style>
     .card-container {
         display: flex;
@@ -134,6 +137,37 @@
         margin-top: 10px;
     }
 
+    .delete-button {
+        background-color: #dc3545;  
+        color: #fff; 
+        border: none; 
+        padding: 8px 16px; 
+        border-radius: 4px; 
+        cursor: pointer; 
+    }
+
+    .delete-button:hover {
+        background-color: #c82333;
+    }
+
+
+    .action-button {
+    padding: 10px 20px; 
+    margin: 5px;
+    font-size: 16px; 
+    border-radius: 5px; 
+    }
+
+    .btn-primary {
+    background-color: #007bff; 
+    border: none; 
+    cursor: pointer; 
+    }
+
+    .btn-primary:hover {
+    background-color: #0056b3; 
+    }
+
 </style>
 
     
@@ -149,7 +183,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="#" class="navbar-logo"><img src="img_example/logo.png" alt="logo"></a>
+            <a href="#" class="navbar-logo"><img src="{{ asset('img_example/logo.png') }}" alt="logo"></a>
             <div class="search-container">
                 <input type="text" placeholder="Search...">
                 <button type="submit">Search</button>
@@ -170,12 +204,18 @@
 @foreach($menu_warungs as $t)
 <div class="card-container">
     <div class="custom-card">
-        <div class="card card-style" style="background-color: rgba(128, 128, 128, 0.5);">
+        <div class="card card-style" style="background-color: #B49852; border: 1px solid gray; padding: 10px; margin: 10px; border-radius: 5px;">
             <img class="card-img-top" src="{{ asset('gambar_menu/'.$t->gambar) }}" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">{{$t->nama}} </h5>
-                <p class="card-text">Kategori : {{$t->kategori}}  Harga Rp.{{$t->harga}} Deskripsi :{{$t->deskripsi}}</p>
-                <a href="/seller/{{$t->id}}/menu/edit" class="btn btn-primary">Ubah data menu kamu</a>
+                <p class="card-text">Kategori : {{$t->kategori}} <br> Harga Rp.{{$t->harga}} <br> Deskripsi :{{$t->deskripsi}}</p>
+                <a href="/seller/{{$t->id}}/menu/edit" class="btn btn-dark action-button">Ubah data menu kamu</a>
+                <form action="/menu/{{$t->id}}" method="post" style="display: inline;"></form>
+                <button type="submit" class="btn btn-primary action-button" style="background-color: black; color: white; border: none; padding: 10px 20px; border-radius: 5px;" value="delete">Delete</button>
+            
+                
+
+    
             </div>
         </div>
     </div>

@@ -15,6 +15,18 @@ class Pemesanan extends Model
     
 }
 
+    protected $guarded =[];
+    protected $fillable = [
+        'nama_pelanggan',
+        'status_pemesanan',
+        'total_harga',
+        'confirmation_at',
+        'menu',
+        'quantity',
+        'total_harga',
+        'alamat',];
+    public $timestamps = false;
+
 
     public function payment()
     {

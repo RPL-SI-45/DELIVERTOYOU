@@ -10,7 +10,8 @@
     <style>
         body {
             margin: 0;
-            font-family: Biryani; size: 14px;
+            font-family: 'Biryani', sans-serif;
+            font-size: 14px;
         }
 
         .navbar {
@@ -18,11 +19,10 @@
             background-color: #B49852;
         }
 
-        .navbar-logo img{
+        .navbar-logo img {
             height: 40px;
             margin-top: 10px;
             margin-right: 15px;
-
         }
 
         .search-container {
@@ -61,7 +61,7 @@
             max-width: 100%;
             height: auto;
             display: block;
-            margin-top: -150px; 
+            margin-top: -150px;
             z-index: -1;
         }
 
@@ -77,8 +77,6 @@
             background-color: white;
             padding: 10px;
             text-align: left;
-            
-            
         }
 
         .about {
@@ -95,8 +93,8 @@
         }
 
         .card .card-img-top {
-            height: 50px; 
-            object-fit: contain; 
+            height: 50px;
+            object-fit: contain;
             margin-right: 300px;
         }
 
@@ -115,8 +113,6 @@
             margin-left: 50px;
             margin-top: -50px;
         }
-
-    
     </style>
 </head>
 <body>
@@ -131,8 +127,10 @@
             </button>
             <a href="#" class="navbar-logo"><img src="/img_example/logo.png" alt="logo"></a>
             <div class="search-container">
-                <input type="text" placeholder="Search...">
-                <button type="submit">Search</button>
+                <form action="{{ route('search.filter') }}" method="GET">
+                    <input type="text" name="search" placeholder="Search..." value="{{ request()->search }}">
+                    <button type="submit">Search</button>
+                </form>
             </div>
         </div>
         <div class="collapse navbar-collapse">
@@ -181,19 +179,18 @@
     </div>
 </div>
 
-@foreach($menu_warungs as $t)
 <div class="card-container">
+    @foreach($menu_warungs as $t)
     <div class="card">
         <a href=""><img src="{{ asset('gambar_menu/'.$t->gambar) }}" class="card-img-top"></a>
-        <div class="{{$t->nama}}">
-            <p class="Harga Rp.{{$t->harga}}"></p>
+        <div class="card-text">
+            <p class="Harga">Rp. {{ $t->harga }}</p>
         </div>
     </div>
+    @endforeach
 </div>
-@endforeach
 
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

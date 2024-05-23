@@ -149,7 +149,7 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="home">HOME</a></li>
+                <li><a href="/order/status">STATUS</a></li>
                 <li><a href="menu">MENU</a></li>
                 <li><a href="categories">CATEGORIES</a></li>
                 <li><a href="{{ route('cart.index') }}">KERANJANG</a></li>
