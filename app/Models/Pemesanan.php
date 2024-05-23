@@ -7,10 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\OrderController;
 
+
 class Pemesanan extends Model
 {
     use HasFactory;
     protected $table = 'pemesanan';
+    
+}
+
     protected $guarded =[];
 
     public function payment()
@@ -32,3 +36,4 @@ class Pemesanan extends Model
     // }
 
 }
+

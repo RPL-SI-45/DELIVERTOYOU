@@ -51,7 +51,7 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('/pemesanan', [PemesananController::class, 'index']);
 Route::delete('/pemesanan/{id}', [PemesananController::class, 'destroy']);
 Route::get('/pembayaran', [PemesananController::class, 'store']);
-Route::get('/', function () {
+Route::get('/home', function () {
     return view('home');
 });
 
