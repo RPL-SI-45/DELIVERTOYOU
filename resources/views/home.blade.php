@@ -133,7 +133,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="#" class="navbar-logo"><img src="img_example/logo.png" alt="logo"></a>
+            <li>
+                @if(auth()->check())
+                    @if(auth()->user()->role == 'seller')
+                        <p class="navbar-text">Halo Seller</p>
+                    @elseif(auth()->user()->role == 'customer')
+                        <p class="navbar-text">Halo {{ auth()->user()->name }}</p>
+                    @endif
+                @endif
+            </li>
             <div class="search-container">
                 <input type="text" placeholder="Search...">
                 <button type="submit">Search</button>
@@ -144,15 +152,12 @@
                 <li><a href="home">HOME</a></li>
                 <li><a href="menu">MENU</a></li>
                 <li><a href="categories">CATEGORIES</a></li>
-                <li><a href="/">LOGOUT</a></li>
+                <li><a href="cart">KERANJANG</a></li>
                 <li>
-                    @if(auth()->check())
-                        @if(auth()->user()->role == 'seller')
-                            <p class="navbar-text">Halo Seller</p>
-                        @elseif(auth()->user()->role == 'customer')
-                            <p class="navbar-text">Halo {{ auth()->user()->name }}</p>
-                        @endif
-                    @endif
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">LOGOUT</a>
                 </li>
             </ul>
         </div>

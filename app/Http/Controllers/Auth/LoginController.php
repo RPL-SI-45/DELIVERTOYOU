@@ -24,4 +24,13 @@ class LoginController extends Controller
     return redirect()->route('login')->with('error', 'Invalid email or password.');
     }
 
+    public function logout(Request $request)
+    {
+        Auth::logout(); // Mengakhiri sesi pengguna
+        $request->session()->invalidate(); // Mengosongkan sesi
+        $request->session()->regenerateToken(); // Mencegah serangan CSRF
+
+        return redirect('/'); // Mengarahkan pengguna kembali ke halaman landing page
+    }
+
 }

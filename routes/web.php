@@ -9,7 +9,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\LandingPageController;
-
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,9 +27,14 @@ Route::get('login', 'App\Http\Controllers\Auth\LoginController@showLoginForm')->
 Route::post('login', 'App\Http\Controllers\Auth\LoginController@login')->name('login.post');
 Route::get('register', 'App\Http\Controllers\Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('register', 'App\Http\Controllers\Auth\RegisterController@register');
+Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
+
+
 
 Route::middleware(['auth', 'redirectIfNotCustomerOrSeller'])->group(function () {
-    Route::get('/home', 'HomeController@index')->name('home');
+   Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
 });
 
 Route::get('/', [LandingPageController::class, 'index'])->name('landing');
