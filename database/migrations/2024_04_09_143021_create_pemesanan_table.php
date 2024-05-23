@@ -20,6 +20,8 @@ return new class extends Migration
             $table->decimal('total_harga', 10, 2);
             $table->string('alamat');
             $table->string('status_pemesanan')->default('Menunggu konfirmasi');
+            $table->integer('rating');
+            $table->string('feedback');
             $table->timestamp('confirmation_at')->nullable();
             $table->timestamps();
         });

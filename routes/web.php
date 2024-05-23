@@ -10,8 +10,11 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderHistoryController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\FeedbackController;
+
 use App\Http\Controllers\SellerDashController;
 use App\Http\Controllers\SearchFilterMenu;
+
 
 
 use App\Http\Controllers\LandingPageController;
@@ -46,6 +49,15 @@ Route::middleware(['auth', 'redirectIfNotCustomerOrSeller'])->group(function () 
 
 Route::get('/', [LandingPageController::class, 'index'])->name('landing');
 
+#FEEDBACK
+Route::get('/order/status/feedback',[FeedbackController::class,'index']);
+
+#EDIT PROFIL
+Route::get('/edit-profile', 'UserController@editProfile')->name('edit-profile');
+Route::post('/update-profile', 'UserController@updateProfile')->name('update-profile');
+
+
+
 #KERANJANG
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 
@@ -53,7 +65,7 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('/pemesanan', [PemesananController::class, 'index']);
 Route::delete('/pemesanan/{id}', [PemesananController::class, 'destroy']);
 Route::get('/pembayaran', [PemesananController::class, 'store']);
-Route::get('/', function () {
+Route::get('/home', function () {
     return view('home');
 });
 
