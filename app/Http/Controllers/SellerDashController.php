@@ -10,22 +10,13 @@ class SellerDashController extends Controller
 {
     public function index(Request $request)
     {
-  
-            $SellerDash = SellerDash::all();
-            
-            $menuwarung = menu_warungs::findOrFail($request->id);
-            $count = count($menuwarung->id);
-    
-            $countEntry = new SellerDash();
-            $countEntry->Total_pemesanan = $count;
+     
+        $SellerDash = SellerDash::all();
 
-            menu_warungs::create([
-                'Total_pemesanan' => $request->$countEntry,
-                ]
-            );
+        return view('Sellerdash.Sellerdash', compact('SellerDash'));
+
 
         
-        return view('Sellerdash', compact('SellerDash'));
     }
 
     

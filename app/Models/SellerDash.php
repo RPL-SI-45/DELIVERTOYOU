@@ -11,4 +11,5 @@ class SellerDash extends Model
 
     protected $table = 'SellerDash';
     protected $guarded =[];
+    public $timestamps = false;
 }

@@ -2,27 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=
-    , initial-scale=1.0">
-    <title>Document</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href='https://fonts.googleapis.com/css?family=Biryani' rel='stylesheet'>
+    
+
+
     <style>
-        body {
+    .body {
       font-family: Arial, sans-serif;
 
     }
     .card-container {
         display: flex;
         flex-wrap: wrap;
-    }
-
-    .custom-card {
-        flex: 0 0 calc(50% - 10px); /* Mengatur lebar kartu menjadi 50% dari lebar parent dengan sedikit margin */
-        margin: 5px; /* Memberikan sedikit margin antara kartu */
     }
 
     .font-style {
@@ -129,54 +123,46 @@
 </head>
 
 <body>
-
 <div class="navbar navbar-default navbar-static-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="#" class="navbar-logo"><img src="{{ asset('img_example/logo.png') }}" alt="logo"></a>
-            <div class="search-container">
-                <input type="text" placeholder="Search...">
-                <button type="submit">Search</button>
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="#" class="navbar-logo"><img src="{{ asset('img_example/logo.png') }}" alt="logo"></a>
+                <div class="search-container">
+                    <input type="text" placeholder="Search...">
+                    <button type="submit">Search</button>
+                </div>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="home">HOME</a></li>
+                    <li><a href="menu">MENU</a></li>
+                    <li><a href="categories">CATEGORIES</a></li>
+                    <li><a href="about">ABOUT</a></li>
+                    <li><a href="login">LOGIN</a></li>
+                </ul>
             </div>
         </div>
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="home">HOME</a></li>
-                <li><a href="menu">MENU</a></li>
-                <li><a href="categories">CATEGORIES</a></li>
-                <li><a href="about">ABOUT</a></li>
-                <li><a href="login">LOGIN</a></li>
-            </ul>
-        </div>
     </div>
-</div>
+        
+            @foreach($SellerDash as $t)
+                <div class="container mt-5">
+                 <div class="table-container">
+                  <div class="table-column">
+                    <img src="{{ asset('img_example/makanan.png') }}" alt="Image 3" class="custom-img-size">
+                    <div class="table-cell font-weight-bold">Total Pemesanan : {{$t->Total_pemesanan}}</div>
+                    <div class="table-cell font-weight-bold">Total Pendapatan : {{$t->Total_harga}}</div>
 
 
-<div class="container mt-5">
-    <div class="table-container">
-        <div class="table-column">
-        <img src="{{ asset('img_example/makanan.png') }}" alt="Image 3" class="custom-img-size">
-        <div class="table-cell font-weight-bold">CRISBAR</div>
-        <div class="table-cell">ID : {{ $pemesanan->id }}</div>
-        <div class="table-cell">Status : {{ $pemesanan->status_pemesanan }}</div>
-        <div class="table-cell">Alamat : {{ $pemesanan->alamat }}</div>
-        <div class="table-cell">Menu   : {{ $pemesanan->menu }}</div>
-        <div class="table-cell">Harga   : {{ $pemesanan->harga }}</div>
-        <div class="table-cell">Quantity   : {{ $pemesanan->Quantity }}</div>
-        <div class="table-cell">Total  : {{ $pemesanan->total_harga }}</div>
-        <br>
-
-        <a href="/seller/status" a type="button" class="btn btn-dark">Back</a>   
-        </div>
-    </div>
-</div>
-
-
+             @endforeach
+                </div>
+                 </div>
+                  </div>   
+      
 </body>
 </html>

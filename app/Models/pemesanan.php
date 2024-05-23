@@ -12,6 +12,7 @@ class Pemesanan extends Model
     use HasFactory;
     protected $table = 'pemesanan';
     protected $guarded =[];
+    public $timestamps = false;
 
     public function payment()
     {

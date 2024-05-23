@@ -5,9 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Biryani' rel='stylesheet'>
+
     <style>
     .card-container {
         display: flex;
@@ -135,35 +138,34 @@
     }
 
     .delete-button {
-        background-color: #dc3545; /* warna latar belakang */
-        color: #fff; /* warna teks */
-        border: none; /* menghilangkan border */
-        padding: 8px 16px; /* padding di dalam tombol */
-        border-radius: 4px; /* sudut lengkungan */
-        cursor: pointer; /* mengubah kursor saat di atas tombol */
+        background-color: #dc3545;  
+        color: #fff; 
+        border: none; 
+        padding: 8px 16px; 
+        border-radius: 4px; 
+        cursor: pointer; 
     }
 
     .delete-button:hover {
-        background-color: #c82333; /* warna latar belakang saat hover */
+        background-color: #c82333;
     }
 
 
     .action-button {
-    padding: 10px 20px; /* Sesuaikan padding sesuai kebutuhan */
-    margin: 5px; /* Sesuaikan margin sesuai kebutuhan */
-    font-size: 16px; /* Sesuaikan ukuran font sesuai kebutuhan */
-    border-radius: 5px; /* Sesuaikan border-radius sesuai kebutuhan */
+    padding: 10px 20px; 
+    margin: 5px;
+    font-size: 16px; 
+    border-radius: 5px; 
     }
 
     .btn-primary {
-    background-color: #007bff; /* Warna latar belakang */
-    color: white; /* Warna teks */
-    border: none; /* Hapus border default */
-    cursor: pointer; /* Ubah cursor menjadi pointer saat hover */
+    background-color: #007bff; 
+    border: none; 
+    cursor: pointer; 
     }
 
     .btn-primary:hover {
-    background-color: #0056b3; /* Warna latar belakang saat di-hover */
+    background-color: #0056b3; 
     }
 
 </style>
@@ -181,7 +183,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="#" class="navbar-logo"><img src="img_example/logo.png" alt="logo"></a>
+            <a href="#" class="navbar-logo"><img src="{{ asset('img_example/logo.png') }}" alt="logo"></a>
             <div class="search-container">
                 <input type="text" placeholder="Search...">
                 <button type="submit">Search</button>

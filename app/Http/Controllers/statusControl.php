@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\pemesanan;
+use App\Models\SellerDash;
 use Illuminate\Http\Request;
 
 class statusControl extends Controller
@@ -29,9 +30,9 @@ class statusControl extends Controller
     
 
 
-    public function seller_status_detail($id)
+    public function seller_status_detail(Request $request)
     {
-        $pemesanan = pemesanan::all();
+        $pemesanan = Pemesanan::findOrFail($request->id); 
         return view('kelola_status.seller_status_detail',compact(['pemesanan']));
     }
 
@@ -55,7 +56,7 @@ class statusControl extends Controller
         
     public function seller_status_detail_1()
     {
-        $pemesanan = pemesanan::all();
+        $pemesanan = pemesanan::where('status_pemesanan' ,'!=', 'Pesanan Diterima dan selesai' )->get();
         return view('kelola_status.seller_status_detail_1',compact(['pemesanan']));
 
     }
@@ -66,7 +67,7 @@ class statusControl extends Controller
         $id = $request->input('id');
         $diproses = $request->input('status_pemesanan');
         
-  
+
         $diproses = 'Sedang diantar oleh driver professional';
         $update = pemesanan::where('id', $id)->update(['status_pemesanan' => $diproses]);
         
@@ -79,26 +80,37 @@ class statusControl extends Controller
 
     public function seller_status_detail_2()
     {
-        $pemesanan = pemesanan::all();
+        $pemesanan = pemesanan::where('status_pemesanan' ,'!=', 'Pesanan Diterima dan selesai' );
         return view('kelola_status.seller_status_detail_2',compact(['pemesanan']));
 
     }
 
     public function done_status(Request $request)
     {
+    
+     
         $id = $request->input('id');
-        $diproses = $request->input('status_pemesanan');
-        
         $diproses = 'Pesanan Diterima dan selesai';
-        $update = pemesanan::where('id', $id)->update(['status_pemesanan' => $diproses]);
+        pemesanan::where('id', $id)->update(['status_pemesanan' => $diproses]);
+        
+ 
+        $count = pemesanan::where('status_pemesanan' , 'Pesanan Diterima dan selesai' )->get()->count();
+        $totalAmount = pemesanan::where('status_pemesanan' , '=', 'Pesanan Diterima dan selesai' )->get()->sum('total_harga');
+
+        // dd($totalAmount);
+        
+        SellerDash::create([
+            'total_pemesanan' => $count,
+            'total_harga' => $totalAmount
+        ]);
+
+           
         
 
-        if ($update) {
-            return redirect('seller/{id}/status/detail/3');
-        } else {
-            return redirect()->back()->with('error', 'Gagal memperbarui status pemesanan.');
+        return redirect('/seller/status');
+
         }
-    }
+    
 
     public function seller_status_detail_3()
     {
