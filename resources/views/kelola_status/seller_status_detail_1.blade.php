@@ -170,12 +170,14 @@
         <div class="table-cell">Total  : {{ $pemesanan->total_harga }}</div>
         <br>
 
+        
             <form action="{{ route('up_to_send') }}" method="POST">
                 @csrf
-                 <input type="hidden" name="id" value="{{ $t->id }}">
+                 <input type="hidden" name="id" value="{{ $pemesanan->id }}">
             <button type="submit" class="btn btn-primary">Update</button>
             </form>
         </div>
+        
     </div>
 </div>
 

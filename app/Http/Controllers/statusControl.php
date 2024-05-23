@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\pemesanan;
 use App\Models\SellerDash;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+
 
 class statusControl extends Controller
 {
@@ -30,9 +32,9 @@ class statusControl extends Controller
     
 
 
-    public function seller_status_detail(Request $request)
+    public function seller_status_detail($id)
     {
-        $pemesanan = Pemesanan::findOrFail($request->id); 
+        $pemesanan = pemesanan::all();
         return view('kelola_status.seller_status_detail',compact(['pemesanan']));
     }
 
@@ -54,9 +56,9 @@ class statusControl extends Controller
         }
     }
         
-    public function seller_status_detail_1()
+    public function seller_status_detail_1(Request $request)
     {
-        $pemesanan = pemesanan::where('status_pemesanan' ,'!=', 'Pesanan Diterima dan selesai' )->get();
+        $pemesanan = pemesanan::all();
         return view('kelola_status.seller_status_detail_1',compact(['pemesanan']));
 
     }
@@ -78,9 +80,9 @@ class statusControl extends Controller
         }
     }
 
-    public function seller_status_detail_2()
+    public function seller_status_detail_2(Request $request)
     {
-        $pemesanan = pemesanan::where('status_pemesanan' ,'!=', 'Pesanan Diterima dan selesai' );
+        $pemesanan = Pemesanan::findOrFail($request->id); 
         return view('kelola_status.seller_status_detail_2',compact(['pemesanan']));
 
     }
@@ -99,17 +101,28 @@ class statusControl extends Controller
 
         // dd($totalAmount);
         
-        SellerDash::create([
-            'total_pemesanan' => $count,
-            'total_harga' => $totalAmount
-        ]);
+        $sellerDash = SellerDash::find(1);
+
+        if ($sellerDash) {
+            $sellerDash->total_pemesanan += $count;
+            $sellerDash->total_harga += $totalAmount;
+            $sellerDash->save();
+        } else {
+            
+            SellerDash::create([
+                'total_pemesanan' => $count,
+                'total_harga' => $totalAmount,
+            ]);
 
            
-        
-
-        return redirect('/seller/status');
-
         }
+        $currentDateTime = Carbon::now();
+        $pemesanan = Pemesanan::find($id);
+        $pemesanan->confirmation_at = $currentDateTime;
+        $pemesanan->save();
+
+        return redirect('seller/status');
+    }
     
 
     public function seller_status_detail_3()
