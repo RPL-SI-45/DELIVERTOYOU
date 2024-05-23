@@ -13,7 +13,7 @@ class Pemesanan extends Model
     use HasFactory;
     protected $table = 'pemesanan';
     
-}
+
 
     protected $guarded =[];
     protected $fillable = [

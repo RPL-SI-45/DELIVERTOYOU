@@ -134,6 +134,7 @@
                 <span class="icon-bar"></span>
             </button>
             <li>
+                <div>
                 @if(auth()->check())
                     @if(auth()->user()->role == 'seller')
                         <p class="navbar-text">Halo Seller</p>
@@ -141,6 +142,7 @@
                         <p class="navbar-text">Halo {{ auth()->user()->name }}</p>
                     @endif
                 @endif
+                </div>
             </li>
             <div class="search-container">
                 <input type="text" placeholder="Search...">

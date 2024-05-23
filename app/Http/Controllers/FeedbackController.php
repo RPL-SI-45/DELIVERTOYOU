@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Pemesanan;
+use App\Models\pemesanan;
 
 class FeedbackController extends Controller
 {
     public function index(){
 
-        $Pemesanan = Pemesanan::all();
+        $pemesanan = pemesanan::all();
         return view('feedback.feedback');
 
     }
