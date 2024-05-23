@@ -71,16 +71,16 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             width: 100%;
-            max-width: 350px; /* Mengurangi ukuran maksimal form */
+            max-width: 350px;
             display: flex;
             flex-direction: column;
-            max-height: 100%; /* Membatasi tinggi maksimal form */
-            overflow-y: auto; /* Menambahkan scroll secara vertikal */
+            max-height: 100%;
+            overflow-y: auto;
         }
 
         form input {
             width: 100%;
-            padding: 8px; /* Mengurangi padding input */
+            padding: 8px;
             margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -101,7 +101,6 @@
         form button:hover {
             background-color: #45a049;
         }
-
     </style>
 </head>
 <body>
@@ -134,16 +133,17 @@
 
 <div class="form-container">
     <form action="/update-profile" method="POST">
-        <input type="text" id="name" name="name" placeholder="Name" value="">
-        <input type="email" id="email" name="email" placeholder="Email Address" value="">
-        <input type="text" id="alamat" name="alamat" placeholder="Alamat" value="">
-        <input type="tel" id="telefon" name="telefon" placeholder="No Telephone" value="">
+        <input type="text" id="name" name="name" placeholder="Name" value="{{ isset($user['name']) ? $user['name'] : '' }}">
+        <input type="email" id="email" name="email" placeholder="Email Address" value="{{ isset($user['email']) ? $user['email'] : '' }}">
+        <input type="text" id="alamat" name="alamat" placeholder="Alamat" value="{{ isset($user['alamat']) ? $user['alamat'] : '' }}">
+        <input type="tel" id="telefon" name="nomor_telepon" placeholder="No Telephone" value="{{ isset($user['nomor_telepon']) ? $user['nomor_telepon'] : '' }}">
         <input type="password" id="old-password" name="old-password" placeholder="Old Password">
         <input type="password" id="new-password" name="new-password" placeholder="New Password">
         <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password">
         <button type="submit">Update Profile</button>
     </form>
 </div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

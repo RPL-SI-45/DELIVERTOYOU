@@ -15,7 +15,6 @@ class Pemesanan extends Model
     
 }
 
-    protected $guarded =[];
 
     public function payment()
     {
