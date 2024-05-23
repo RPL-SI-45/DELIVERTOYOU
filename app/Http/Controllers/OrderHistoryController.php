@@ -8,7 +8,7 @@ use App\Models\Pemesanan;
 class OrderHistoryController extends Controller
 {
     public function index(Request $request)
-{
+    {
     $query = Pemesanan::query();
 
     // Filter berdasarkan status pesanan
@@ -30,5 +30,20 @@ class OrderHistoryController extends Controller
     }
 
     return view('riwayatpesanan.sellerriwayat', compact('pemesanan'));
-}
+    }
+    
+    public function custhistory()
+    {
+        $customerEmail = auth()->user()->email;
+        $orders = Pemesanan::where('email', $customerEmail)->get();
+        
+        return view('riwayatpesanan.customerriwayat', compact('orders'));
+    }
+
+    public function historydetail($id)
+    {
+        $order = Pemesanan::findOrFail($id);
+
+        return view('riwayatpesanan.customerdetail', compact('order'));
+    }
 }

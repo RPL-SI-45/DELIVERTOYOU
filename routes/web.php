@@ -45,7 +45,6 @@ Route::put('/kategori_admin/{id}',[KategoriAdminController::class,'update']);
 Route::delete('/kategori_admin/{id}',[KategoriAdminController::class,'destroy']);
 
 #PAYMENT
-Route::get('/payment', [PaymentController::class, 'index']);
 Route::get('/payment/{pemesananId}', [PaymentController::class, "index"]);
 Route::post('/payment/store/{pemesananId}', [PaymentController::class, 'store'])->name('payment.store');
 Route::get('/payment/qris/{pemesananId}', [PaymentController::class, "showQrisForm"])->name('payment.qris');
@@ -54,7 +53,7 @@ Route::get('/customer/status/{pemesananId}', [PaymentController::class, 'showSta
 
 #PESANAN MASUK PENJUAL
 Route::get('/seller/order', [OrderController::class, 'sellerOrder'])->name('seller.order');
-Route::get('/seller/orders/{id}/detail', [OrderController::class, 'sellerDetail'])->name('seller.detail');
+Route::get('/seller/order/{id}/detail', [OrderController::class, 'sellerDetail'])->name('seller.detail');
 Route::get('/seller/status/{id}/update', [OrderController::class, 'acc_konfirmasi'])->name('seller_status_update');
 Route::get('/seller/reject/{id}', [OrderController::class, 'reject'])->name('seller.reject');
 
@@ -82,4 +81,8 @@ Route::get('/order/status', [statusControl::class,'order_status']);
 Route::get('/order/{id}/status/detail', [statusControl::class,'order_status_detail']);
 
 #RIWAYAT PENJUAL
-Route::get('/seller/orderhistory', [OrderHistoryController::class, 'index'])->name('order.history');
+Route::get('/seller/history', [OrderHistoryController::class, 'index'])->name('order.history');
+
+#RIWAYAT CUSTOMER
+Route::get('/order/history', [OrderHistoryController::class, 'custhistory'])->name('cust.history');
+Route::get('/order/{id}/history/detail', [OrderHistoryController::class, 'historydetail'])->name('history.detail');
