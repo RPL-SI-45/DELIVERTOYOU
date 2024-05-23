@@ -5,10 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Riwayat Pesanan</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-row {
+            margin-bottom: 20px;
+        }
+        .table {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
-        <h2>Riwayat Pesanan</h2>
+        <h2 class="mb-4">Riwayat Pesanan</h2>
         <form action="{{ route('order.history') }}" method="GET">
             <div class="form-row">
                 <div class="col-md-4 mb-3">
@@ -18,19 +35,21 @@
                         <option value="Pesanan Ditolak">Ditolak</option>
                     </select>
                 </div>
-            <div class="col-md-4 mb-3">
-                <label for="from_date">Dari Tanggal:</label>
-                <input type="date" class="form-control" id="from_date" name="from_date">
+                <div class="col-md-4 mb-3">
+                    <label for="from_date">Dari Tanggal:</label>
+                    <input type="date" class="form-control" id="from_date" name="from_date">
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="to_date">Hingga Tanggal:</label>
+                    <input type="date" class="form-control" id="to_date" name="to_date">
+                </div>
             </div>
-            <div class="col-md-4 mb-3">
-                <label for="to_date">Hingga Tanggal:</label>
-                <input type="date" class="form-control" id="to_date" name="to_date">
+            <div class="form-group">
+                <button class="btn btn-primary" type="submit">Filter</button>
+                @if(request()->has('status') || request()->has('from_date') || request()->has('to_date'))
+                    <a href="{{ route('order.history') }}" class="btn btn-secondary ml-2">Hapus Filter</a>
+                @endif
             </div>
-            </div>
-            <button class="btn btn-primary" type="submit">Filter</button>
-            @if(request()->has('status') || request()->has('from_date') || request()->has('to_date'))
-                <a href="{{ route('order.history') }}" class="btn btn-secondary ml-2">Hapus Filter</a>
-            @endif
         </form>
         <table class="table table-bordered mt-3">
             <thead>
