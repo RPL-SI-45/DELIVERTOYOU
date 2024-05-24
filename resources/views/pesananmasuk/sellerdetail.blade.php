@@ -12,7 +12,7 @@
         }
 
         .container {
-            background-color: #fff;
+            background-color: #B49852;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -26,48 +26,84 @@
         .btn-primary {
             margin-top: 20px;
             margin-right: 10px;
+            background-color: #007bff;
+            border-color: #007bff;
         }
 
-        .btn-secondary {
+        .btn-danger {
             margin-top: 20px;
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+
+        .img-thumbnail {
+            max-width: 200px;
+            border: 1px solid #dee2e6;
+            border-radius: .25rem;
+            padding: .25rem;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <table class="table table-hover" border="1">
-        <tr>
-            <th>ID Pesanan</th>
-            <th>Nama Pelanggan</th>
-            <th>Pesanan</th>
-            <th>Quantity</th>
-            <th>Metode Pembayaran</th>
-            <th>Bukti Bayar</th>
-            <th>Total Harga</th>
-            <th>Status Pesanan</th>
-        </tr>
-        <tr>
-            <td>{{ $pemesanan->id }}</td>
-            <td>{{ $pemesanan->nama_pelanggan }}</td>
-            <td>{{ $pemesanan->menu }}</td>
-            <td>{{ $pemesanan->quantity }}</td>
-            <td>@if($pemesanan->payment)
-                    {{ $pemesanan->payment->metode }}
-                @endif
-            </td>
-            <td>
-                @if($pemesanan->payment && $pemesanan->payment->metode == 'QRIS' && $pemesanan->payment->bukti)
-                    <img src="{{ asset('bukti/bayar/' . $pemesanan->payment->bukti) }}" alt="Bukti Pembayaran QRIS" style="max-width: 200px;">
-                @else
-                    Tidak ada
-                @endif
-            </td>
-            <td>{{ $pemesanan->total_harga }}</td>
-            <td>{{ $pemesanan->status_pemesanan }}</td>
-        </tr>
-    </table>
-    <a href="{{route('seller.order')}}" class="btn btn-primary">Kembali</a>
-    <a href="{{ route('seller.reject', ['id' => $pemesanan->id]) }}" class="btn btn-secondary">Tolak</a>
+    <h1 class="mb-4">Detail Pesanan</h1>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID Pesanan</th>
+                    <th>Nama Pelanggan</th>
+                    <th>Pesanan</th>
+                    <th>Quantity</th>
+                    <th>Metode Pembayaran</th>
+                    <th>Bukti Bayar</th>
+                    <th>Total Harga</th>
+                    <th>Status Pesanan</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ $pemesanan->id }}</td>
+                    <td>{{ $pemesanan->nama_pelanggan }}</td>
+                    <td>{{ $pemesanan->menu }}</td>
+                    <td>{{ $pemesanan->quantity }}</td>
+                    <td>
+                        @if($pemesanan->payment)
+                            {{ $pemesanan->payment->metode }}
+                        @endif
+                    </td>
+                    <td>
+                        @if($pemesanan->payment && $pemesanan->payment->metode == 'QRIS' && $pemesanan->payment->bukti)
+                            <img src="{{ asset('bukti/bayar/' . $pemesanan->payment->bukti) }}" alt="Bukti Pembayaran QRIS" class="img-thumbnail">
+                        @else
+                            Tidak ada
+                        @endif
+                    </td>
+                    <td>{{ $pemesanan->total_harga }}</td>
+                    <td>{{ $pemesanan->status_pemesanan }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-end">
+        <a href="{{route('seller.order')}}" class="btn btn-primary">Kembali</a>
+        <a href="{{ route('seller.reject', ['id' => $pemesanan->id]) }}" class="btn btn-danger">Tolak</a>
+    </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
