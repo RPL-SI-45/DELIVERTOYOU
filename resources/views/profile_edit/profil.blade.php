@@ -3,7 +3,6 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href='https://fonts.googleapis.com/css?family=Biryani' rel='stylesheet'>
     <title>DeliverToYou</title>
@@ -57,65 +56,55 @@
             background: #ccc;
         }
 
-        .content-img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin-top: -150px;
-            z-index: -1;
-        }
-
-        .content-container {
-            position: relative;
-            display: inline-block;
-        }
-
-        .content-text {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            background-color: white;
-            padding: 10px;
-            text-align: left;
-        }
-
-        .about {
-            margin: 0;
-        }
-
-        .card-container {
+        .form-container {
             display: flex;
-            flex-direction: row;
             justify-content: center;
-            margin-top: 20px;
-            flex-wrap: wrap;
-            align-items: flex-start;
-        }
-
-        .card .card-img-top {
-            height: 50px;
-            object-fit: contain;
-            margin-right: 300px;
-        }
-
-        .card {
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            transition: 0.3s;
-            width: 50rem;
-            margin: 15px;
+            align-items: center;
+            height: 80vh;
+            background-color: #f7f7f7;
             padding: 20px;
-            text-align: right;
-            background-color: #E7E4DC;
         }
 
-        .card-text {
-            text-align: right;
-            margin-left: 50px;
-            margin-top: -50px;
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 350px;
+            display: flex;
+            flex-direction: column;
+            max-height: 100%;
+            overflow-y: auto;
+        }
+
+        form input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        form button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
+
 <div class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
@@ -125,12 +114,10 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="#" class="navbar-logo"><img src="/img_example/logo.png" alt="logo"></a>
+            <a href="#" class="navbar-logo"><img src="img_example/logo.png" alt="logo"></a>
             <div class="search-container">
-                <form action="{{ route('search.filter') }}" method="GET">
-                    <input type="text" name="search" placeholder="Search..." value="{{ request()->search }}">
-                    <button type="submit">Search</button>
-                </form>
+                <input type="text" placeholder="Search...">
+                <button type="submit">Search</button>
             </div>
         </div>
         <div class="collapse navbar-collapse">
@@ -144,24 +131,21 @@
     </div>
 </div>
 
-
-<div class="content-container">
-    <img src="/img_example/makanan.png" class="content-img" alt="Content Image">
-    <div class="content-text">
-        <p class="about">NAMA WARUNG, ALAMAT</p></br>
-    </div>
+<div class="form-container">
+    <form action="/update-profile" method="POST">
+        @csrf
+        @method('PUT')
+        <input type="text" id="name" name="name" placeholder="Name" value="{{ auth()->user()->name }}">
+        <input type="email" id="email" name="email" placeholder="Email Address" value="{{ auth()->user()->email }}">
+        <input type="text" id="alamat" name="alamat" placeholder="Alamat" value="{{ auth()->user()->alamat }}">
+        <input type="text" id="telefon" name="nomor_telepon" placeholder="No Telephone" value="{{ auth()->user()->nomor_telepon }}">
+        <input type="password" id="old-password" name="old-password" placeholder="Old Password">
+        <input type="password" id="new-password" name="new-password" placeholder="New Password">
+        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password">
+        <button type="submit">Update Profile</button>
+    </form>
 </div>
 
-<div class="card-container">
-    @foreach($menu_warungs as $t)
-    <div class="card">
-        <a href=""><img src="{{ asset('gambar_menu/'.$t->gambar) }}" class="card-img-top"></a>
-        <div class="card-text">
-            <p class="Harga">Rp. {{ $t->harga }}</p>
-        </div>
-    </div>
-    @endforeach
-</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

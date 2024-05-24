@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
     <title>Document</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href='https://fonts.googleapis.com/css?family=Biryani' rel='stylesheet'>
-   
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -214,7 +215,9 @@
                         } 
                     ?>  
                 
-                    <a href="<?= $route ?>" a type="button" class="btn btn-dark">Detail</a>   
+
+                    <a href="<?= $route ?>" a type="button" class="btn btn-dark">Detail</a> 
+
 
                 @endforeach
                     

@@ -25,14 +25,13 @@ class statusControl extends Controller
         return view('kelola_status.cust_status',compact(['pemesanan']));
     }
 
+
     
     public function order_status_detail(Request $request)
     {
         $pemesanan = Pemesanan::findOrFail($request->id); 
         return view('kelola_status.cust_status_detail', compact('pemesanan'));
     }
-    
-
 
     public function seller_status_detail($id)
     {
@@ -84,6 +83,7 @@ class statusControl extends Controller
 
     public function seller_status_detail_2(Request $request)
     {
+
         $pemesanan = Pemesanan::findOrFail($request->id); 
         return view('kelola_status.seller_status_detail_2',compact(['pemesanan']));
 
@@ -116,6 +116,7 @@ class statusControl extends Controller
                 'total_pemesanan' => $totalCountAll,
                 'total_harga' => $totalAmountAll,
             ]);
+
         }
 
         // Filter untuk 1 bulan terakhir

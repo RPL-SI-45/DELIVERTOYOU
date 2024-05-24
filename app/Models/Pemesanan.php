@@ -6,11 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderHistoryController;
+
 
 class Pemesanan extends Model
 {
     use HasFactory;
     protected $table = 'pemesanan';
+    
+
+
     protected $guarded =[];
     protected $fillable = [
         'nama_pelanggan',
@@ -22,6 +27,7 @@ class Pemesanan extends Model
         'total_harga',
         'alamat',];
     public $timestamps = false;
+
 
     public function payment()
     {
@@ -42,3 +48,4 @@ class Pemesanan extends Model
     // }
 
 }
+

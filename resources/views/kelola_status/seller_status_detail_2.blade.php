@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href='https://fonts.googleapis.com/css?family=Biryani' rel='stylesheet'>
+
     
     <style>
         body {
@@ -140,7 +141,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+
             <a href="#" class="navbar-logo"><img src="{{ asset('img_example/logo.png') }}" alt="logo"></a>
+
             <div class="search-container">
                 <input type="text" placeholder="Search...">
                 <button type="submit">Search</button>
@@ -162,6 +165,7 @@
     <div class="table-container">
         <div class="table-column">
         <img src="{{ asset('img_example/makanan.png') }}" alt="Image 3" class="custom-img-size">
+
         <div class="table-cell font-weight-bold">{{ $pemesanan->nama_pelanggan}}</div>
         <div class="table-cell">ID : {{ $pemesanan->id }}</div>
         <div class="table-cell">Status : {{ $pemesanan->status_pemesanan }}</div>
@@ -180,10 +184,6 @@
         </div>
     </div>
 </div>
-
-
-
-
     
 </body>
 </html>
