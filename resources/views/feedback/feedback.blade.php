@@ -101,8 +101,8 @@
     </select>
     <h3>Feedback</h3>  
     <input type="text" name="feedback" placeholder="Boleh feedbacknya kk">
+    <a href="/order/status/" a type="button" class="btn btn-dark">Submit</a>
 
-    <button type="submit" class="btn btn-success">Submit</button>
 
  </form>
 
