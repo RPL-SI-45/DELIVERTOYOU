@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 
+
 class statusControl extends Controller
 {
 
@@ -26,40 +27,44 @@ class statusControl extends Controller
     }
 
 
-    
     public function order_status_detail(Request $request)
     {
-        $pemesanan = Pemesanan::findOrFail($request->id); 
+        $pemesanan = pemesanan::findOrFail($request->id); 
         return view('kelola_status.cust_status_detail', compact('pemesanan'));
     }
 
-    public function seller_status_detail($id)
+    public function seller_status_detail(Request $request)
     {
-        $pemesanan = pemesanan::all();
+        $pemesanan = pemesanan::findOrFail($request->id); 
         return view('kelola_status.seller_status_detail',compact(['pemesanan']));
+
     }
+
 
     public function up_to_cook(Request $request)
     {
+        // Validasi input request
+        $request->validate([
+            'id' => 'required|integer|exists:pemesanan,id',
+        ]);
     
         $id = $request->input('id');
-        $diproses = $request->input('status_pemesanan');
-        
-        
         $diproses = 'Sedang Dimasak oleh Ahlinya';
+    
+        // Update status pemesanan
         $update = pemesanan::where('id', $id)->update(['status_pemesanan' => $diproses]);
-        
-
+    
+        // Redirect berdasarkan hasil update
         if ($update) {
-            return redirect('seller/{id}/status/detail/1');
+            return redirect("seller/{$id}/status/detail/1")->with('success', 'Status berhasil diperbarui.');
         } else {
-            return redirect()->back()->with('error', 'Gagal memperbarui status acc_pemesanan.');
+            return redirect()->back()->with('error', 'Gagal memperbarui status pemesanan.');
         }
     }
-        
+    
     public function seller_status_detail_1(Request $request)
     {
-        $pemesanan = pemesanan::all();
+        $pemesanan = pemesanan::findOrFail($request->id); 
         return view('kelola_status.seller_status_detail_1',compact(['pemesanan']));
 
     }
@@ -75,7 +80,7 @@ class statusControl extends Controller
         $update = pemesanan::where('id', $id)->update(['status_pemesanan' => $diproses]);
         
         if ($update) {
-            return redirect('seller/{id}/status/detail/2');
+            return redirect("seller/{$id}/status/detail/2");
         } else {
             return redirect()->back()->with('error', 'Gagal memperbarui status pemesanan.');
         }
@@ -84,7 +89,7 @@ class statusControl extends Controller
     public function seller_status_detail_2(Request $request)
     {
 
-        $pemesanan = Pemesanan::findOrFail($request->id); 
+        $pemesanan = pemesanan::findOrFail($request->id); 
         return view('kelola_status.seller_status_detail_2',compact(['pemesanan']));
 
     }
@@ -102,6 +107,8 @@ class statusControl extends Controller
     
         // Mengambil semua data
         $totalCountAll = pemesanan::where('status_pemesanan', 'Pesanan Diterima dan selesai')->count();
+        session(['totalOrders' => $totalCountAll]);
+
         $totalAmountAll = pemesanan::where('status_pemesanan', 'Pesanan Diterima dan selesai')->sum('total_harga');
     
         // Mengupdate atau membuat data di SellerDash (semua data)
@@ -146,8 +153,6 @@ class statusControl extends Controller
                 'Total_harga2' => $totalAmountLastOneMonth,
             ]);
         }
-    
-
     
         return redirect('seller/status');
     }

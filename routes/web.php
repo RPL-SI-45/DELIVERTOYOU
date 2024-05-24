@@ -9,15 +9,10 @@ use App\Http\Controllers\CardController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderHistoryController;
-
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\FeedbackController;
-
 use App\Http\Controllers\SellerDashController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\SearchFilterMenu;
-
-
-
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
@@ -149,14 +144,13 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('/pemesanan', [PemesananController::class, 'index']);
 Route::delete('/pemesanan/{id}', [PemesananController::class, 'destroy']);
 Route::get('/pembayaran', [PemesananController::class, 'store']);
-Route::get('/home', function () {
+Route::get('/', function () {
     return view('home');
 });
 
 #HALAMAN UTAMA
 Route::get('/home', [CardController::class, 'halamanutama']);
 Route::get('/customer/menu', [CardController::class, 'menuwarung']);
-Route::get('/customer/menu/search', [SearchFilterMenu::class, 'index'])->name('search.filter');
 
 #PROFIL
 Route::get('/profil', [ProfileController::class, 'index']);
@@ -169,12 +163,8 @@ Route::get('/kategori_admin/{id}/edit',[KategoriAdminController::class,'edit']);
 Route::put('/kategori_admin/{id}',[KategoriAdminController::class,'update']);
 Route::delete('/kategori_admin/{id}',[KategoriAdminController::class,'destroy']);
 
-
-#HALAMAN UTAMA
-Route::get('/customer/menu', [CardController::class, 'menuwarung']);
-Route::get('/home', [CardController::class, 'halamanutama'])->name('home');
-
 #PAYMENT
+Route::get('/payment', [PaymentController::class, 'index']);
 Route::get('/payment/{pemesananId}', [PaymentController::class, "index"]);
 Route::post('/payment/store/{pemesananId}', [PaymentController::class, 'store'])->name('payment.store');
 Route::get('/payment/qris/{pemesananId}', [PaymentController::class, "showQrisForm"])->name('payment.qris');
@@ -183,7 +173,7 @@ Route::get('/customer/status/{pemesananId}', [PaymentController::class, 'showSta
 
 #PESANAN MASUK PENJUAL
 Route::get('/seller/order', [OrderController::class, 'sellerOrder'])->name('seller.order');
-Route::get('/seller/order/{id}/detail', [OrderController::class, 'sellerDetail'])->name('seller.detail');
+Route::get('/seller/orders/{id}/detail', [OrderController::class, 'sellerDetail'])->name('seller.detail');
 Route::get('/seller/status/{id}/update', [OrderController::class, 'acc_konfirmasi'])->name('seller_status_update');
 Route::get('/seller/reject/{id}', [OrderController::class, 'reject'])->name('seller.reject');
 
@@ -209,18 +199,10 @@ Route::get('seller/{id}/status/detail/3', [statusControl::class,'seller_status_d
 #KELOLA STATUS CUSTOMER
 Route::get('/order/status', [statusControl::class,'order_status']);
 Route::get('/order/{id}/status/detail', [statusControl::class,'order_status_detail']);
-
-
 #RIWAYAT PENJUAL
-Route::get('/seller/history', [OrderHistoryController::class, 'index'])->name('order.history');
-
-#RIWAYAT CUSTOMER
-Route::get('/order/history', [OrderHistoryController::class, 'custhistory'])->name('cust.history');
-Route::get('/order/{id}/history/detail', [OrderHistoryController::class, 'historydetail'])->name('history.detail');
+Route::get('/seller/orderhistory', [OrderHistoryController::class, 'index'])->name('order.history');
 
 
 #DASHBOARD
 Route::get('/seller/dash', [SellerDashController::class,'index']);
-Route::get('/seller/dash/3_month', [SellerDashController::class,'Month']);
-Route::get('/seller/dash/1_month', [SellerDashController::class,'index']);
-
+Route::get('/seller/dash/1_month', [SellerDashController::class,'Month1']);

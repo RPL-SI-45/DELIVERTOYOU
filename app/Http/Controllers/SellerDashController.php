@@ -18,14 +18,6 @@ class SellerDashController extends Controller
         return view('Sellerdash.Sellerdash', compact('SellerDash'));
     }
 
-
-    public function Month(Request $request)
-    {
-        $SellerDash1 = SellerDash1::all();
-    
-        return view('Sellerdash.Sellerdash1', compact('SellerDash1'));
-    }
-    
     
 
     public function Month1(Request $request)
@@ -33,7 +25,7 @@ class SellerDashController extends Controller
      
         $SellerDash2 = SellerDash2::all();
 
-        return view('Sellerdash.Sellerdash3');
+        return view('Sellerdash.Sellerdash3', compact('SellerDash2'));
         
     }
 

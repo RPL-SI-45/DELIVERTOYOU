@@ -25,7 +25,9 @@ class Pemesanan extends Model
         'menu',
         'quantity',
         'total_harga',
-        'alamat',];
+        'alamat',
+        'rating',
+        'feedback',];
     public $timestamps = false;
 
 
