@@ -22,7 +22,7 @@ class FeedbackController extends Controller
         $pemesanan->feedback = $request->feedback;
         $pemesanan->save();
 
-        return redirect()->back();
+        return redirect('/order/status');
 
     }
 }
