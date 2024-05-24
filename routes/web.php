@@ -122,3 +122,5 @@ Route::get('/seller/orderhistory', [OrderHistoryController::class, 'index'])->na
 
 #DASHBOARD
 Route::get('/seller/dash', [SellerDashController::class,'index']);
+Route::get('/seller/dash/3_month', [SellerDashController::class,'Month']);
+Route::get('/seller/dash/1_month', [SellerDashController::class,'index']);
