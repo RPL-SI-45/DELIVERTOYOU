@@ -170,18 +170,32 @@
         <div class="table-cell">Total  : {{ $t->total_harga }}</div>
         <br>
 
+
+<div class="container mt-5">
+    <div class="table-container">
+        <div class="table-column">
+        <img src="{{ asset('img_example/makanan.png') }}" alt="Image 3" class="custom-img-size">
+        <div class="table-cell font-weight-bold">Nama Customer</div>
+        <div class="table-cell">ID : {{ $pemesanan->id }}</div>
+        <div class="table-cell">Status : {{ $pemesanan->status_pemesanan }}</div>
+        <div class="table-cell">Alamat : {{ $pemesanan->alamat }}</div>
+        <div class="table-cell">Menu : {{ $pemesanan->menu }}</div>
+        <div class="table-cell">Harga : {{ $pemesanan->harga }}</div>
+        <div class="table-cell">Quantity : {{ $pemesanan->quantity }}</div>
+        <div class="table-cell">Total : {{ $pemesanan->total_harga }}</div>
+        <br>
+
         <form action="{{ route('up_to_cook') }}" method="POST">
         @csrf
-        <input type="hidden" name="id" value="{{ $t->id }}">
-         <a type="submit" class="btn btn-dark">Update</a>
+        <input type="hidden" name="id" value="{{ $pemesanan->id }}">
+        <button type="submit" class="btn btn-dark">Update</button>
         </form>
+
+
         <a href="/seller/status" a type="button" class="btn btn-dark">Back</a>   
         </div>
     </div>
 </div>
- @endforeach
-
-
 
     
 </body>

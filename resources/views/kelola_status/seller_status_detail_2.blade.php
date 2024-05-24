@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=
     , initial-scale=1.0">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Biryani' rel='stylesheet'>
+
     
     <style>
         body {
@@ -137,7 +141,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="#" class="navbar-logo"><img src="img_example/logo.png" alt="logo"></a>
+
+            <a href="#" class="navbar-logo"><img src="{{ asset('img_example/logo.png') }}" alt="logo"></a>
+
             <div class="search-container">
                 <input type="text" placeholder="Search...">
                 <button type="submit">Search</button>
@@ -155,33 +161,29 @@
     </div>
 </div>
 
-@foreach($pemesanan as $t)
 <div class="container mt-5">
     <div class="table-container">
         <div class="table-column">
         <img src="{{ asset('img_example/makanan.png') }}" alt="Image 3" class="custom-img-size">
-        <div class="table-cell font-weight-bold">"nama Customer"</div>
-        <div class="table-cell">ID : {{ $t->id }}</div>
-        <div class="table-cell">Status : {{ $t->status_pemesanan }}</div>
-        <div class="table-cell">Alamat : {{ $t->alamat }}</div>
-        <div class="table-cell">Menu   : {{ $t->menu }}</div>
-        <div class="table-cell">Harga   : {{ $t->harga }}</div>
-        <div class="table-cell">Quantity   : {{ $t->Quantity }}</div>
-        <div class="table-cell">Total  : {{ $t->total_harga }}</div>
+
+        <div class="table-cell font-weight-bold">{{ $pemesanan->nama_pelanggan}}</div>
+        <div class="table-cell">ID : {{ $pemesanan->id }}</div>
+        <div class="table-cell">Status : {{ $pemesanan->status_pemesanan }}</div>
+        <div class="table-cell">Alamat : {{ $pemesanan->alamat }}</div>
+        <div class="table-cell">Menu   : {{ $pemesanan->menu }}</div>
+        <div class="table-cell">Harga   : {{ $pemesanan->harga }}</div>
+        <div class="table-cell">Quantity   : {{ $pemesanan->Quantity }}</div>
+        <div class="table-cell">Total  : {{ $pemesanan->total_harga }}</div>
         <br>
 
             <form action="{{ route('done_status') }}" method="POST">
                 @csrf
-                 <input type="hidden" name="id" value="{{ $t->id }}">
+                 <input type="hidden" name="id" value="{{ $pemesanan->id }}">
             <button type="submit" class="btn btn-primary">Update</button>
             </form>
         </div>
     </div>
 </div>
- @endforeach
-
-
-
     
 </body>
 </html>

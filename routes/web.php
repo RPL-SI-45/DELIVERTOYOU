@@ -10,6 +10,19 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderHistoryController;
 
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\FeedbackController;
+
+use App\Http\Controllers\SellerDashController;
+use App\Http\Controllers\SearchFilterMenu;
+
+
+
+use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CartController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,17 +34,48 @@ use App\Http\Controllers\OrderHistoryController;
 |
 */
 
+
+Route::get('login', 'App\Http\Controllers\Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'App\Http\Controllers\Auth\LoginController@login')->name('login.post');
+Route::get('register', 'App\Http\Controllers\Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('register', 'App\Http\Controllers\Auth\RegisterController@register');
+Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
+
+
+
+Route::middleware(['auth', 'redirectIfNotCustomerOrSeller'])->group(function () {
+   Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
+});
+
+Route::get('/', [LandingPageController::class, 'index'])->name('landing');
+
+#FEEDBACK
+Route::get('/order/{id}/status/feedback',[FeedbackController::class,'index']);
+Route::post('/postfeedback',[FeedbackController::class,'store']);
+
+#EDIT PROFIL
+Route::get('/edit-profile', 'UserController@editProfile')->name('edit-profile');
+Route::put('/update-profile', [ProfileController::class, 'updateProfile'])->name('update-profile');
+
+
+
+#KERANJANG
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+
 #PEMESANAN
 Route::get('/pemesanan', [PemesananController::class, 'index']);
 Route::delete('/pemesanan/{id}', [PemesananController::class, 'destroy']);
 Route::get('/pembayaran', [PemesananController::class, 'store']);
-Route::get('/', function () {
+Route::get('/home', function () {
     return view('home');
 });
 
 #HALAMAN UTAMA
 Route::get('/home', [CardController::class, 'halamanutama']);
 Route::get('/customer/menu', [CardController::class, 'menuwarung']);
+Route::get('/customer/menu/search', [SearchFilterMenu::class, 'index'])->name('search.filter');
 
 #PROFIL
 Route::get('/profil', [ProfileController::class, 'index']);
@@ -43,6 +87,11 @@ Route::post('/kategori_admin/store',[KategoriAdminController::class,'store']);
 Route::get('/kategori_admin/{id}/edit',[KategoriAdminController::class,'edit']);
 Route::put('/kategori_admin/{id}',[KategoriAdminController::class,'update']);
 Route::delete('/kategori_admin/{id}',[KategoriAdminController::class,'destroy']);
+
+
+#HALAMAN UTAMA
+Route::get('/customer/menu', [CardController::class, 'menuwarung']);
+Route::get('/home', [CardController::class, 'halamanutama'])->name('home');
 
 #PAYMENT
 Route::get('/payment/{pemesananId}', [PaymentController::class, "index"]);
@@ -63,7 +112,7 @@ Route::get('/seller/menu/input', [menuControl::class,'seller_menu_input']);
 Route::post('/post',[menuControl::class,'store']);
 Route::get('/seller/{id}/menu/edit',[menuControl::class,'seller_menu_edit']);
 Route::put('seller/menu/{id}',[menuControl::class,'update']);
-Route::DELETE('/menu/{id}',[menuControl::class,'destroy']);
+Route::get('/menu/{id}',[menuControl::class,'destroy']);
 
 #KELOLA STATUS PENJUAL
 Route::get('/seller/status', [statusControl::class,'seller_status']);
@@ -80,9 +129,15 @@ Route::get('seller/{id}/status/detail/3', [statusControl::class,'seller_status_d
 Route::get('/order/status', [statusControl::class,'order_status']);
 Route::get('/order/{id}/status/detail', [statusControl::class,'order_status_detail']);
 
+
 #RIWAYAT PENJUAL
 Route::get('/seller/history', [OrderHistoryController::class, 'index'])->name('order.history');
 
 #RIWAYAT CUSTOMER
 Route::get('/order/history', [OrderHistoryController::class, 'custhistory'])->name('cust.history');
 Route::get('/order/{id}/history/detail', [OrderHistoryController::class, 'historydetail'])->name('history.detail');
+
+
+#DASHBOARD
+Route::get('/seller/dash', [SellerDashController::class,'index']);
+

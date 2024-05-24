@@ -155,33 +155,31 @@
     </div>
 </div>
 
-@foreach($pemesanan as $t)
+
 <div class="container mt-5">
     <div class="table-container">
         <div class="table-column">
         <img src="{{ asset('img_example/makanan.png') }}" alt="Image 3" class="custom-img-size">
         <div class="table-cell font-weight-bold">"nama Customer"</div>
-        <div class="table-cell">ID : {{ $t->id }}</div>
-        <div class="table-cell">Status : {{ $t->status_pemesanan }}</div>
-        <div class="table-cell">Alamat : {{ $t->alamat }}</div>
-        <div class="table-cell">Menu   : {{ $t->menu }}</div>
-        <div class="table-cell">Harga   : {{ $t->harga }}</div>
-        <div class="table-cell">Quantity   : {{ $t->Quantity }}</div>
-        <div class="table-cell">Total  : {{ $t->total_harga }}</div>
+
+        <div class="table-cell">ID : {{ $pemesanan->id }}</div>
+        <div class="table-cell">Status : {{ $pemesanan->status_pemesanan }}</div>
+        <div class="table-cell">Alamat : {{ $pemesanan->alamat }}</div>
+        <div class="table-cell">Menu   : {{ $pemesanan->menu }}</div>
+        <div class="table-cell">Harga   : {{ $pemesanan->harga }}</div>
+        <div class="table-cell">Quantity   : {{ $pemesanan->Quantity }}</div>
+        <div class="table-cell">Total  : {{ $pemesanan->total_harga }}</div>
         <br>
+
 
             <form action="{{ route('up_to_send') }}" method="POST">
                 @csrf
-                 <input type="hidden" name="id" value="{{ $t->id }}">
+                 <input type="hidden" name="id" value="{{ $pemesanan->id }}">
             <button type="submit" class="btn btn-primary">Update</button>
             </form>
         </div>
     </div>
 </div>
- @endforeach
-
-
-
     
 </body>
 </html>

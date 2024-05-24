@@ -9,11 +9,26 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderHistoryController;
 
 
+
 class Pemesanan extends Model
 {
     use HasFactory;
     protected $table = 'pemesanan';
+    
+
+
     protected $guarded =[];
+    protected $fillable = [
+        'nama_pelanggan',
+        'status_pemesanan',
+        'total_harga',
+        'confirmation_at',
+        'menu',
+        'quantity',
+        'total_harga',
+        'alamat',];
+    public $timestamps = false;
+
 
     public function payment()
     {
@@ -32,3 +47,4 @@ public function pesananmasuk() {
     // }
 
 }
+

@@ -47,3 +47,4 @@ class OrderHistoryController extends Controller
         return view('riwayatpesanan.customerdetail', compact('order'));
     }
 }
+

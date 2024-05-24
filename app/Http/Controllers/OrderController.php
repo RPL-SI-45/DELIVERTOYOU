@@ -58,7 +58,7 @@ class OrderController extends Controller
 
         $pemesanan->status_pemesanan = 'Pesanan Ditolak';
         $pemesanan->save();
-
+        
         return redirect()->route('seller.order')->with('status', 'Pesanan ditolak');
     }
 }
