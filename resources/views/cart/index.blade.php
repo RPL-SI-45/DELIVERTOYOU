@@ -2,33 +2,192 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keranjang</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Your Cart</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: sans-serif;
+        }
+        .container {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .table img {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }
+        .btn-remove {
+            background-color: #dc3545;
+            border: none;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .btn-remove:hover {
+            background-color: #c82333;
+        }
+        .alert-link {
+            color: #007bff;
+            text-decoration: underline;
+        }
+        .alert-link:hover {
+            color: #0056b3;
+        }
+
+        .navbar {
+            background-color: #B49852;
+            border: none;
+            border-radius: 0;
+        }
+
+        .navbar-logo img {
+            height: 40px;
+            margin-top: 5px;
+        }
+
+        .navbar-text {
+            color: #fff;
+            margin-right: 15px;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+
+        .navbar-nav > li > a {
+            color: #fff;
+        }
+
+        .navbar-nav > li > a:hover {
+            color: #f1f1f1;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .search-container input[type="text"] {
+            padding: 5px 10px;
+            margin-top: 8px;
+            font-size: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 200px;
+        }
+
+        .search-container button {
+            padding: 5px 10px;
+            margin-top: 8px;
+            margin-left: 5px;
+            background: #ddd;
+            font-size: 12px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .search-container button:hover {
+            background: #ccc;
+        }
+    </style>
 </head>
 <body>
-    <h1>Keranjang Belanja</h1>
+    <div class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @if(auth()->check())
+                    @if(auth()->user()->role == 'seller')
+                        <p class="navbar-text">Halo Seller</p>
+                    @elseif(auth()->user()->role == 'customer')
+                        <p class="navbar-text">Halo {{ auth()->user()->name }}</p>
+                    @endif
+                @endif
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="home">HOME</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Keranjang</h1>
+        @if(session('cart'))
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Gambar</th>
+                            <th>Nama</th>
+                            <th>Harga</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(session('cart') as $id => $details)
+                        <tr>
+                            <td><img src="{{ asset('gambar_menu/'.$details['gambar']) }}" alt="{{ $details['nama'] }}" class="img-fluid"></td>
+                            <td>{{ $details['nama'] }}</td>
+                            <td>Rp. {{ number_format($details['harga'], 0, ',', '.') }}</td>
+                            <td>
+                                <form action="{{ route('cart.remove', $id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    <button type="submit" class="btn-remove">Hapus</button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                        <!-- Kolom kupon -->
+                        <tr>
+                            <td colspan="3"></td>
+                            <td>
+                                <input type="text" class="form-control" name="kupon" placeholder="Masukkan Kupon">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        @else
+            <div class="alert alert-warning text-center" role="alert">
+                Keranjang anda kosong! 
+                <a href="/home" class="alert-link">Home</a>
+            </div>
+        @endif
+    </div>
 
-    @if(count($cart) > 0)
-        <table>
-            <thead>
-                <tr>
-                    <th>Nama Restoran</th>
-                    <th>Nama Makanan</th>
-                    <th>Jumlah</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($cart as $item)
-                    <tr>
-                        <td>{{ $item['restaurant_name'] }}</td>
-                        <td>{{ $item['food_name'] }}</td>
-                        <td>{{ $item['quantity'] }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    @else
-        <p>Keranjang Anda kosong.</p>
-    @endif
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#search-button').on('click', function(e) {
+                e.preventDefault();
+                var query = $('#search-input').val().toLowerCase();
+                $('.card-container .card').each(function() {
+                    var itemName = $(this).find('.card-img-top').attr('alt').toLowerCase();
+                    if (itemName.includes(query)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

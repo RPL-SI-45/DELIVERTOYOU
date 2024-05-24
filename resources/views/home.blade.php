@@ -1,52 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href='https://fonts.googleapis.com/css?family=Biryani' rel='stylesheet'>
     <title>DeliverToYou</title>
     <style>
         body {
             margin: 0;
-            font-family: Biryani; size: 14px;
+            font-family: 'Biryani', sans-serif;
+            font-size: 14px;
+            background-color: #f5f5f5;
         }
 
         .navbar {
-            overflow: hidden;
             background-color: #B49852;
+            border: none;
+            border-radius: 0;
         }
 
-        .navbar-logo img{
+        .navbar-logo img {
             height: 40px;
-            margin-top: 10px;
+            margin-top: 5px;
+        }
+
+        .navbar-text {
+            color: #fff;
             margin-right: 15px;
+            margin-top: 15px;
+            font-size: 16px;
         }
 
         .search-container {
-            display: inline-block;
-            position: absolute;
-            left: 45%;
-            top: 0;
-            transform: translateX(-45%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
 
-        .search-container input[type=text] {
-            padding: 5px;
-            margin-top: 16px;
-            font-size: 10px;
-            border: none;
+        .search-container input[type="text"] {
+            padding: 5px 10px;
+            margin-top: 8px;
+            font-size: 12px;
+            border: 1px solid #ccc;
             border-radius: 5px;
-            width: 130px;
+            width: 200px;
         }
 
         .search-container button {
-            padding: 5px;
-            margin-top: 16px;
-            margin-left: 3px;
+            padding: 5px 10px;
+            margin-top: 8px;
+            margin-left: 5px;
             background: #ddd;
-            font-size: 9.5px;
+            font-size: 12px;
             border: none;
             cursor: pointer;
             border-radius: 5px;
@@ -58,72 +65,122 @@
 
         .content-container {
             position: relative;
-            display: inline-block;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .content-img {
+            width: 100%;
+            height: auto;
+            display: block;
         }
 
         .content-text {
             position: absolute;
-            bottom: 0;
-            left: 300px;
-            background-color: white;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(255, 255, 255, 0.8);
             padding: 10px;
             text-align: center;
+            border-radius: 5px;
         }
 
         .about {
             margin: 0;
-        }
-
-        .card-container {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            margin-top: 20px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .content-img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin-top: -50px; 
-            z-index: -1;
+            font-weight: bold;
         }
 
         .button-pesan {
             background-color: #E1AB24;
+            border: none;
             border-radius: 7px;
+            padding: 10px 20px;
+            color: #fff;
+            cursor: pointer;
         }
 
-        .card .card-img-top {
-            height: 50px; 
-            object-fit: contain; 
+        .button-pesan:hover {
+            background-color: #d18a1a;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            width: 100%;
         }
 
         .card {
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            transition: 0.3s;
-            width: 15rem;
-            margin: 7px;
-            padding: 20px;
-            text-align: center;
-            background-color: #E7E4DC;
-
+            width: 300px; /* Anda dapat menyesuaikan lebar kartu sesuai kebutuhan */
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .card:hover {
-            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
         }
 
         .card-text {
-            margin-top: 10px;
+            padding: 15px;
+            text-align: center;
         }
 
-    </style>
+        .add-to-cart-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 14px;
+            color: #fff;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #218838;
+        }
+
+
+        .card-text p {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .navbar-nav > li > a {
+            color: #fff;
+        }
+
+        .navbar-nav > li > a:hover {
+            color: #f1f1f1;
+        }
+
+        #notification {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+            </style>
 </head>
 <body>
-
 <div class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
@@ -153,6 +210,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/order/status">STATUS</a></li>
                 <li><a href="menu">MENU</a></li>
+                <li><a href="profil">PROFILE</a></li>
                 <li><a href="categories">CATEGORIES</a></li>
                 <li><a href="{{ route('cart.index') }}">KERANJANG</a></li>
                 <li>
@@ -162,35 +220,44 @@
                     <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">LOGOUT</a>
                 </li>
             </ul>
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Search...">
+                <button type="button" id="search-button">Search</button>
+            </div>
         </div>
     </div>
 </div>
 
 <div class="content-container">
     <img src="img_example/makanan.png" class="content-img" alt="Content Image">
-    <div class="content-text">
-        <p class="about">lorem ipsum</p></br>
-            <button type="button" class="button-pesan">PESAN</button>
-    </div>
 </div>
 
-@foreach($menu_warungs as $t)
-<div class="card-container">
-    <div class="card">
 
-        <a href="/customer/menu"><img src="{{ asset('gambar_menu/'.$t->gambar) }}" class="card-img-top" alt="{{ $t->nama }}></a>
-        
-        <div class="{{$t->nama}}">
-            <p class="Harga Rp.{{$t->harga}}"></p>
+<div class="card-container">
+    @foreach($menu_warungs as $t)
+    <div class="card">
+        <a href="/customer/menu"><img src="{{ asset('gambar_menu/'.$t->gambar) }}" class="card-img-top" alt="{{ $t->nama }}"></a>
+        <div class="card-text">
+            <p>{{ $t->nama }}</p>
+            <p>Rp. {{ $t->harga }}</p>
+            <p>{{ $t->deskripsi}}</p>
+            <form class="add-to-cart-form" data-id="{{ $t->id }}" action="{{ route('cart.add', $t->id) }}" method="POST">
+                @csrf
+                <button type="button" class="add-to-cart-btn">Tambah Keranjang</button>
+            </form>
         </div>
     </div>
+    @endforeach
 </div>
-
-@endforeach
+<div id="notification"></div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<head>
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
 <script>
     $(document).ready(function() {
         $('#search-button').on('click', function(e) {
@@ -208,6 +275,30 @@
     });
 </script>
 
+<script>
+    $(document).ready(function() {
+        $('.add-to-cart-btn').click(function() {
+            var form = $(this).closest('form');
+            var formData = form.serialize();
+            var actionUrl = form.attr('action');
 
+            $.ajax({
+                type: 'POST',
+                url: actionUrl,
+                data: formData,
+                success: function(response) {
+                    if (response.status === 'exists') {
+                        $('#notification').text('Menu sudah ada').css('background-color', '#f44336').fadeIn().delay(2000).fadeOut();
+                    } else if (response.status === 'added') {
+                        $('#notification').text('Berhasil Ditambahkan').css('background-color', '#4CAF50').fadeIn().delay(2000).fadeOut();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert('Terjadi kesalahan, coba lagi.');
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>
