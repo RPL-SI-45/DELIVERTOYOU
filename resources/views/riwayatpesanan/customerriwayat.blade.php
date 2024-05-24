@@ -5,13 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Riwayat Pesanan</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 50px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        .btn-info {
+            background-color: #B49852;
+            border-color: #B49852;
+        }
+
+        .btn-info:hover {
+            background-color: #117a8b;
+            border-color: #117a8b;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h2>Riwayat Pesanan</h2>
+        <h2 class="mb-4">Riwayat Pesanan</h2>
         <div class="table-responsive">
-            <table class="table table-bordered table-hover mt-3">
-                <thead>
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
                     <tr>
                         <th>No</th>
                         <th>Menu</th>
@@ -23,15 +49,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($pemesanan as $pm)
+                    @foreach($pemesanan as $key => $pm)
                         <tr>
-                            <td>{{ $pm->id }}</td>
+                            <td>{{ $key + 1 }}</td>
                             <td>{{ $pm->menu }}</td>
                             <td>{{ $pm->total_harga }}</td>
                             <td>{{ $pm->alamat }}</td>
                             <td>{{ $pm->status_pemesanan }}</td>
                             <td>{{ $pm->created_at }}</td>
-                            <td><a href="{{ route('history.detail', $pm->id) }}" class="btn btn-info">Detail</a></td>
+                            <td><a href="{{ route('history.detail', $pm->id) }}" class="btn btn-info btn-sm">Detail</a></td>
                         </tr>
                     @endforeach
                 </tbody>

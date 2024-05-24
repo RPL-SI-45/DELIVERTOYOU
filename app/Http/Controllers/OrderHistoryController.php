@@ -34,16 +34,13 @@ class OrderHistoryController extends Controller
     
     public function custhistory()
     {
-        $customerEmail = auth()->user()->email;
-        $orders = Pemesanan::where('email', $customerEmail)->get();
-        
-        return view('riwayatpesanan.customerriwayat', compact('orders'));
+        $pemesanan = Pemesanan::orderBy('created_at', 'desc')->get();
+        return view('riwayatpesanan.customerriwayat', compact('pemesanan'));
     }
 
     public function historydetail($id)
     {
         $order = Pemesanan::findOrFail($id);
-
         return view('riwayatpesanan.customerdetail', compact('order'));
     }
 }
