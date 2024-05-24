@@ -47,6 +47,14 @@
                 text-align: left;
             }
         }
+        .btn-secondary {
+            background-color: #B49852;
+            border-color: #B49852;
+        }
+        .btn-secondary:hover {
+            background-color: #8a6d3b;
+            border-color: #8a6d3b;
+        }
     </style>
 </head>
 <body>

@@ -6,10 +6,6 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index(){
-        return view("home");
-    }
-}
     public function index()
     {
         if(auth()->check()) {
@@ -24,5 +20,6 @@ class HomeController extends Controller
             return redirect()->route('login');
         }
     }
+}
 
 
