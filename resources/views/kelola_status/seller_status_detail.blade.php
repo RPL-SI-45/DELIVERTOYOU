@@ -155,6 +155,21 @@
     </div>
 </div>
 
+@foreach($pemesanan as $t)
+<div class="container mt-5">
+    <div class="table-container">
+        <div class="table-column">
+        <img src="{{ asset('img_example/makanan.png') }}" alt="Image 3" class="custom-img-size">
+        <div class="table-cell font-weight-bold">"nama Customer"</div>
+        <div class="table-cell">ID : {{ $t->id }}</div>
+        <div class="table-cell">Status : {{ $t->status_pemesanan }}</div>
+        <div class="table-cell">Alamat : {{ $t->alamat }}</div>
+        <div class="table-cell">Menu   : {{ $t->menu }}</div>
+        <div class="table-cell">Harga   : {{ $t->harga }}</div>
+        <div class="table-cell">Quantity   : {{ $t->Quantity }}</div>
+        <div class="table-cell">Total  : {{ $t->total_harga }}</div>
+        <br>
+
 
 <div class="container mt-5">
     <div class="table-container">
@@ -176,13 +191,11 @@
         <button type="submit" class="btn btn-dark">Update</button>
         </form>
 
+
         <a href="/seller/status" a type="button" class="btn btn-dark">Back</a>   
         </div>
     </div>
 </div>
- 
-
-
 
     
 </body>
