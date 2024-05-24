@@ -194,6 +194,7 @@
                     <div class="table-cell">Total  : {{ $t->total_harga }}</div>
 
                     <a href="/order/{{$t->id}}/status/detail" a type="button" class="btn btn-dark">Detail</a>   
+                    <a href="/order/{{$t->id}}/status/feedback" a type="button" class="btn btn-dark">Detail</a> 
 
                 @endforeach
                     

@@ -50,7 +50,8 @@ Route::middleware(['auth', 'redirectIfNotCustomerOrSeller'])->group(function () 
 Route::get('/', [LandingPageController::class, 'index'])->name('landing');
 
 #FEEDBACK
-Route::get('/order/status/feedback',[FeedbackController::class,'index']);
+Route::get('/order/{id}/status/feedback',[FeedbackController::class,'index']);
+Route::post('/postfeedback',[FeedbackController::class,'store']);
 
 #EDIT PROFIL
 Route::get('/edit-profile', 'UserController@editProfile')->name('edit-profile');

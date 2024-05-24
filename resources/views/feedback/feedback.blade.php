@@ -88,20 +88,23 @@
     </div>
 </div>
 
-<form action="/post" method='POST' enctype="multipart/form-data">
+<form action="/postfeedback" method='POST' enctype="multipart/form-data">
     @csrf
-
+    <input type="hidden" name="id" value="{{$pemesanan->id}}">
     <h3>Rating</h3>  
-    <select name="nama_kategori" class="form-control">
-        <option>Buruk</option>
-        <option>Bagus</option>
-        <option>Sangat Bagus</option>
+    <select name="rating" class="form-control">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
     </select>
     <h3>Feedback</h3>  
-    <input type="text" name="nama" placeholder="Boleh feedbacknya dong">
-
+    <input type="text" name="feedback" placeholder="Boleh feedbacknya kk">
 
     <button type="submit" class="btn btn-success">Submit</button>
+
+ </form>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

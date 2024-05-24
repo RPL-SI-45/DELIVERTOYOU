@@ -214,7 +214,8 @@
                         } 
                     ?>  
                 
-                    <a href="<?= $route ?>" a type="button" class="btn btn-dark">Detail</a>   
+                    <a href="<?= $route ?>" a type="button" class="btn btn-dark">Detail</a> 
+                      
 
                 @endforeach
                     
