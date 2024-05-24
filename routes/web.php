@@ -140,4 +140,6 @@ Route::get('/order/{id}/history/detail', [OrderHistoryController::class, 'histor
 
 #DASHBOARD
 Route::get('/seller/dash', [SellerDashController::class,'index']);
+Route::get('/seller/dash/3_month', [SellerDashController::class,'Month']);
+Route::get('/seller/dash/1_month', [SellerDashController::class,'index']);
 
