@@ -192,14 +192,19 @@
                     <div class="table-cell">Menu : {{ $t->menu }}</div>
                     <div class="table-cell">Status : {{ $t->status_pemesanan }}</div>
                     <div class="table-cell">Total  : {{ $t->total_harga }}</div>
+                    <div class="table-cell">Rating  : {{ $t->rating }}</div>
+                    <div class="table-cell">Feedback  : {{ $t->feedback }}</div>
+
 
                     <a href="/order/{{$t->id}}/status/detail" a type="button" class="btn btn-dark">Detail</a>   
+                    <a href="/order/{{$t->id}}/status/feedback" a type="button" class="btn btn-dark">Feedback</a> 
 
-                @endforeach
+                
                     
                   </div>
                  </div>
-                </div>   
+                </div>
+            @endforeach   
       
 </body>
 </html>

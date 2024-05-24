@@ -133,10 +133,12 @@
 
 <div class="form-container">
     <form action="/update-profile" method="POST">
-        <input type="text" id="name" name="name" placeholder="Name" value="{{ isset($user['name']) ? $user['name'] : '' }}">
-        <input type="email" id="email" name="email" placeholder="Email Address" value="{{ isset($user['email']) ? $user['email'] : '' }}">
-        <input type="text" id="alamat" name="alamat" placeholder="Alamat" value="{{ isset($user['alamat']) ? $user['alamat'] : '' }}">
-        <input type="tel" id="telefon" name="nomor_telepon" placeholder="No Telephone" value="{{ isset($user['nomor_telepon']) ? $user['nomor_telepon'] : '' }}">
+        @csrf
+        @method('PUT')
+        <input type="text" id="name" name="name" placeholder="Name" value="{{ auth()->user()->name }}">
+        <input type="email" id="email" name="email" placeholder="Email Address" value="{{ auth()->user()->email }}">
+        <input type="text" id="alamat" name="alamat" placeholder="Alamat" value="{{ auth()->user()->alamat }}">
+        <input type="text" id="telefon" name="nomor_telepon" placeholder="No Telephone" value="{{ auth()->user()->nomor_telepon }}">
         <input type="password" id="old-password" name="old-password" placeholder="Old Password">
         <input type="password" id="new-password" name="new-password" placeholder="New Password">
         <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password">
