@@ -147,7 +147,7 @@
                             <td>
                                 <form action="{{ route('cart.remove', $id) }}" method="POST" class="d-inline">
                                     @csrf
-                                    <button type="submit" class="btn-remove">Remove</button>
+                                    <button type="submit" class="btn-remove">Hapus</button>
                                 </form>
                             </td>
                         </tr>
