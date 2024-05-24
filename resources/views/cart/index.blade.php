@@ -3,32 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keranjang</title>
+    <title>Your Cart</title>
+    <style>
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .table th {
+            background-color: #f2f2f2;
+        }
+        .table img {
+            width: 50px;
+            height: 50px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Keranjang Belanja</h1>
-
-    @if(count($cart) > 0)
-        <table>
-            <thead>
-                <tr>
-                    <th>Nama Restoran</th>
-                    <th>Nama Makanan</th>
-                    <th>Jumlah</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($cart as $item)
+    <div class="container">
+        <h1>Keranjang</h1>
+        @if(session('cart'))
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>{{ $item['restaurant_name'] }}</td>
-                        <td>{{ $item['food_name'] }}</td>
-                        <td>{{ $item['quantity'] }}</td>
+                        <th>Gambar</th>
+                        <th>Nama</th>
+                        <th>Harga</th>
+                        <th>Action</th> <!-- New column for remove action -->
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-    @else
-        <p>Keranjang Anda kosong.</p>
-    @endif
+                </thead>
+                <tbody>
+                    @foreach(session('cart') as $id => $details)
+                    <tr>
+                        <td><img src="{{ asset('gambar_menu/'.$details['gambar']) }}" alt="{{ $details['nama'] }}"></td>
+                        <td>{{ $details['nama'] }}</td>
+                        <td>Rp. {{ $details['harga'] }}</td>
+                        <td>
+                            <form action="{{ route('cart.remove', $id) }}" method="POST">
+                                @csrf
+                                <button type="submit">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @else
+            <p>Keranjang anda kosong!</p>
+        @endif
+    </div>
 </body>
 </html>
