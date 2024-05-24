@@ -199,11 +199,12 @@
                     <a href="/order/{{$t->id}}/status/detail" a type="button" class="btn btn-dark">Detail</a>   
                     <a href="/order/{{$t->id}}/status/feedback" a type="button" class="btn btn-dark">Feedback</a> 
 
-                @endforeach
+                
                     
                   </div>
                  </div>
-                </div>   
+                </div>
+            @endforeach   
       
 </body>
 </html>
