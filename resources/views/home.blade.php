@@ -201,10 +201,7 @@
                 @endif
                 </div>
             </li>
-            <div class="search-container">
-                <input type="text" placeholder="Search...">
-                <button type="submit">Search</button>
-            </div>
+            
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">

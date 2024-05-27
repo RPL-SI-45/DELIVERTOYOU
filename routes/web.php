@@ -151,6 +151,7 @@ Route::get('/', function () {
 #HALAMAN UTAMA
 Route::get('/home', [CardController::class, 'halamanutama']);
 Route::get('/customer/menu', [CardController::class, 'menuwarung']);
+Route::get('/customer/menu/search', [SearchFilterMenu::class, 'index'])->name('search.filter');
 
 #PROFIL
 Route::get('/profil', [ProfileController::class, 'index']);
