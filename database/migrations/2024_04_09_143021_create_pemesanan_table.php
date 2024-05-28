@@ -22,8 +22,13 @@ return new class extends Migration
             $table->string('status_pemesanan')->default('Menunggu konfirmasi');
             $table->integer('rating');
             $table->string('feedback');
+            $table->unsignedBigInteger('seller_id'); 
+            $table->string('seller');
             $table->timestamp('confirmation_at')->nullable();
+            $table->unsignedBigInteger('customer_id'); 
             $table->timestamps();
+            $table->foreign('seller_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('customer_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

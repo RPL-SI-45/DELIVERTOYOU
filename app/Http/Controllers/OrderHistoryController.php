@@ -9,7 +9,11 @@ class OrderHistoryController extends Controller
 {
     public function index(Request $request)
     {
-    $query = Pemesanan::query();
+        $user_role = Auth::user()->role;
+        if($user_role == 'seller') {
+            $query = Pemesanan::query();
+            $order = $query->where('seller_id', Auth::user()->id)->get();
+        }
 
     // Filter berdasarkan status pesanan
     if ($request->has('status')) {
@@ -25,16 +29,20 @@ class OrderHistoryController extends Controller
     if (!$request->has('status') && (!$request->has('from_date') || !$request->has('to_date'))) {
         $pemesanan = Pemesanan::orderBy('created_at', 'desc')->get();
     } else {
-        // Ambil data pesanan berdasarkan filter yang diterapkan
         $pemesanan = $query->orderBy('created_at', 'desc')->get();
     }
 
     return view('riwayatpesanan.sellerriwayat', compact('pemesanan'));
     }
-    
+
+
+    // RIWAYAT CUSTOMER
     public function custhistory()
     {
-        $pemesanan = Pemesanan::orderBy('created_at', 'desc')->get();
+        $user_role = Auth::user()->role;
+        if($user_role == 'customer') {
+            $pemesanan = Pemesanan::where('customer_id', $user->id)->orderBy('created_at', 'desc')->get();
+        }
         return view('riwayatpesanan.customerriwayat', compact('pemesanan'));
     }
 

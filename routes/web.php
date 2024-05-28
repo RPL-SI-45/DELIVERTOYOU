@@ -58,9 +58,7 @@ Route::get('/edit-profile', 'UserController@editProfile')->name('edit-profile');
 Route::put('/update-profile', [ProfileController::class, 'updateProfile'])->name('update-profile');
 
 
-
 #KERANJANG
-
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/add-to-cart/{id}', [CartController::class, 'addToCart'])->name('cart.add');
 Route::get('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
@@ -91,15 +89,11 @@ Route::get('/kategori_admin/{id}/edit',[KategoriAdminController::class,'edit']);
 Route::put('/kategori_admin/{id}',[KategoriAdminController::class,'update']);
 Route::delete('/kategori_admin/{id}',[KategoriAdminController::class,'destroy']);
 
-#PAYMENT
 #HALAMAN UTAMA
 Route::get('/customer/menu', [CardController::class, 'menuwarung']);
 Route::get('/home', [CardController::class, 'halamanutama'])->name('home');
 
-
-
-#PAYMET
-Route::get('/payment', [PaymentController::class, 'index']);
+#PAYMENT
 Route::get('/payment/{pemesananId}', [PaymentController::class, "index"]);
 Route::post('/payment/store/{pemesananId}', [PaymentController::class, 'store'])->name('payment.store');
 Route::get('/payment/qris/{pemesananId}', [PaymentController::class, "showQrisForm"])->name('payment.qris');
@@ -134,9 +128,19 @@ Route::get('seller/{id}/status/detail/3', [statusControl::class,'seller_status_d
 #KELOLA STATUS CUSTOMER
 Route::get('/order/status', [statusControl::class,'order_status']);
 Route::get('/order/{id}/status/detail', [statusControl::class,'order_status_detail']);
-#RIWAYAT PENJUAL
-Route::get('/seller/orderhistory', [OrderHistoryController::class, 'index'])->name('order.history');
 
+#RIWAYAT PENJUAL
+Route::get('/seller/history', [OrderHistoryController::class, 'index'])->name('order.history');
+
+#RIWAYAT CUSTOMER
+Route::get('/order/history', [OrderHistoryController::class, 'custhistory'])->name('cust.history');
+Route::get('/order/{id}/history/detail', [OrderHistoryController::class, 'historydetail'])->name('history.detail');
+
+
+#DASHBOARD
+Route::get('/seller/dash', [SellerDashController::class,'index']);
+Route::get('/seller/dash/3_month', [SellerDashController::class,'Month']);
+Route::get('/seller/dash/1_month', [SellerDashController::class,'index']);
     
 });
 
@@ -174,13 +178,6 @@ Route::delete('/kategori_admin/{id}',[KategoriAdminController::class,'destroy'])
 Route::get('/customer/menu', [CardController::class, 'menuwarung']);
 Route::get('/home', [CardController::class, 'halamanutama'])->name('home');
 
-#PAYMENT
-Route::get('/payment/{pemesananId}', [PaymentController::class, "index"]);
-Route::post('/payment/store/{pemesananId}', [PaymentController::class, 'store'])->name('payment.store');
-Route::get('/payment/qris/{pemesananId}', [PaymentController::class, "showQrisForm"])->name('payment.qris');
-Route::post('/payment/qris/store/{pemesananId}', [PaymentController::class, "storeQris"])->name('payment.storeQris');
-Route::get('/customer/status/{pemesananId}', [PaymentController::class, 'showStatus'])->name('customer.status');
-
 #PESANAN MASUK PENJUAL
 Route::get('/seller/order', [OrderController::class, 'sellerOrder'])->name('seller.order');
 Route::get('/seller/order/{id}/detail', [OrderController::class, 'sellerDetail'])->name('seller.detail');
@@ -209,18 +206,3 @@ Route::get('seller/{id}/status/detail/3', [statusControl::class,'seller_status_d
 #KELOLA STATUS CUSTOMER
 Route::get('/order/status', [statusControl::class,'order_status']);
 Route::get('/order/{id}/status/detail', [statusControl::class,'order_status_detail']);
-
-
-#RIWAYAT PENJUAL
-Route::get('/seller/history', [OrderHistoryController::class, 'index'])->name('order.history');
-
-#RIWAYAT CUSTOMER
-Route::get('/order/history', [OrderHistoryController::class, 'custhistory'])->name('cust.history');
-Route::get('/order/{id}/history/detail', [OrderHistoryController::class, 'historydetail'])->name('history.detail');
-
-
-#DASHBOARD
-Route::get('/seller/dash', [SellerDashController::class,'index']);
-Route::get('/seller/dash/3_month', [SellerDashController::class,'Month']);
-Route::get('/seller/dash/1_month', [SellerDashController::class,'index']);
-

@@ -33,10 +33,11 @@ class statusControl extends Controller
         return view('kelola_status.cust_status_detail', compact('pemesanan'));
     }
 
-    public function seller_status_detail($id)
+    public function seller_status_detail(Request $request)
     {
-        $pemesanan = pemesanan::all();
+        $pemesanan = pemesanan::findOrFail($request->id); 
         return view('kelola_status.seller_status_detail',compact(['pemesanan']));
+
     }
 
     public function up_to_cook(Request $request)
@@ -146,8 +147,6 @@ class statusControl extends Controller
                 'Total_harga2' => $totalAmountLastOneMonth,
             ]);
         }
-    
-
     
         return redirect('seller/status');
     }
