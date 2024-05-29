@@ -161,6 +161,10 @@
                         </tr>
                     </tbody>
                 </table>
+                <!-- Tombol Lanjut Checkout -->
+                <div class="text-right">
+                    <a href="{{ url('/pemesanan') }}" class="btn btn-success">Lanjut Checkout</a>
+                </div>
             </div>
         @else
             <div class="alert alert-warning text-center" role="alert">
