@@ -73,7 +73,17 @@ Route::get('/home', function () {
 
 #HALAMAN UTAMA
 Route::get('/home', [CardController::class, 'halamanutama']);
+Route::get('home/filter', [CardController::class, 'filterByCategory'])->name('home.filter');
 Route::get('/customer/menu', [CardController::class, 'menuwarung']);
+Route::get('/customer/menu/search', [SearchFilterMenu::class, 'index'])->name('search.filter');
+Route::get('/menuwarung', [CardController::class, 'menuwarung'])->name('menuwarung.filter');
+Route::get('/menuwarung/filter', [CardController::class, 'filterByCategory'])->name('menuwarung.filter');
+
+
+
+
+
+
 
 #PROFIL
 Route::get('/profil', [ProfileController::class, 'index']);
@@ -152,6 +162,13 @@ Route::get('/', function () {
 Route::get('/home', [CardController::class, 'halamanutama']);
 Route::get('/customer/menu', [CardController::class, 'menuwarung']);
 Route::get('/customer/menu/search', [SearchFilterMenu::class, 'index'])->name('search.filter');
+Route::get('/menuwarung', [CardController::class, 'menuwarung'])->name('menuwarung.filter');
+Route::get('/menuwarung/filter', [CardController::class, 'filterByCategory'])->name('menuwarung.filter');
+
+
+
+
+
 
 #PROFIL
 Route::get('/profil', [ProfileController::class, 'index']);

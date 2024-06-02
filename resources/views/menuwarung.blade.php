@@ -3,7 +3,6 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href='https://fonts.googleapis.com/css?family=Biryani' rel='stylesheet'>
     <title>DeliverToYou</title>
@@ -83,6 +82,12 @@
             margin: 0;
         }
 
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
         .card-container {
             display: flex;
             flex-direction: row;
@@ -144,12 +149,23 @@
     </div>
 </div>
 
-
 <div class="content-container">
     <img src="/img_example/makanan.png" class="content-img" alt="Content Image">
     <div class="content-text">
         <p class="about">NAMA WARUNG, ALAMAT</p></br>
     </div>
+</div>
+
+<div class="dropdownfilter">
+    <h3> Filter </h3>
+    <form action="{{ route('menuwarung.filter') }}" method="GET">
+        <select name="nama_kategori" class="form-control" onchange="this.form.submit()">
+            <option value="">Select Category</option>
+            @foreach($Kategori_admin as $key => $value)
+                <option value="{{ $value }}" {{ request()->nama_kategori == $key ? 'selected' : '' }}>{{ $value }}</option>
+            @endforeach
+        </select>
+    </form>
 </div>
 
 <div class="card-container">
@@ -162,6 +178,8 @@
     </div>
     @endforeach
 </div>
+
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
