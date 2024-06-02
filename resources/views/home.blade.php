@@ -229,10 +229,20 @@
 </div>
 
 <div class="content-container">
-    <img src="img_example/makanan.png" class="content-img" alt="Content Image">
+    <img src="/img_example/makanan.png" class="content-img" alt="Content Image">
 </div>
 
-
+<div class="dropdownfilter">
+    <h3> Filter </h3>
+    <form action="{{ route('home.filter') }}" method="GET">
+        <select name="nama_kategori" class="form-control" onchange="this.form.submit()">
+            <option value="">Select Category</option>
+            @foreach($Kategori_admin as $key => $value)
+                <option value="{{ $value }}" {{ request()->nama_kategori == $key ? 'selected' : '' }}>{{ $value }}</option>
+            @endforeach
+        </select>
+    </form>
+</div>
 
 <div class="card-container">
     @foreach($menu_warungs as $t)

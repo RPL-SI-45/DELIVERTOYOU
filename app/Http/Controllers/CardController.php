@@ -22,6 +22,22 @@ class CardController extends Controller
         return view('home', compact(['menu_warungs', 'Kategori_admin']));
     }
 
+    public function filterAllByCategory(Request $request) {
+        $Kategori_admin = Kategori_admin::pluck('jenis_kategori', 'id')->toArray();
+        
+        // // Ambil ID kategori yang dipilih
+        $selectedCategoryId = $request->nama_kategori;
+    
+        // Filter menu_warungs berdasarkan kategori
+        $menu_warungs = menu_warungs::where('kategori', $selectedCategoryId)->get();
+
+        // // Debugging
+        // dd($menu_warungs);
+    
+        return view('home', compact(['menu_warungs', 'Kategori_admin']));
+        // return view('home', compact(['menu_warungs', 'Kategori_admin']));
+    }
+
     public function filterByCategory(Request $request) {
         $Kategori_admin = Kategori_admin::pluck('jenis_kategori', 'id')->toArray();
         
