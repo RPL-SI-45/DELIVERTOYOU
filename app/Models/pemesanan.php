@@ -4,45 +4,26 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\OrderHistoryController;
-
 
 class Pemesanan extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['user_id', 'seller_id', 'nama_pelanggan', 'alamat', 'status_pemesanan', 'rating', 'feedback', 'confirmation_at'];
     protected $table = 'pemesanan';
-    protected $guarded =[];
-    protected $fillable = [
-        'nama_pelanggan',
-        'status_pemesanan',
-        'total_harga',
-        'confirmation_at',
-        'menu',
-        'quantity',
-        'total_harga',
-        'alamat',
-        'seller_id',
-        'rating',
-        'feedback',
-    ];
-    public $timestamps = false;
-
-
-    public function payment()
+    
+    public function user()
     {
-        return $this->hasOne(Payment::class);
-    }
-  
-    public function pesananmasuk() { 
-        return $this->belongsTo(PesananMasuk::class, 'pesananmasuk_id'); 
+        return $this->belongsTo(User::class);
     }
 
     public function seller()
     {
-        return $this->belongsTo(User::class, 'seller_id')->where('role', 'seller');
+        return $this->belongsTo(User::class, 'seller_id');
     }
 
+    public function items()
+    {
+        return $this->hasMany(PemesananItem::class);
+    }
 }
-

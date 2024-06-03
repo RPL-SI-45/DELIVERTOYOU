@@ -16,6 +16,12 @@ class menu_warungs extends Model
         'nama',
         'harga',
         'deskripsi',
-        'gambar',  ];
+        'gambar',  
+        'seller_id', ];
     protected $guarded= ['id'];
+    
+    public function seller()
+    {
+        return $this->belongsTo(User::class, 'seller_id');
+    }
 }
