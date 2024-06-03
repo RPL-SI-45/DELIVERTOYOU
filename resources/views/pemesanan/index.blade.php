@@ -145,5 +145,18 @@
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script>
+    const btnPembayaran = document.getElementById('btnPembayaran');
+    const alamatInput = document.getElementById('alamat');
+
+    btnPembayaran.addEventListener('click', function() {
+      const alamatValue = alamatInput.value.trim();
+      if (alamatValue === '') {
+        alert('Isi Alamat Terlebih Dahulu');
+        return false; // Mencegah pengiriman form
+      }
+      window.location.href = '/payment/{id}';
+    });
+</script>
 </body>
 </html>
