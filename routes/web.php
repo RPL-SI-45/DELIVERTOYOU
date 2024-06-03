@@ -68,6 +68,7 @@ Route::middleware(['auth', 'redirectIfNotCustomerOrSeller'])->group(function () 
     Route::get('/pembayaran', [PemesananController::class, 'store']);
     Route::resource('pemesanan', PemesananController::class);
     Route::post('/pemesanan', [PemesananController::class, 'store'])->name('pemesanan.store');
+    Route::patch('/pemesanan/update-quantity/{id}', [PemesananController::class, 'updateQuantity'])->name('pemesanan.updateQuantity');
 
     #PROFIL
     Route::get('/profil', [ProfileController::class, 'index']);

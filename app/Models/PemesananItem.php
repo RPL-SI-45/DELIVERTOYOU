@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,6 +14,7 @@ class PemesananItem extends Model
         'menu_id',
         'harga',
         'quantity',
+        'total_harga',
     ];
 
     public function pemesanan()
@@ -23,5 +25,11 @@ class PemesananItem extends Model
     public function menu()
     {
         return $this->belongsTo(menu_warungs::class, 'menu_id');
+    }
+
+    public function save(array $options = [])
+    {
+        $this->total_harga = $this->harga * $this->quantity;
+        parent::save($options);
     }
 }

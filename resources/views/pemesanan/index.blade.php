@@ -105,16 +105,26 @@
                   <td>{{ $item->menu->nama }}</td>
                   <td>{{ number_format($item->harga, 0, ',', '.') }}</td>
                   <td class="btn-group">
-                    <button class="btn-minus" data-id="{{ $item->id }}">-</button>
+                    <form action="{{ route('pemesanan.updateQuantity', $item->id) }}" method="POST" style="display: inline;">
+                      @csrf
+                      @method('patch')
+                      <input type="hidden" name="action" value="decrease">
+                      <button type="submit" class="btn-minus">-</button>
+                    </form>
                     <span id="quantity_{{ $item->id }}" data-harga="{{ $item->harga }}">{{ $item->quantity }}</span>
-                    <button class="btn-plus" data-id="{{ $item->id }}">+</button>
+                    <form action="{{ route('pemesanan.updateQuantity', $item->id) }}" method="POST" style="display: inline;">
+                      @csrf
+                      @method('patch')
+                      <input type="hidden" name="action" value="increase">
+                      <button type="submit" class="btn-plus">+</button>
+                    </form>
                   </td>
                   <td id="total_price_{{ $item->id }}">{{ number_format($item->harga * $item->quantity, 0, ',', '.') }}</td>
                   <td>
                       <form action="{{ route('pemesanan.destroyItem', $item->id) }}" method="POST">
                           @csrf
                           @method('delete')
-                          <button type="submit" class="btn-delete" data-id="{{ $item->id }}">Hapus</button>
+                          <button type="submit" class="btn-delete">Hapus</button>
                       </form>
                   </td>
                 </tr>
@@ -124,7 +134,7 @@
         </table>
       </div>
       <div class="form-box">
-        <h4 id="total_harga">Total Harga : 0</h4>
+        <h4 id="total_harga">Total Harga : {{ number_format($pemesanan->sum(fn($ps) => $ps->items->sum(fn($item) => $item->harga * $item->quantity)), 0, ',', '.') }}</h4>
       </div>
       <label for="alamat">Alamat Penerima:</label>
       <div class="table-responsive">
@@ -133,69 +143,6 @@
       <button id="btnPembayaran">Lanjut Ke Pembayaran</button>
     </div>
   </div>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      var btnMinus = document.querySelectorAll('.btn-minus');
-      var btnPlus = document.querySelectorAll('.btn-plus');
-      updateTotalHarga();
-
-      btnMinus.forEach(function(button) {
-        button.addEventListener('click', function() {
-          var id = this.getAttribute('data-id');
-          var quantityElement = document.getElementById('quantity_' + id);
-          var quantity = parseInt(quantityElement.innerText);
-          var harga = parseFloat(quantityElement.getAttribute('data-harga'));
-          if (quantity > 0) {
-            quantity -= 1;
-            quantityElement.innerText = quantity;
-            updateTotalPrice(id, quantity, harga);
-          }
-        });
-      });
-
-      btnPlus.forEach(function(button) {
-        button.addEventListener('click', function() {
-          var id = this.getAttribute('data-id');
-          var quantityElement = document.getElementById('quantity_' + id);
-          var quantity = parseInt(quantityElement.innerText);
-          var harga = parseFloat(quantityElement.getAttribute('data-harga'));
-          if (quantity < 99) {
-            quantity += 1;
-            quantityElement.innerText = quantity;
-            updateTotalPrice(id, quantity, harga);
-          }
-        });
-      });
-
-      function updateTotalPrice(id, quantity, harga) {
-        var totalHarga = harga * quantity;
-        document.querySelector('#total_price_' + id).innerText = totalHarga.toLocaleString('id-ID');
-        updateTotalHarga();
-      }
-
-      function updateTotalHarga() {
-        var totalHarga = 0;
-        var totalElements = document.querySelectorAll('[id^="total_price_"]');
-        totalElements.forEach(function(element) {
-          totalHarga += parseFloat(element.innerText.replace(/\./g, '').replace(',', '.'));
-        });
-        document.getElementById('total_harga').innerText = 'Total Harga : ' + totalHarga.toLocaleString('id-ID');
-      }
-    });
-
-    const btnPembayaran = document.getElementById('btnPembayaran');
-    const alamatInput = document.getElementById('alamat');
-
-    btnPembayaran.addEventListener('click', function() {
-      const alamatValue = alamatInput.value.trim();
-      if (alamatValue === '') {
-        alert('Isi Alamat Terlebih Dahulu');
-        return false; // Mencegah pengiriman form
-      }
-      window.location.href = '/payment/{id}';
-    });
-  </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>

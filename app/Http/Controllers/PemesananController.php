@@ -25,12 +25,9 @@ class PemesananController extends Controller
             return redirect()->back()->with('status', 'Keranjang Anda kosong.');
         }
     
-
-    
         $pemesanan = Pemesanan::create([
             'user_id' => $user->id,
             'nama_pelanggan' => $user->name,
-
         ]);
     
         foreach ($cartItems as $item) {
@@ -39,15 +36,28 @@ class PemesananController extends Controller
                 'menu_id' => $item->menu_id,
                 'harga' => $item->menu->harga,
                 'quantity' => $item->quantity,
+                'total_harga' => $item->menu->harga * $item->quantity,
             ]);
         }
     
-        
-    
         return redirect()->route('pemesanan.index')->with('status', 'Pemesanan berhasil dibuat.');
     }
-    
 
+    public function updateQuantity(Request $request, $id)
+    {
+        $item = PemesananItem::findOrFail($id);
+
+        if ($request->action == 'increase') {
+            $item->quantity += 1;
+        } elseif ($request->action == 'decrease' && $item->quantity > 0) {
+            $item->quantity -= 1;
+        }
+
+        $item->total_harga = $item->harga * $item->quantity;
+        $item->save();
+
+        return redirect()->back()->with('status', 'Quantity updated.');
+    }
 
     public function destroyItem($id)
     {

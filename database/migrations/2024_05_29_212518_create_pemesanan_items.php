@@ -14,7 +14,7 @@ return new class extends Migration
             $table->unsignedBigInteger('menu_id');
             $table->decimal('harga', 10, 2);
             $table->integer('quantity');
-            $table->decimal('total_harga', 10, 2);
+            $table->decimal('total_harga', 10, 2)->default(0); // Set default value
             $table->timestamps();
 
             // Foreign key constraints
