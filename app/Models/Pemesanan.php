@@ -13,7 +13,7 @@ class Pemesanan extends Model
 {
     public $table = "pemesanan";
     use HasFactory;
-    protected $table = 'pemesanan';
+    
     
 
 
@@ -31,6 +31,7 @@ class Pemesanan extends Model
     }
   
     public function payment()
+    {
         return $this->hasOne(Payment::class);
     }
   
