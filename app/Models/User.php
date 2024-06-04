@@ -23,6 +23,8 @@ class User extends Authenticatable
         'password',
         'nomor_telepon',
         'alamat',
+        'nama_toko',
+        'alamat_toko',
         'tanggal_lahir',
         'role',
         

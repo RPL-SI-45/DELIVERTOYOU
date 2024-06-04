@@ -156,9 +156,11 @@
             <hr class="my-4">
             <p>Gunakan alat dan fitur yang tersedia untuk meningkatkan penjualan Anda.</p>
             <a class="btn btn-dark" href="/seller/status" role="button">Lihat Pesanan</a>
-            <div class="text-center my-5">
+            <!-- <div class="text-center my-5"> -->
             <a href="/seller/menu/input" class="btn btn-dark">Tambah Makanan & Minuman Baru</a>
             <a href="/seller/menu" class="btn btn-dark">Kelola Menu</a>
+            
+            <a href="/seller/{{ auth()->user()->id }}/edit" class="btn btn-dark">Edit Profil Toko</a>
             </div>
         </div>
     </div>

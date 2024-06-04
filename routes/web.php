@@ -65,9 +65,10 @@ Route::middleware(['auth', 'redirectIfNotCustomerOrSeller'])->group(function () 
     Route::resource('pemesanan', PemesananController::class);
     Route::post('/pemesanan', [PemesananController::class, 'store'])->name('pemesanan.store');
     Route::patch('/pemesanan/update-quantity/{id}', [PemesananController::class, 'updateQuantity'])->name('pemesanan.updateQuantity');
-
     #PROFIL
     Route::get('/profil', [ProfileController::class, 'index']);
+    Route::get('/seller/{id}/edit', [SellerDashController::class, 'EditProfileToko']);
+    Route::put('/seller/{id}', [SellerDashController::class, 'UpdateProfileToko']);  
     #KATEGORI ADMIN
     Route::get('/kategori_admin',[KategoriAdminController::class,'index']);
     Route::get('/kategori_admin/create',[KategoriAdminController::class,'create']);
@@ -79,6 +80,9 @@ Route::middleware(['auth', 'redirectIfNotCustomerOrSeller'])->group(function () 
     Route::get('/customer/menu', [CardController::class, 'menuwarung']);
     Route::get('/home', [CardController::class, 'halamanutama'])->name('home');
     Route::get('/customer/menu/search', [SearchFilterMenu::class, 'index'])->name('search.filter');
+    Route::get('home/filter', [CardController::class, 'filterAllByCategory'])->name('home.filter');
+    Route::get('/menuwarung', [CardController::class, 'menuwarung'])->name('menuwarung.filter');
+    Route::get('/menuwarung/filter', [CardController::class, 'filterByCategory'])->name('menuwarung.filter');
     #PAYMENT
     Route::get('/payment/{pemesananId}', [PaymentController::class, "index"])->name('payment.index');
     Route::post('/payment/store/{pemesananId}', [PaymentController::class, 'store'])->name('payment.store');
@@ -120,4 +124,5 @@ Route::middleware(['auth', 'redirectIfNotCustomerOrSeller'])->group(function () 
     Route::get('/seller/dash/1_month', [SellerDashController::class,'index']);
 
 });
+
 
