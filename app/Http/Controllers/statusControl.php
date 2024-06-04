@@ -43,11 +43,11 @@ class statusControl extends Controller
 
     public function up_to_cook(Request $request)
     {
-        // Validasi input request
+
         $request->validate([
             'id' => 'required|integer|exists:pemesanan,id',
         ]);
-    
+
         $id = $request->input('id');
         $diproses = 'Sedang Dimasak oleh Ahlinya';
     

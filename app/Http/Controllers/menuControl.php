@@ -7,6 +7,7 @@ use App\Models\menu_warungs;
 use App\Models\Kategori_admin;
 use Illuminate\Support\Facades\File;
 use Form;
+use Illuminate\Support\Facades\Auth;
 
 class menuControl extends Controller
 {
@@ -52,6 +53,7 @@ class menuControl extends Controller
             'harga' => $request->harga,
             'deskripsi' => $request->deskripsi,
             'gambar' => $filename,
+            'seller_id' => Auth::id(),
         ]);
         
 

@@ -152,7 +152,6 @@
             background-color: #218838;
         }
 
-
         .card-text p {
             margin: 0;
             font-size: 16px;
@@ -178,7 +177,7 @@
             border-radius: 5px;
             z-index: 1000;
         }
-            </style>
+    </style>
 </head>
 <body>
 <div class="navbar navbar-default navbar-static-top">
@@ -201,10 +200,6 @@
                 @endif
                 </div>
             </li>
-            <div class="search-container">
-                <input type="text" placeholder="Search...">
-                <button type="submit">Search</button>
-            </div>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -213,6 +208,7 @@
                 <li><a href="profil">PROFILE</a></li>
                 <li><a href="categories">CATEGORIES</a></li>
                 <li><a href="{{ route('cart.index') }}">KERANJANG</a></li>
+
                 <li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
@@ -232,7 +228,6 @@
     <img src="img_example/makanan.png" class="content-img" alt="Content Image">
 </div>
 
-
 <div class="card-container">
     @foreach($menu_warungs as $t)
     <div class="card">
@@ -243,7 +238,7 @@
             <p>{{ $t->deskripsi}}</p>
             <form class="add-to-cart-form" data-id="{{ $t->id }}" action="{{ route('cart.add', $t->id) }}" method="POST">
                 @csrf
-                <button type="button" class="add-to-cart-btn">Tambah Keranjang</button>
+                <button type="submit" class="add-to-cart-btn">Tambah Keranjang</button>
             </form>
         </div>
     </div>
@@ -254,10 +249,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<head>
-    <!-- jQuery CDN -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
 <script>
     $(document).ready(function() {
         $('#search-button').on('click', function(e) {
@@ -272,33 +263,13 @@
                 }
             });
         });
+
+        var status = "{{ session('status') }}";
+        if (status) {
+            $('#notification').text(status).css('background-color', '#4CAF50').fadeIn().delay(2000).fadeOut();
+        }
     });
 </script>
 
-<script>
-    $(document).ready(function() {
-        $('.add-to-cart-btn').click(function() {
-            var form = $(this).closest('form');
-            var formData = form.serialize();
-            var actionUrl = form.attr('action');
-
-            $.ajax({
-                type: 'POST',
-                url: actionUrl,
-                data: formData,
-                success: function(response) {
-                    if (response.status === 'exists') {
-                        $('#notification').text('Menu sudah ada').css('background-color', '#f44336').fadeIn().delay(2000).fadeOut();
-                    } else if (response.status === 'added') {
-                        $('#notification').text('Berhasil Ditambahkan').css('background-color', '#4CAF50').fadeIn().delay(2000).fadeOut();
-                    }
-                },
-                error: function(xhr, status, error) {
-                    alert('Terjadi kesalahan, coba lagi.');
-                }
-            });
-        });
-    });
-</script>
 </body>
 </html>
