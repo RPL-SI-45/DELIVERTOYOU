@@ -154,7 +154,6 @@
             background-color: #218838;
         }
 
-
         .card-text p {
             margin: 0;
             font-size: 16px;
@@ -180,7 +179,7 @@
             border-radius: 5px;
             z-index: 1000;
         }
-            </style>
+    </style>
 </head>
 <body>
 <div class="navbar navbar-default navbar-static-top">
@@ -203,7 +202,7 @@
                 @endif
                 </div>
             </li>
-            
+
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -212,6 +211,7 @@
                 <li><a href="profil">PROFILE</a></li>
                 <li><a href="categories">CATEGORIES</a></li>
                 <li><a href="{{ route('cart.index') }}">KERANJANG</a></li>
+
                 <li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
@@ -232,6 +232,7 @@
     <img src="/img_example/makanan.png" class="content-img" alt="Content Image">
 </div>
 
+
 <div class="dropdownfilter">
     <h3> Filter </h3>
     <form action="{{ route('home.filter') }}" method="GET">
@@ -244,6 +245,7 @@
     </form>
 </div>
 
+
 <div class="card-container">
     @foreach($menu_warungs as $t)
     <div class="card">
@@ -254,7 +256,7 @@
             <p>{{ $t->deskripsi}}</p>
             <form class="add-to-cart-form" data-id="{{ $t->id }}" action="{{ route('cart.add', $t->id) }}" method="POST">
                 @csrf
-                <button type="button" class="add-to-cart-btn">Tambah Keranjang</button>
+                <button type="submit" class="add-to-cart-btn">Tambah Keranjang</button>
             </form>
         </div>
     </div>
@@ -282,9 +284,11 @@
                 }
             });
         });
-    });
-</script>
 
+        var status = "{{ session('status') }}";
+        if (status) {
+            $('#notification').text(status).css('background-color', '#4CAF50').fadeIn().delay(2000).fadeOut();
+        }
 
 
 <script>
@@ -310,7 +314,9 @@
                 }
             });
         });
+
     });
 </script>
+
 </body>
 </html>
