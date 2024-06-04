@@ -18,6 +18,7 @@ class menu_warungs extends Model
         'deskripsi',
         'gambar',  
         'seller_id', ];
+        
     protected $guarded= ['id'];
     
     public function seller()

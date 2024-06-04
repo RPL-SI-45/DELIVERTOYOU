@@ -53,7 +53,7 @@ class menuControl extends Controller
             'harga' => $request->harga,
             'deskripsi' => $request->deskripsi,
             'gambar' => $filename,
-            'seller_id' => Auth::id(),
+            'seller_id' => Auth::id()->role,
         ]);
         
 
