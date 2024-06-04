@@ -71,7 +71,7 @@
             </button>
             <a href="#" class="navbar-logo"><img src="/img_example/logo.png" alt="logo"></a>
             <div class="search-container">
-                <form action="{{ route('search.filter') }}" method="GET">
+                <form action="" method="GET">
                     <input type="text" name="search" placeholder="Search..." value="{{ request()->search }}">
                     <button type="submit">Search</button>
                 </form>

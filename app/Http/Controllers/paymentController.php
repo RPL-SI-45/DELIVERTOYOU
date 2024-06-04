@@ -19,6 +19,11 @@ class PaymentController extends Controller
         $pemesanan = Pemesanan::findOrFail($pemesananId);
         $total_bayar = $pemesanan->total_harga;
 
+        $user = Auth::user();
+
+        pemesanan::create([
+            'customer_id' => $user->id,]);
+
         if ($request->metode === 'qris') {
             return redirect()->route('payment.qris', ['pemesananId' => $pemesananId]);
         } else {
@@ -65,7 +70,7 @@ class PaymentController extends Controller
         ]);
 
         // Redirect ke halaman konfirmasi pembayaran diterima
-        return redirect()->route('customer.status', $pemesananId);
+        return redirect()->route('/order/status', $pemesananId);
 
     }
     public function showStatus($pemesananId)

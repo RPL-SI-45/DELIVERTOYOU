@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\menu_warungs;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -11,41 +13,41 @@ class CartController extends Controller
     {
         $menu_item = menu_warungs::find($id);
 
-        $cart = session()->get('cart', []);
-
-        if (isset($cart[$id])) {
-            // Kembalikan respon jika item sudah ada di keranjang
-            return response()->json(['status' => 'exists']);
-        } else {
-            // Tambahkan item ke keranjang jika belum ada
-            $cart[$id] = [
-                "nama" => $menu_item->nama,
-                "harga" => $menu_item->harga,
-                "quantity" => 1,
-                "gambar" => $menu_item->gambar
-            ];
-
-            session()->put('cart', $cart);
-            return response()->json(['status' => 'added']);
+        if (!$menu_item) {
+            return redirect()->back()->with('status', 'Menu tidak ditemukan.');
         }
+
+        $user = Auth::user();
+        $existingCartItem = Cart::where('user_id', $user->id)->where('menu_id', $id)->first();
+
+        if ($existingCartItem) {
+            return redirect()->back()->with('status', 'Menu sudah ada di keranjang.');
+        }
+
+        Cart::create([
+            'user_id' => $user->id,
+            'menu_id' => $id,
+            'quantity' => 1,
+        ]);
+
+        return redirect()->back()->with('status', 'Berhasil Ditambahkan ke Keranjang.');
     }
 
     public function index()
     {
-        $cart = session()->get('cart', []);
+        $cart = Cart::where('user_id', Auth::id())->with('menu')->get();
         return view('cart.index', compact('cart'));
     }
 
     public function removeFromCart(Request $request, $id)
     {
-        $cart = session()->get('cart', []);
+        $cartItem = Cart::where('user_id', Auth::id())->where('id', $id)->first();
 
-        if(isset($cart[$id])) {
-            unset($cart[$id]);
-            session()->put('cart', $cart);
-            session()->flash('success', 'Item has been removed from cart!');
+        if ($cartItem) {
+            $cartItem->delete();
+            return redirect()->route('cart.index')->with('status', 'Item has been removed from cart!');
         }
 
-        return redirect()->route('cart.index');
+        return redirect()->route('cart.index')->with('status', 'Item not found in cart!');
     }
 }

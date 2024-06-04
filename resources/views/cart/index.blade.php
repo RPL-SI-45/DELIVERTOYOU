@@ -127,27 +127,27 @@
     </div>
     <div class="container my-5">
         <h1 class="text-center mb-4">Keranjang</h1>
-        @if(session('cart'))
+        @if($cart->count())
             <div class="table-responsive">
                 <table class="table table-bordered table-hover">
                     <thead class="thead-light">
                         <tr>
                             <th>Gambar</th>
-                            <th>Nama</th>
+                            <th>Menu</th>
                             <th>Harga</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach(session('cart') as $id => $details)
+                        @foreach($cart as $item)
                         <tr>
-                            <td><img src="{{ asset('gambar_menu/'.$details['gambar']) }}" alt="{{ $details['nama'] }}" class="img-fluid"></td>
-                            <td>{{ $details['nama'] }}</td>
-                            <td>Rp. {{ number_format($details['harga'], 0, ',', '.') }}</td>
+                            <td><img src="{{ asset('gambar_menu/'.$item->menu->gambar) }}" alt="{{ $item->menu->nama }}" class="img-fluid"></td>
+                            <td>{{ $item->menu->nama }}</td>
+                            <td>Rp. {{ number_format($item->menu->harga, 0, ',', '.') }}</td>
                             <td>
-                                <form action="{{ route('cart.remove', $id) }}" method="POST" class="d-inline">
+                                <form action="{{ route('cart.remove', $item->id) }}" method="POST" class="d-inline">
                                     @csrf
-                                    <button type="submit" class="btn-remove">Hapus</button>
+                                    <button type="submit" class="btn btn-danger btn-remove">Hapus</button>
                                 </form>
                             </td>
                         </tr>
@@ -161,6 +161,12 @@
                         </tr>
                     </tbody>
                 </table>
+                <!-- Checkout Form -->
+                <form action="{{ route('pemesanan.store') }}" method="POST">
+                    @csrf
+                    <button type="submit">Pesan</button>
+                </form>
+
             </div>
         @else
             <div class="alert alert-warning text-center" role="alert">

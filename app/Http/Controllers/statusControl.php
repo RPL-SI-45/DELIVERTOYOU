@@ -8,20 +8,26 @@ use App\Models\SellerDash1;
 use App\Models\SellerDash2;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 
 
 class statusControl extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function seller_status()
-    {
+    {   
         $pemesanan = pemesanan::all();
         return view('kelola_status.seller_status',compact(['pemesanan']));
     }
 
     public function order_status(Request $request)
     {
+        $orders = Auth::user()->orders;
         $pemesanan = pemesanan::all();
         return view('kelola_status.cust_status',compact(['pemesanan']));
     }
