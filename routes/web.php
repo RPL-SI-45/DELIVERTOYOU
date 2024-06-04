@@ -79,8 +79,7 @@ Route::middleware(['auth', 'redirectIfNotCustomerOrSeller'])->group(function () 
     Route::get('/home', [CardController::class, 'halamanutama'])->name('home');
     Route::get('/customer/menu/search', [SearchFilterMenu::class, 'index'])->name('search.filter');
     #PAYMENT
-    Route::get('/payment', [PaymentController::class, 'index']);
-    Route::get('/payment/{pemesananId}', [PaymentController::class, "index"]);
+    Route::get('/payment/{pemesananId}', [PaymentController::class, "index"])->name('payment.index');
     Route::post('/payment/store/{pemesananId}', [PaymentController::class, 'store'])->name('payment.store');
     Route::get('/payment/qris/{pemesananId}', [PaymentController::class, "showQrisForm"])->name('payment.qris');
     Route::post('/payment/qris/store/{pemesananId}', [PaymentController::class, "storeQris"])->name('payment.storeQris');

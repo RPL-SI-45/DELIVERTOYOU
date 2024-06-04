@@ -42,7 +42,9 @@ class statusControl extends Controller
 
     public function up_to_cook(Request $request)
     {
-    
+        $request->validate([
+            'id' => 'required|integer|exists:pemesanan,id',
+        ]);
         $id = $request->input('id');
         $diproses = $request->input('status_pemesanan');
         

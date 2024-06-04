@@ -140,7 +140,10 @@
       <div class="table-responsive">
         <textarea id="alamat" name="alamat" rows="4" cols="50"></textarea>
       </div>
-      <button id="btnPembayaran">Lanjut Ke Pembayaran</button>
+      <form action="{{ route('payment.index', ['pemesananId' => $pemesanan->first()->id]) }}" method="GET">
+          @csrf
+          <button type="submit" id="btnPembayaran">Lanjut Ke Pembayaran</button>
+      </form>
     </div>
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

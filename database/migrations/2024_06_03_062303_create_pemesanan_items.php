@@ -15,6 +15,7 @@ return new class extends Migration
             $table->decimal('harga', 10, 2);
             $table->integer('quantity');
             $table->decimal('total_harga', 10, 2)->default(0);
+            $table->decimal('total_semua_menu', 10, 2)->default(0);
             $table->timestamps();
 
             // Foreign key constraints
