@@ -173,6 +173,8 @@ Route::get('/menuwarung/filter', [CardController::class, 'filterByCategory'])->n
 
 #PROFIL
 Route::get('/profil', [ProfileController::class, 'index']);
+Route::get('/seller/{id}/edit', [SellerDashController::class, 'EditProfileToko']);
+Route::put('/seller/{id}', [SellerDashController::class, 'UpdateProfileToko']);
 
 #KATEGORI ADMIN
 Route::get('/kategori_admin',[KategoriAdminController::class,'index']);

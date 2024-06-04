@@ -52,6 +52,6 @@ class RegisterController extends Controller
         // Optionally, you can log the user in automatically after registration
         // auth()->login($user);
 
-        return redirect()->route('home')->with('success', 'Registration successful. Please log in.');
+        return redirect()->route('/home')->with('success', 'Registration successful. Please log in.');
     }
 }

@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('alamat');
             $table->string('role')->default('customer');
             $table->string('password');
+            $table->string('nama_toko')->nullable();
+            $table->string('alamat_toko')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
