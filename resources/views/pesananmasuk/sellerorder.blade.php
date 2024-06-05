@@ -49,31 +49,39 @@
                         <th>Nama Pelanggan</th>
                         <th>Order</th>
                         <th>Quantity</th>
-                        <th>Total Harga</th>
+                        <th>Total Pesanan</th>
                         <th>Alamat</th>
                         <th>Status Pesanan</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($pemesanan as $p)
-                        @foreach($p->items as $item)
+                    @foreach($pemesanan as $orderGroup)
+                        @foreach($orderGroup as $order)
                             <tr>
-                                <td>{{$p->id}}</td>
-                                <td>{{$p->nama_pelanggan}}</td>
-                                <td>{{$item->menu->nama}}</td>
-                                <td>{{$item->quantity}}</td>
-                                <td>{{$item->total_semua_menu}}</td>
-                                <td>{{$p->alamat}}</td>
-                                <td>
-                                    @if($p->status_pemesanan == 'Pesanan Ditolak')
+                                <td rowspan="{{ count($order->items) }}">{{ $order->id }}</td>
+                                <td rowspan="{{ count($order->items) }}">{{ $order->nama_pelanggan }}</td>
+                                <td rowspan="{{ count($order->items) }}">
+                                    @foreach($order->items as $item)
+                                        <div>{{ $item->menu->nama }}</div>
+                                    @endforeach
+                                </td>
+                                <td rowspan="{{ count($order->items) }}">
+                                    @foreach($order->items as $item)
+                                        <div>{{ $item->quantity }}</div>
+                                    @endforeach
+                                </td>
+                                <td rowspan="{{ count($order->items) }}">{{ $order->items->sum('total_semua_menu') }}</td>
+                                <td rowspan="{{ count($order->items) }}">{{ $order->alamat }}</td>
+                                <td rowspan="{{ count($order->items) }}">
+                                    @if($order->status_pemesanan == 'Pesanan Ditolak')
                                         <span class="badge bg-danger">Pesanan ditolak</span>
                                     @else
-                                        <a href="/seller/status/{{ $p->id }}/update" class="btn btn-primary btn-sm">Konfirmasi Pesanan</a>
+                                        <a href="{{ route('seller_status_update', ['id' => $order->id]) }}" class="btn btn-primary btn-sm">Konfirmasi Pesanan</a>
                                     @endif
                                 </td>
-                                <td>
-                                    <a href="{{route('seller.detail', ['id' => $p->id])}}" class="btn btn-primary btn-sm">Detail</a>
+                                <td rowspan="{{ count($order->items) }}">
+                                    <a href="{{ route('seller.detail', ['id' => $order->id]) }}" class="btn btn-primary btn-sm">Detail</a>
                                 </td>
                             </tr>
                         @endforeach
