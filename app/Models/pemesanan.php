@@ -10,9 +10,16 @@ class Pemesanan extends Model
     public $table = "pemesanan";
     use HasFactory;
 
+
     protected $fillable = ['user_id', 'seller_id', 'nama_pelanggan', 'alamat', 'status_pemesanan', 'rating', 'feedback', 'confirmation_at'];
     
     public function user()
+
+    protected $guarded =[];
+
+
+    public function payment()
+
     {
         return $this->belongsTo(User::class);
     }

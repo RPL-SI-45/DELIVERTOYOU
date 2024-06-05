@@ -12,6 +12,7 @@ use App\Http\Controllers\OrderHistoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\SellerDashController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\SearchFilterMenu;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\HomeController;
@@ -119,3 +120,4 @@ Route::middleware(['auth', 'redirectIfNotCustomerOrSeller'])->group(function () 
     Route::get('/seller/dash/1_month', [SellerDashController::class,'index']);
 
 });
+

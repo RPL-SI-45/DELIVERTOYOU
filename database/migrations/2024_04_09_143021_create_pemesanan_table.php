@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('nama_pelanggan');
             $table->string('alamat')->nullable();
             $table->string('status_pemesanan')->default('Menunggu konfirmasi');
-            $table->integer('rating')->nullable();
-            $table->string('feedback')->nullable();
+            $table->string('rating')->default('Customer belum memberikan rating')->nullable();
+            $table->string('feedback')->default('Customer belum memberikan feedback')->nullable();
             $table->timestamp('confirmation_at')->nullable();
             $table->timestamps();
         });
