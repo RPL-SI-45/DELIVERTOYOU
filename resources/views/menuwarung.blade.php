@@ -173,7 +173,9 @@
 <div class="content-container">
     <img src="/img_example/makanan.png" class="content-img" alt="Content Image">
     <div class="content-text">
-        <p class="about">{{auth()->user()->nama_toko}}, {{auth()->user()->alamat_toko}}</p></br>
+        @foreach($nama_toko as $toko)
+        <p class="about">{{$toko->nama_toko}}, {{$toko->alamat_toko}}</p></br>
+        @endforeach
     </div>
 </div>
 

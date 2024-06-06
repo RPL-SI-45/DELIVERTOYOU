@@ -10,7 +10,6 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderHistoryController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\SellerDashController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\SearchFilterMenu;
@@ -77,7 +76,7 @@ Route::middleware(['auth', 'redirectIfNotCustomerOrSeller'])->group(function () 
     Route::put('/kategori_admin/{id}',[KategoriAdminController::class,'update']);
     Route::delete('/kategori_admin/{id}',[KategoriAdminController::class,'destroy']);
     #HALAMAN UTAMA
-    Route::get('/customer/menu', [CardController::class, 'menuwarung']);
+    Route::get('/customer/{id}/menu', [CardController::class, 'menuwarung']);
     Route::get('/home', [CardController::class, 'halamanutama'])->name('home');
     Route::get('/customer/menu/search', [SearchFilterMenu::class, 'index'])->name('search.filter');
     Route::get('home/filter', [CardController::class, 'filterAllByCategory'])->name('home.filter');
