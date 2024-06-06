@@ -16,7 +16,8 @@ class PemesananItem extends Model
         'quantity',
         'total_harga',
         'total_semua_menu',
-        'user_id'
+        'seller_id',
+        'user_id',
     ];
 
     public function pemesanan()

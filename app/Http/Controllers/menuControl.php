@@ -7,15 +7,14 @@ use App\Models\menu_warungs;
 use App\Models\Kategori_admin;
 use Illuminate\Support\Facades\File;
 use Form;
+use Illuminate\Support\Facades\Auth;
 
 class menuControl extends Controller
 {
 
     public function seller_menu()
     {
-        //$menu_warungs = menu_warungs::all();
-        $id_user = auth()->id();
-        $menu_warungs = menu_warungs::where('seller_id', $id_user)->get();
+        $menu_warungs = menu_warungs::all();
         return view('menu_input_penjual.seller_menu', compact('menu_warungs'));
     }
 
@@ -54,6 +53,7 @@ class menuControl extends Controller
             'harga' => $request->harga,
             'deskripsi' => $request->deskripsi,
             'gambar' => $filename,
+            'seller_id' => Auth::id(),
         ]);
         
 

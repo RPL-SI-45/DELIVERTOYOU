@@ -30,7 +30,6 @@ class CartController extends Controller
             'quantity' => 1,
         ]);
 
-    
         return redirect()->back()->with('status', 'Berhasil Ditambahkan ke Keranjang.');
     }
 

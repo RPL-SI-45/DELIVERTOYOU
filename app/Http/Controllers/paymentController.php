@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Payment;
+use App\Models\PemesananItem;
 use App\Models\Pemesanan;
 use Illuminate\Http\Request;
 
@@ -10,19 +12,24 @@ class PaymentController extends Controller
     public function index($pemesananId)
     {
         $pemesanan = Pemesanan::findOrFail($pemesananId);
-        $payment = Payment::where('pemesanan_id', $pemesananId)->first();
-        return view('payment.customerpayment', compact('pemesanan'));
+        $pemesananItem = PemesananItem::where('pemesanan_id', $pemesananId)->first();
+        return view('payment.customerpayment', compact('pemesanan', 'pemesananItem'));
     }
 
     public function store(Request $request, $pemesananId)
     {
         $pemesanan = Pemesanan::findOrFail($pemesananId);
-        $total_bayar = $pemesanan->total_harga;
+        $pemesananItem = PemesananItem::where('pemesanan_id', $pemesananId)->first();
 
-        $user = Auth::user();
+        if (!$pemesananItem) {
+            return redirect()->back()->withErrors(['error' => 'Pemesanan Item not found']);
+        }
 
-        pemesanan::create([
-            'customer_id' => $user->id,]);
+        $total_bayar = $pemesananItem->total_semua_menu;
+
+        if (is_null($total_bayar)) {
+            return redirect()->back()->withErrors(['error' => 'Total bayar cannot be null']);
+        }
 
         if ($request->metode === 'qris') {
             return redirect()->route('payment.qris', ['pemesananId' => $pemesananId]);
@@ -32,10 +39,9 @@ class PaymentController extends Controller
                 'metode' => 'Tunai',
                 'total_bayar' => $total_bayar,
             ]);
-    
+
             return redirect()->route('customer.status', ['pemesananId' => $pemesananId]);
         }
-    
     }
 
     public function showQrisForm($pemesananId)
@@ -52,7 +58,17 @@ class PaymentController extends Controller
         ]);
 
         $pemesanan = Pemesanan::findOrFail($pemesananId);
-        $total_bayar = $pemesanan->total_harga;
+        $pemesananItem = PemesananItem::where('pemesanan_id', $pemesananId)->first();
+
+        if (!$pemesananItem) {
+            return redirect()->back()->withErrors(['error' => 'Pemesanan Item not found']);
+        }
+
+        $total_bayar = $pemesananItem->total_semua_menu;
+
+        if (is_null($total_bayar)) {
+            return redirect()->back()->withErrors(['error' => 'Total bayar cannot be null']);
+        }
 
         // Proses penyimpanan bukti pembayaran QRIS
         $file = $request->file('bukti');
@@ -70,13 +86,13 @@ class PaymentController extends Controller
         ]);
 
         // Redirect ke halaman konfirmasi pembayaran diterima
-        return redirect()->route('/order/status', $pemesananId);
-
+        //return redirect()->route('customer.status', $pemesananId);
+        return redirect('order/status');
     }
+
     public function showStatus($pemesananId)
     {
         $pemesanan = Pemesanan::findOrFail($pemesananId);
         return view('payment.customerstatus', compact('pemesanan'));
-    
     }
 }

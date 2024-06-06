@@ -14,12 +14,11 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->nullable();; // Tambahkan kolom user_id
             $table->foreignId('seller_id')->constrained('users')->onDelete('cascade')->nullable();
             $table->string('nama_pelanggan');
-            $table->string('customer_id');
-            $table->string('menu');
-            $table->decimal('harga', 10, 2);
-            $table->integer('quantity');
-            $table->decimal('total_harga', 10, 2);
-            $table->string('alamat');
+            $table->string('menu')->nullable();
+            $table->decimal('harga', 10, 2)->nullable();
+            $table->integer('quantity')->nullable();
+            $table->decimal('total_harga', 10, 2)->nullable();
+            $table->string('alamat')->nullable();
             $table->string('status_pemesanan')->default('Menunggu konfirmasi');
             $table->string('rating')->default('Customer belum memberikan rating')->nullable();
             $table->string('feedback')->default('Customer belum memberikan feedback')->nullable();

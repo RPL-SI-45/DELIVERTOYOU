@@ -125,7 +125,11 @@ class statusControl extends Controller
         $totalCountAll = pemesanan::where('status_pemesanan', 'Pesanan Diterima dan selesai')->count();
         session(['totalOrders' => $totalCountAll]);
 
-        $totalAmountAll = pemesanan::where('status_pemesanan', 'Pesanan Diterima dan selesai')->sum('total_harga');
+        $totalAmountAll = Pemesanan::where('status_pemesanan', 'Pesanan Diterima dan selesai')
+        ->whereHas('pemesananitems')
+        ->withSum('pemesananitems as total_semua_menu', 'total_semua_menu')
+        ->get()
+        ->sum('total_semua_menu');
     
         // Mengupdate atau membuat data di SellerDash (semua data)
         $sellerDash = SellerDash::find(1);
@@ -151,10 +155,17 @@ class statusControl extends Controller
                                       ->where('confirmation_at', '<=', $tanggalHariIni)
                                       ->count();
     
+
         $totalAmountLastOneMonth = Pemesanan::where('status_pemesanan', 'Pesanan Diterima dan selesai')
-                                            ->where('confirmation_at', '>=', $tanggalSatuBulanLalu)
-                                            ->where('confirmation_at', '<=', $tanggalHariIni)
-                                            ->sum('total_harga');
+            ->where('confirmation_at', '>=', $tanggalSatuBulanLalu)
+            ->where('confirmation_at', '<=', $tanggalHariIni)
+            ->whereHas('pemesananitems', function ($query) {
+                // Di sini Anda bisa menambahkan kondisi tambahan jika diperlukan
+            })
+            ->withSum('pemesananitems as total_semua_menu', 'total_semua_menu')
+            ->get()
+            ->sum('total_semua_menu');
+
     
         // Mengupdate atau membuat data di SellerDash2 (1 bulan terakhir)
         $sellerDash2 = SellerDash2::find(1);

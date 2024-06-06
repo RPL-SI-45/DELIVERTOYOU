@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('menu_warungs', function (Blueprint $table) {
             $table->id('id');
+            $table->foreignId('seller_id')->constrained('users')->onDelete('cascade')->nullable();
             $table->string('kategori');
             $table->string('nama');
             $table->string('harga');
