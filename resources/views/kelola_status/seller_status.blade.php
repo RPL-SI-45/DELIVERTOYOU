@@ -182,6 +182,7 @@
 </div>
 
             @foreach($pemesanan as $t)
+                @foreach($Pemesananitem as $m)
                 <div class="container mt-5">
                  <div class="table-container">
                   <div class="table-column">
@@ -189,7 +190,8 @@
                     <div class="table-cell font-weight-bold">Customer : {{ $t->nama_pelanggan }}</div>
                     <div class="table-cell">ID : {{ $t->id }}</div>
                     <div class="table-cell">Status : {{ $t->status_pemesanan }}</div>
-                    <div class="table-cell">Total  : {{ $t->total_harga }}</div>
+                    <div class="table-cell">Total  : {{ $m->total_harga }}</div>
+ 
 
                     <?php
                     $diproses = $t->status_pemesanan;
@@ -218,16 +220,13 @@
 
                 
                     
+                   </div>
                   </div>
                  </div>
                 </div>
-            
-            
+                @endforeach
+            @endforeach
 
-               
-        </table>
-    </div>
-    @endforeach
     
 
 

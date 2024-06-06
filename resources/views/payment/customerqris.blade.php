@@ -47,15 +47,17 @@
                 <h2>Pembayaran QRIS</h2>
                 <form action="{{ route('payment.storeQris', ['pemesananId' => $pemesanan->id]) }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @foreach($qris as $qr) 
                     <div class="form-group mb-3">
                         <label for="qris_image">Payment QRIS</label> <br>
-                        <img src="{{ asset('storage/cthqr.jpg') }}" alt="QRIS Image" id="qris_image" class="img-fluid">
+                        <img src="{{ Storage::url($qr->qrcode) }}" alt="QRIS Image" id="qris_image" class="img-fluid">
                     </div>
                     <div class="form-group mb-3">
                         <label for="proof_of_payment">Unggah Bukti Pembayaran</label> <br>
                         <input type="file" name="bukti" id="bukti" class="form-control" required>
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Submit</button>
+                    @endforeach
                 </form>
             </div>
         </div>

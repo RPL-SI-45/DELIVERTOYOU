@@ -16,7 +16,7 @@ class CartController extends Controller
         if (!$menu_item) {
             return redirect()->back()->with('status', 'Menu tidak ditemukan.');
         }
-
+ 
         $user = Auth::user();
         $existingCartItem = Cart::where('user_id', $user->id)->where('menu_id', $id)->first();
 
@@ -35,7 +35,10 @@ class CartController extends Controller
 
     public function index()
     {
-        $cart = Cart::where('user_id', Auth::id())->with('menu')->get();
+        $cart = Cart::where('user_id', Auth::id())
+            ->where('status', 'active')
+            ->with('menu')
+            ->get();
         return view('cart.index', compact('cart'));
     }
 
