@@ -10,6 +10,7 @@ class KategoriAdminController extends Controller
     public function index()
     {
         $kategori_admin = Kategori_admin::all();
+        session(['kategori_admin' => $kategori_admin]);
         return view('kategori_admin.index',compact(['kategori_admin']));
     }
 

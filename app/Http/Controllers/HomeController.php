@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Kategori_admin;
 
 use Illuminate\Http\Request;
 
@@ -8,6 +9,7 @@ class HomeController extends Controller
 {
     public function index()
     {
+        
         if(auth()->check()) {
             if(auth()->user()->role == 'customer') {
                 return view('home')->with('nama', auth()->user()->name);
@@ -21,5 +23,7 @@ class HomeController extends Controller
         }
     }
 }
+
+
 
 

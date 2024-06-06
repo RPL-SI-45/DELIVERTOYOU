@@ -65,4 +65,6 @@ class SellerDashController extends Controller
 
         return redirect('/seller/dash')->with('success', 'Profile updated successfully');
     }
+
 }
+

@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href='https://fonts.googleapis.com/css?family=Biryani' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <title>DeliverToYou</title>
     <style>
         body {
@@ -189,17 +191,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <li>
-                <div>
-                @if(auth()->check())
+            @if(auth()->check())
+                <p class="navbar-text">
                     @if(auth()->user()->role == 'seller')
-                        <p class="navbar-text">Halo Seller</p>
+                        Halo Seller
                     @elseif(auth()->user()->role == 'customer')
-                        <p class="navbar-text">Halo {{ auth()->user()->name }}</p>
+                        Halo {{ auth()->user()->name }}
                     @endif
-                @endif
-                </div>
-            </li>
+                </p>
+            @endif
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -208,7 +208,6 @@
                 <li><a href="profil">PROFILE</a></li>
                 <li><a href="categories">CATEGORIES</a></li>
                 <li><a href="{{ route('cart.index') }}">KERANJANG</a></li>
-
                 <li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
@@ -225,13 +224,25 @@
 </div>
 
 <div class="content-container">
-    <img src="img_example/makanan.png" class="content-img" alt="Content Image">
+    <img src="/img_example/makanan.png" class="content-img" alt="Content Image">
+</div>
+
+<div class="dropdownfilter">
+    <h3> Filter </h3>
+    <form action="{{ route('home.filter') }}" method="GET">
+        <select name="nama_kategori" class="form-control" onchange="this.form.submit()">
+            <option value="">Select Category</option>
+            @foreach($Kategori_admin as $key => $value)
+                <option value="{{ $value }}" {{ request()->nama_kategori == $key ? 'selected' : '' }}>{{ $value }}</option>
+            @endforeach
+        </select>
+    </form>
 </div>
 
 <div class="card-container">
     @foreach($menu_warungs as $t)
     <div class="card">
-        <a href="/customer/menu"><img src="{{ asset('gambar_menu/'.$t->gambar) }}" class="card-img-top" alt="{{ $t->nama }}"></a>
+        <a href="/customer/{{$t->seller_id}}/menu"><img src="{{ asset('gambar_menu/'.$t->gambar) }}" class="card-img-top" alt="{{ $t->nama }}"></a>
         <div class="card-text">
             <p>{{ $t->nama }}</p>
             <p>Rp. {{ $t->harga }}</p>
@@ -268,6 +279,29 @@
         if (status) {
             $('#notification').text(status).css('background-color', '#4CAF50').fadeIn().delay(2000).fadeOut();
         }
+
+        $('.add-to-cart-btn').click(function(e) {
+            e.preventDefault();
+            var form = $(this).closest('form');
+            var formData = form.serialize();
+            var actionUrl = form.attr('action');
+
+            $.ajax({
+                type: 'POST',
+                url: actionUrl,
+                data: formData,
+                success: function(response) {
+                    if (response.status === 'exists') {
+                        $('#notification').text('Menu sudah ada').css('background-color', '#f44336').fadeIn().delay(2000).fadeOut();
+                    } else if (response.status === 'added') {
+                        $('#notification').text('Berhasil Ditambahkan').css('background-color', '#4CAF50').fadeIn().delay(2000).fadeOut();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert('Terjadi kesalahan, coba lagi.');
+                }
+            });
+        });
     });
 </script>
 

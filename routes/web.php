@@ -10,7 +10,6 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderHistoryController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\SellerDashController;
 use App\Http\Controllers\SearchFilterMenu;
 use App\Http\Controllers\Auth\LoginController;
@@ -71,10 +70,22 @@ Route::middleware(['auth', 'redirectIfNotCustomerOrSeller'])->group(function () 
     Route::post('/submit-alamat', [PemesananController::class, 'submitAlamat'])->name('submit.alamat');
     #PROFIL
     Route::get('/profil', [ProfileController::class, 'index']);
+    Route::get('/seller/{id}/edit', [SellerDashController::class, 'EditProfileToko']);
+    Route::put('/seller/{id}', [SellerDashController::class, 'UpdateProfileToko']);  
+    #KATEGORI ADMIN
+    Route::get('/kategori_admin',[KategoriAdminController::class,'index']);
+    Route::get('/kategori_admin/create',[KategoriAdminController::class,'create']);
+    Route::post('/kategori_admin/store',[KategoriAdminController::class,'store']);
+    Route::get('/kategori_admin/{id}/edit',[KategoriAdminController::class,'edit']);
+    Route::put('/kategori_admin/{id}',[KategoriAdminController::class,'update']);
+    Route::delete('/kategori_admin/{id}',[KategoriAdminController::class,'destroy']);
     #HALAMAN UTAMA
-    Route::get('/customer/menu', [CardController::class, 'menuwarung']);
+    Route::get('/customer/{id}/menu', [CardController::class, 'menuwarung']);
     Route::get('/home', [CardController::class, 'halamanutama'])->name('home');
     Route::get('/customer/menu/search', [SearchFilterMenu::class, 'index'])->name('search.filter');
+    Route::get('home/filter', [CardController::class, 'filterAllByCategory'])->name('home.filter');
+    Route::get('/menuwarung', [CardController::class, 'menuwarung'])->name('menuwarung.filter');
+    Route::get('/menuwarung/filter', [CardController::class, 'filterByCategory'])->name('menuwarung.filter');
     #PAYMENT
     Route::get('/payment/{pemesananId}', [PaymentController::class, "index"])->name('payment.index');
     Route::post('/payment/store/{pemesananId}', [PaymentController::class, 'store'])->name('payment.store');
@@ -86,8 +97,6 @@ Route::middleware(['auth', 'redirectIfNotCustomerOrSeller'])->group(function () 
     #RIWAYAT CUSTOMER
     Route::get('/order/history', [OrderHistoryController::class, 'custhistory'])->name('cust.history');
     Route::get('/order/{id}/history/detail', [OrderHistoryController::class, 'historydetail'])->name('history.detail');
-
-
 });
 
 Route::middleware(['auth', 'seller'])->group(function () {
@@ -123,7 +132,6 @@ Route::middleware(['auth', 'seller'])->group(function () {
     Route::get('/seller/{id}/edit', [SellerDashController::class, 'EditProfileToko']);
     Route::put('/seller/{id}', [SellerDashController::class, 'UpdateProfileToko']);
 });
-
 // KATEGORI ADMIN
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/kategori_admin', [KategoriAdminController::class, 'index'])->name('kategori_admin.index');
@@ -133,3 +141,4 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('/kategori_admin/{id}', [KategoriAdminController::class, 'update'])->name('kategori_admin.update');
     Route::delete('/kategori_admin/{id}', [KategoriAdminController::class, 'destroy'])->name('kategori_admin.destroy');
 });
+
