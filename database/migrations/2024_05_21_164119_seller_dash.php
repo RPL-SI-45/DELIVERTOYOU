@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('Total_pemesanan');
             $table->string('Total_harga');
+            $table->string('Total_rating')->nullable();
+
         });
     }
 

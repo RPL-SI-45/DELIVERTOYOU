@@ -48,7 +48,7 @@
                         <th>No</th>
                         <th>Nama Pelanggan</th>
                         <th>Order</th>
-                        <th>Harga</th>
+                        <th>Quantity</th>
                         <th>Total Harga</th>
                         <th>Alamat</th>
                         <th>Status Pesanan</th>
@@ -57,24 +57,26 @@
                 </thead>
                 <tbody>
                     @foreach($pemesanan as $p)
-                    <tr>
-                        <td>{{$p->id}}</td>
-                        <td>{{$p->nama_pelanggan}}</td>
-                        <td>{{$p->menu}}</td>
-                        <td>{{$p->harga}}</td>
-                        <td>{{$p->total_harga}}</td>
-                        <td>{{$p->alamat}}</td>
-                        <td>
-                            @if($p->status_pemesanan == 'Pesanan Ditolak')
-                                <span class="badge bg-danger">Pesanan ditolak</span>
-                            @else
-                                <a href="/seller/status/{{ $p->id }}/update" class="btn btn-primary btn-sm">Konfirmasi Pesanan</a>
-                            @endif
-                        </td>
-                        <td>
-                            <a href="{{route('seller.detail', ['id' => $p->id])}}" class="btn btn-primary btn-sm">Detail</a>
-                        </td>
-                    </tr>
+                        @foreach($p->items as $item)
+                            <tr>
+                                <td>{{$p->id}}</td>
+                                <td>{{$p->nama_pelanggan}}</td>
+                                <td>{{$item->menu->nama}}</td>
+                                <td>{{$item->quantity}}</td>
+                                <td>{{$item->total_semua_menu}}</td>
+                                <td>{{$p->alamat}}</td>
+                                <td>
+                                    @if($p->status_pemesanan == 'Pesanan Ditolak')
+                                        <span class="badge bg-danger">Pesanan ditolak</span>
+                                    @else
+                                        <a href="/seller/status/{{ $p->id }}/update" class="btn btn-primary btn-sm">Konfirmasi Pesanan</a>
+                                    @endif
+                                </td>
+                                <td>
+                                    <a href="{{route('seller.detail', ['id' => $p->id])}}" class="btn btn-primary btn-sm">Detail</a>
+                                </td>
+                            </tr>
+                        @endforeach
                     @endforeach
                 </tbody>
             </table>

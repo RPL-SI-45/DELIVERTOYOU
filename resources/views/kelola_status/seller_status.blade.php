@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
     <title>Document</title>
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href='https://fonts.googleapis.com/css?family=Biryani' rel='stylesheet'>
-
+   
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -187,7 +186,7 @@
                  <div class="table-container">
                   <div class="table-column">
                      <img src="{{ asset('img_example/makanan.png') }}" alt="Image 3" class="custom-img-size">
-                    <div class="table-cell font-weight-bold">"nama CUSTOMER"</div>
+                    <div class="table-cell font-weight-bold">Customer : {{ $t->nama_pelanggan }}</div>
                     <div class="table-cell">ID : {{ $t->id }}</div>
                     <div class="table-cell">Status : {{ $t->status_pemesanan }}</div>
                     <div class="table-cell">Total  : {{ $t->total_harga }}</div>
@@ -215,20 +214,20 @@
                         } 
                     ?>  
                 
+                    <a href="<?= $route ?>" a type="button" class="btn btn-dark">Detail</a>   
 
-                    <a href="<?= $route ?>" a type="button" class="btn btn-dark">Detail</a> 
-
-
-                @endforeach
+                
                     
                   </div>
                  </div>
                 </div>
             
+            
 
                
         </table>
     </div>
+    @endforeach
     
 
 

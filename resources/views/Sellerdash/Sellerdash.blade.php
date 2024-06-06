@@ -149,20 +149,45 @@
             </div>
         </div>
     </div>
-        
+    <div class="container mt-5">
+        <div class="jumbotron text-center">
+            <h1 class="display-4">Selamat Datang di Dashboard Penjual DelivertoYou!</h1>
+            <p class="lead">Kelola pesanan Anda dengan mudah, pantau performa penjualan, dan maksimalkan potensi bisnis Anda.</p>
+            <hr class="my-4">
+            <p>Gunakan alat dan fitur yang tersedia untuk meningkatkan penjualan Anda.</p>
+            <a class="btn btn-dark" href="/seller/status" role="button">Lihat Pesanan</a>
+            <!-- <div class="text-center my-5"> -->
+            <a href="/seller/menu/input" class="btn btn-dark">Tambah Makanan & Minuman Baru</a>
+            <a href="/seller/menu" class="btn btn-dark">Kelola Menu</a>
+            
+            <a href="/seller/{{ auth()->user()->id }}/edit" class="btn btn-dark">Edit Profil Toko</a>
+            </div>
+        </div>
+    </div>
+    <div style="text-align: center;">
+    <a href="/seller/dash/1_month" type="button" class="btn btn-dark" style="display: inline-block; margin-right: 10px;">1 bulan yang lalu</a>
+    <a href="/seller/dash" type="button" class="btn btn-dark" style="display: inline-block;">Total Waktu</a>
+    </div>
+
             @foreach($SellerDash as $t)
                 <div class="container mt-5">
                  <div class="table-container">
                   <div class="table-column">
                     <img src="{{ asset('img_example/makanan.png') }}" alt="Image 3" class="custom-img-size">
-                    <div class="table-cell font-weight-bold">Total Pemesanan : {{$t->Total_pemesanan}}</div>
-                    <div class="table-cell font-weight-bold">Total Pendapatan : {{$t->Total_harga}}</div>
+                    <h2>Performa Penjualan</h2>
+                    <div class="card-header">    Total Pendapatan Anda</div>
+                    <div class="table-cell font-weight-bold"> Rp.{{$t->Total_harga}}</div>
+                    <div class="card-header">    Total Pemesanan yang terselesaikan</div>
+                    <div class="table-cell font-weight-bold"> {{$t->Total_pemesanan}}</div>
+                    <div class="card-header">    Rating</div>
+                    <div class="table-cell font-weight-bold">Total Rating : {{$t->Total_rating}}</div>
+                   </div>
+                  </div>
+                </div>   
+            @endforeach
 
 
-             @endforeach
-                </div>
-                 </div>
-                  </div>   
-      
+            
+            
 </body>
 </html>

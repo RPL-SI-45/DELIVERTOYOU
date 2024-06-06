@@ -76,11 +76,12 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach($pemesanan->items as $item)
                 <tr>
                     <td>{{ $pemesanan->id }}</td>
                     <td>{{ $pemesanan->nama_pelanggan }}</td>
-                    <td>{{ $pemesanan->menu }}</td>
-                    <td>{{ $pemesanan->quantity }}</td>
+                    <td>{{ $item->menu->nama }}</td>
+                    <td>{{ $item->quantity }}</td>
                     <td>
                         @if($pemesanan->payment)
                             {{ $pemesanan->payment->metode }}
@@ -93,14 +94,15 @@
                             Tidak ada
                         @endif
                     </td>
-                    <td>{{ $pemesanan->total_harga }}</td>
+                    <td>{{ $item->total_semua_menu }}</td>
                     <td>{{ $pemesanan->status_pemesanan }}</td>
                 </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
     <div class="d-flex justify-content-end">
-        <a href="{{route('seller.order')}}" class="btn btn-primary">Kembali</a>
+        <a href="{{ route('seller.order') }}" class="btn btn-primary">Kembali</a>
         <a href="{{ route('seller.reject', ['id' => $pemesanan->id]) }}" class="btn btn-danger">Tolak</a>
     </div>
 </div>
