@@ -11,6 +11,8 @@ return new class extends Migration
     {
         Schema::create('pemesanan', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade')->nullable();; // Tambahkan kolom user_id
+            $table->foreignId('seller_id')->constrained('users')->onDelete('cascade')->nullable();
             $table->string('nama_pelanggan');
             $table->string('customer_id');
             $table->string('menu');

@@ -166,10 +166,10 @@
         <div class="table-cell">ID : {{ $pemesanan->id }}</div>
         <div class="table-cell">Status : {{ $pemesanan->status_pemesanan }}</div>
         <div class="table-cell">Alamat : {{ $pemesanan->alamat }}</div>
-        <div class="table-cell">Menu   : {{ $pemesanan->menu }}</div>
-        <div class="table-cell">Harga   : {{ $pemesanan->harga }}</div>
-        <div class="table-cell">Quantity   : {{ $pemesanan->Quantity }}</div>
-        <div class="table-cell">Total  : {{ $pemesanan->total_harga }}</div>
+        <div class="table-cell">Menu   : {{ $Pemesananitem->menu_id }}</div>
+        <div class="table-cell">Harga   : {{ $Pemesananitem->harga }}</div>
+        <div class="table-cell">Quantity   : {{ $Pemesananitem->quantity }}</div>
+        <div class="table-cell">Total  : {{ $Pemesananitem->total_harga }}</div>
         <br>
 
         <a href="/seller/status" a type="button" class="btn btn-dark">Back</a>   

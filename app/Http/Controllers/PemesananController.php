@@ -29,6 +29,9 @@ class PemesananController extends Controller
             'user_id' => $user->id,
             'nama_pelanggan' => $user->name,
         ]);
+
+    
+        $totalSemuaMenu = 0; // Inisialisasi total semua menu
     
         foreach ($cartItems as $item) {
             PemesananItem::create([
@@ -36,8 +39,18 @@ class PemesananController extends Controller
                 'menu_id' => $item->menu_id,
                 'harga' => $item->menu->harga,
                 'quantity' => $item->quantity,
-                'total_harga' => $item->menu->harga * $item->quantity,
+                'total_harga' => $totalHargaItem,
+                'user_id' => $user->id,
             ]);
+    
+            $totalSemuaMenu += $totalHargaItem; // Tambahkan total harga item ke total semua menu
+        }
+        
+   
+        // Perbarui total semua menu dalam setiap pemesanan item
+        foreach ($pemesanan->items as $pemesananItem) {
+            $pemesananItem->total_semua_menu = $totalSemuaMenu;
+            $pemesananItem->save();
         }
     
         return redirect()->route('pemesanan.index')->with('status', 'Pemesanan berhasil dibuat.');

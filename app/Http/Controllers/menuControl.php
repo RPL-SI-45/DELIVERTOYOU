@@ -13,7 +13,9 @@ class menuControl extends Controller
 
     public function seller_menu()
     {
-        $menu_warungs = menu_warungs::all();
+        //$menu_warungs = menu_warungs::all();
+        $id_user = auth()->id();
+        $menu_warungs = menu_warungs::where('seller_id', $id_user)->get();
         return view('menu_input_penjual.seller_menu', compact('menu_warungs'));
     }
 

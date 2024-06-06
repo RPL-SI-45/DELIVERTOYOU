@@ -16,8 +16,6 @@ use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\SellerDashController;
 use App\Http\Controllers\SearchFilterMenu;
 
-
-
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
