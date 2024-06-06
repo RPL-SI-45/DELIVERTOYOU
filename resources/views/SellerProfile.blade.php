@@ -149,36 +149,10 @@
 </div>
 
 
-
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
 
 
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div class="form-container">
-        <form action="/seller/{{ $user->id }}" method="POST">
-            @csrf
-            @method('PUT')
-            <input type="text" id="name" name="name" placeholder="Name" value="{{ $user->name }}">
-            <input type="email" id="email" name="email" placeholder="Email Address" value="{{ $user->email }}">
-            <input type="text" id="alamat" name="alamat" placeholder="Alamat" value="{{ $user->alamat }}">
-            <input type="text" id="telefon" name="nomor_telepon" placeholder="No Telephone" value="{{ $user->nomor_telepon }}">
-            <input type="text" id="nama_toko" name="nama_toko" placeholder="Nama Toko">
-            <input type="text" id="alamat_toko" name="alamat_toko" placeholder="Alamat Toko">
-            <button type="submit">Update Profile</button>
-        </form>
-    </div>
-</body>
-</html>
 
- -->

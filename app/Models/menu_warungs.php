@@ -25,4 +25,9 @@ class menu_warungs extends Model
     {
         return $this->belongsTo(User::class, 'seller_id');
     }
+    
+    public function items()
+    {
+        return $this->hasMany(PemesananItem::class, 'menu_id');
+    }
 }

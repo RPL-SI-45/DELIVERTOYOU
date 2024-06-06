@@ -40,8 +40,13 @@ class Pemesanan extends Model
     }
 
 
+    public function payment()
+    {
+        return $this->hasOne(Payment::class, 'pemesanan_id'); 
+    }
+
     public function items()
     {
-        return $this->hasMany(PemesananItem::class);
+        return $this->hasMany(PemesananItem::class, 'pemesanan_id'); 
     }
 }

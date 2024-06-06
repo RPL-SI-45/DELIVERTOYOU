@@ -6,36 +6,52 @@ use App\Models\pemesanan;
 use App\Models\SellerDash;
 use App\Models\SellerDash1;
 use App\Models\SellerDash2;
+use App\Models\Pemesananitem;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 
 
 class statusControl extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function seller_status()
-    {
+    {   
         $pemesanan = pemesanan::all();
-        return view('kelola_status.seller_status',compact(['pemesanan']));
+        $Pemesananitem = Pemesananitem::all();
+        return view('kelola_status.seller_status',compact(['pemesanan','Pemesananitem']));
     }
 
     public function order_status(Request $request)
     {
-        $pemesanan = pemesanan::all();
-        return view('kelola_status.cust_status',compact(['pemesanan']));
+        // Mendapatkan id_user yang saat ini masuk
+        $id_user = auth()->id(); // Anda mungkin perlu menyesuaikan ini dengan cara Anda mengotentikasi pengguna
+    
+        // Mengambil pemesanan yang terkait dengan id_user yang sedang masuk
+        $pemesanan = Pemesanan::where('user_id', $id_user)->get();
+        $Pemesananitem = Pemesananitem::where('user_id', $id_user)->get();
+    
+        return view('kelola_status.cust_status', compact('pemesanan','Pemesananitem'));
     }
 
 
     public function order_status_detail(Request $request)
     {
         $pemesanan = pemesanan::findOrFail($request->id); 
-        return view('kelola_status.cust_status_detail', compact('pemesanan'));
+        $Pemesananitem = Pemesananitem::findOrFail($request->id); 
+        //$Pemesananitem = PemesananItem::all();
+        return view('kelola_status.cust_status_detail', compact('pemesanan','Pemesananitem'));
     }
 
     public function seller_status_detail(Request $request)
     {
         $pemesanan = pemesanan::findOrFail($request->id); 
+        $Pemesananitem = Pemesananitem::findOrFail($request->id); 
         return view('kelola_status.seller_status_detail',compact(['pemesanan']));
 
     }
@@ -43,11 +59,11 @@ class statusControl extends Controller
 
     public function up_to_cook(Request $request)
     {
-
+        // Validasi input request
         $request->validate([
             'id' => 'required|integer|exists:pemesanan,id',
         ]);
-
+    
         $id = $request->input('id');
         $diproses = 'Sedang Dimasak oleh Ahlinya';
     

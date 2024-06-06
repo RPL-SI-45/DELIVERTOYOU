@@ -38,8 +38,9 @@ class SellerDashController extends Controller
             'nomor_telepon' => 'required|string|max:20',
             'nama_toko' => 'nullable|string|max:255',
             'alamat_toko' => 'nullable|string|max:255',
-            'qrcode' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'qrcode' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:4096',
         ]);
+
 
         $user = User::find($id);
 
@@ -56,7 +57,7 @@ class SellerDashController extends Controller
             }
 
             // Simpan gambar qrcode baru
-            $path = $request->file('qrcode')->store('qrcodes');
+            $path = $request->file('qrcode')->store('public/qrcodes');
             $user->qrcode = $path;
         }
 
@@ -64,4 +65,6 @@ class SellerDashController extends Controller
 
         return redirect('/seller/dash')->with('success', 'Profile updated successfully');
     }
+
 }
+

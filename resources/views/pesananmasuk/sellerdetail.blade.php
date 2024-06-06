@@ -76,26 +76,30 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($pemesanan->items as $item)
+                @foreach($pemesanan->items as $index => $item)
                 <tr>
-                    <td>{{ $pemesanan->id }}</td>
-                    <td>{{ $pemesanan->nama_pelanggan }}</td>
+                    @if($index == 0)
+                        <td rowspan="{{ count($pemesanan->items) }}">{{ $pemesanan->id }}</td>
+                        <td rowspan="{{ count($pemesanan->items) }}">{{ $pemesanan->nama_pelanggan }}</td>
+                    @endif
                     <td>{{ $item->menu->nama }}</td>
                     <td>{{ $item->quantity }}</td>
-                    <td>
-                        @if($pemesanan->payment)
-                            {{ $pemesanan->payment->metode }}
-                        @endif
-                    </td>
-                    <td>
-                        @if($pemesanan->payment && $pemesanan->payment->metode == 'QRIS' && $pemesanan->payment->bukti)
-                            <img src="{{ asset('bukti/bayar/' . $pemesanan->payment->bukti) }}" alt="Bukti Pembayaran QRIS" class="img-thumbnail">
-                        @else
-                            Tidak ada
-                        @endif
-                    </td>
-                    <td>{{ $item->total_semua_menu }}</td>
-                    <td>{{ $pemesanan->status_pemesanan }}</td>
+                    @if($index == 0)
+                        <td rowspan="{{ count($pemesanan->items) }}">
+                            @if($pemesanan->payment)
+                                {{ $pemesanan->payment->metode }}
+                            @endif
+                        </td>
+                        <td rowspan="{{ count($pemesanan->items) }}">
+                            @if($pemesanan->payment && $pemesanan->payment->metode == 'QRIS' && $pemesanan->payment->bukti)
+                                <img src="{{ asset('bukti/bayar/' . $pemesanan->payment->bukti) }}" alt="Bukti Pembayaran QRIS" class="img-thumbnail">
+                            @else
+                                Tidak ada
+                            @endif
+                        </td>
+                        <td rowspan="{{ count($pemesanan->items) }}">{{ $pemesanan->items->sum('total_semua_menu') }}</td>
+                        <td rowspan="{{ count($pemesanan->items) }}">{{ $pemesanan->status_pemesanan }}</td>
+                    @endif
                 </tr>
                 @endforeach
             </tbody>
