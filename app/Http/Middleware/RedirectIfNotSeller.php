@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class RedirectIfNotCustomerOrSeller
+class RedirectIfNotSeller
 {
     /**
      * Handle an incoming request.
@@ -17,14 +17,10 @@ class RedirectIfNotCustomerOrSeller
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && (Auth::user()->role == 'customer' || Auth::user()->role == 'seller')) {
+        if (Auth::check() && Auth::user()->role === 'seller') {
             return $next($request);
         }
-        
-        if (Auth::check() && Auth::user()->role == 'admin') {
-            return redirect()->route('admin.kategori');
-        }
-        
-        return redirect()->route('login');
+
+        return redirect()->route('login')->with('error', 'Access denied.');
     }
 }

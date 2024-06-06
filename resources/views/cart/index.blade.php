@@ -14,6 +14,7 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 20px;
+            margin-top: 20px;
         }
         .table img {
             width: 50px;
@@ -67,37 +68,6 @@
         .navbar-nav > li > a:hover {
             color: #f1f1f1;
         }
-
-        .search-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-
-        .search-container input[type="text"] {
-            padding: 5px 10px;
-            margin-top: 8px;
-            font-size: 12px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            width: 200px;
-        }
-
-        .search-container button {
-            padding: 5px 10px;
-            margin-top: 8px;
-            margin-left: 5px;
-            background: #ddd;
-            font-size: 12px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        .search-container button:hover {
-            background: #ccc;
-        }
     </style>
 </head>
 <body>
@@ -140,6 +110,7 @@
                     </thead>
                     <tbody>
                         @foreach($cart as $item)
+                        @if($item->status == 'active')
                         <tr>
                             <td><img src="{{ asset('gambar_menu/'.$item->menu->gambar) }}" alt="{{ $item->menu->nama }}" class="img-fluid"></td>
                             <td>{{ $item->menu->nama }}</td>
@@ -151,22 +122,28 @@
                                 </form>
                             </td>
                         </tr>
+                        @endif
                         @endforeach
-                        <!-- Kolom kupon -->
+                        @if($cart->where('status', 'active')->isEmpty())
+                        <tr>
+                            <td colspan="4" class="text-center">Keranjang Anda kosong!</td>
+                        </tr>
+                        @else
                         <tr>
                             <td colspan="3"></td>
                             <td>
                                 <input type="text" class="form-control" name="kupon" placeholder="Masukkan Kupon">
                             </td>
                         </tr>
+                        @endif
                     </tbody>
                 </table>
-                <!-- Checkout Form -->
+                @if($cart->where('status', 'active')->isNotEmpty())
                 <form action="{{ route('pemesanan.store') }}" method="POST">
                     @csrf
-                    <button type="submit">Pesan</button>
+                    <button type="submit" class="btn btn-primary">Pesan</button>
                 </form>
-
+                @endif
             </div>
         @else
             <div class="alert alert-warning text-center" role="alert">

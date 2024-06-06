@@ -189,8 +189,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <li>
-                <div>
+            <div>
                 @if(auth()->check())
                     @if(auth()->user()->role == 'seller')
                         <p class="navbar-text">Halo Seller</p>
@@ -198,8 +197,7 @@
                         <p class="navbar-text">Halo {{ auth()->user()->name }}</p>
                     @endif
                 @endif
-                </div>
-            </li>
+            </div>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -208,7 +206,6 @@
                 <li><a href="profil">PROFILE</a></li>
                 <li><a href="categories">CATEGORIES</a></li>
                 <li><a href="{{ route('cart.index') }}">KERANJANG</a></li>
-
                 <li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf

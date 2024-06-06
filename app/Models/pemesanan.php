@@ -18,10 +18,14 @@ class Pemesanan extends Model
         'rating',
         'feedback',
         'confirmation_at',
+        
+
     ];
 
     public function items()
     {
         return $this->hasMany(PemesananItem::class);
     }
+
+    
 }
