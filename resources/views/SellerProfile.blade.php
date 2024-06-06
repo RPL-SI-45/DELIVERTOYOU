@@ -132,18 +132,23 @@
 </div>
 
 <div class="form-container">
-    <form action="/seller/{{ $user->id }}" method="POST">
-            @csrf
-            @method('PUT')
-            <input type="text" id="name" name="name" placeholder="Name" value="{{ $user->name }}">
-            <input type="email" id="email" name="email" placeholder="Email Address" value="{{ $user->email }}">
-            <input type="text" id="alamat" name="alamat" placeholder="Alamat" value="{{ $user->alamat }}">
-            <input type="text" id="telefon" name="nomor_telepon" placeholder="No Telephone" value="{{ $user->nomor_telepon }}">
-            <input type="text" id="nama_toko" name="nama_toko" placeholder="Nama Toko" value="{{ $user->nama_toko }}">
-            <input type="text" id="alamat_toko" name="alamat_toko" placeholder="Alamat Toko" value="{{ $user->alamat_toko }}">
-            <button type="submit">Update Profile</button>
-        </form>
+    <form action="/seller/{{ $user->id }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
+        <label>Data Warung</label>
+        <input type="text" id="name" name="name" placeholder="Name" value="{{ $user->name }}">
+        <input type="email" id="email" name="email" placeholder="Email Address" value="{{ $user->email }}">
+        <input type="text" id="alamat" name="alamat" placeholder="Alamat" value="{{ $user->alamat }}">
+        <input type="text" id="telefon" name="nomor_telepon" placeholder="No Telephone" value="{{ $user->nomor_telepon }}">
+        <input type="text" id="nama_toko" name="nama_toko" placeholder="Nama Toko" value="{{ $user->nama_toko }}">
+        <input type="text" id="alamat_toko" name="alamat_toko" placeholder="Alamat Toko" value="{{ $user->alamat_toko }}">
+        <label for="qrcode">Input QRCode</label>
+        <input type="file" id="qrcode" name="qrcode">
+        <button type="submit">Update Profile</button>
+    </form>
 </div>
+
+
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

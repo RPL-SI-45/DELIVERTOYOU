@@ -191,18 +191,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <li>
-                <div>
-                @if(auth()->check())
+            @if(auth()->check())
+                <p class="navbar-text">
                     @if(auth()->user()->role == 'seller')
-                        <p class="navbar-text">Halo Seller</p>
+                        Halo Seller
                     @elseif(auth()->user()->role == 'customer')
-                        <p class="navbar-text">Halo {{ auth()->user()->name }}</p>
+                        Halo {{ auth()->user()->name }}
                     @endif
-                @endif
-                </div>
-            </li>
-
+                </p>
+            @endif
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -211,7 +208,6 @@
                 <li><a href="profil">PROFILE</a></li>
                 <li><a href="categories">CATEGORIES</a></li>
                 <li><a href="{{ route('cart.index') }}">KERANJANG</a></li>
-
                 <li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
@@ -223,7 +219,6 @@
                 <input type="text" id="search-input" placeholder="Search...">
                 <button type="button" id="search-button">Search</button>
             </div>
-            
         </div>
     </div>
 </div>
@@ -231,7 +226,6 @@
 <div class="content-container">
     <img src="/img_example/makanan.png" class="content-img" alt="Content Image">
 </div>
-
 
 <div class="dropdownfilter">
     <h3> Filter </h3>
@@ -245,11 +239,10 @@
     </form>
 </div>
 
-
 <div class="card-container">
     @foreach($menu_warungs as $t)
     <div class="card">
-        <a href="/customer/menu"><img src="{{ asset('gambar_menu/'.$t->gambar) }}" class="card-img-top" alt="{{ $t->nama }}"></a>
+        <a href="/customer/{{$t->seller_id}}/menu"><img src="{{ asset('gambar_menu/'.$t->gambar) }}" class="card-img-top" alt="{{ $t->nama }}"></a>
         <div class="card-text">
             <p>{{ $t->nama }}</p>
             <p>Rp. {{ $t->harga }}</p>
@@ -264,11 +257,8 @@
 </div>
 <div id="notification"></div>
 
-
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 
 <script>
     $(document).ready(function() {
@@ -290,10 +280,8 @@
             $('#notification').text(status).css('background-color', '#4CAF50').fadeIn().delay(2000).fadeOut();
         }
 
-
-<script>
-    $(document).ready(function() {
-        $('.add-to-cart-btn').click(function() {
+        $('.add-to-cart-btn').click(function(e) {
+            e.preventDefault();
             var form = $(this).closest('form');
             var formData = form.serialize();
             var actionUrl = form.attr('action');
@@ -314,7 +302,6 @@
                 }
             });
         });
-
     });
 </script>
 
