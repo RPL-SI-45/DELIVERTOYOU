@@ -1,15 +1,35 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Riwayat Pesanan</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Biryani' rel='stylesheet'>
+    <title>DeliverToYou</title>
     <style>
         body {
-            background-color: #f8f9fa;
-            font-family: 'Arial', sans-serif;
+            margin: 0;
+            font-family: 'Biryani', sans-serif;
+            font-size: 14px;
+            background-color: #f5f5f5;
+        }
+
+        .navbar {
+            background-color: #B49852;
+            border: none;
+            border-radius: 0;
+        }
+
+        .navbar-logo img {
+            height: 40px;
+            margin-top: 5px;
+        }
+
+        .navbar-text {
+            color: #fff;
+            margin-right: 15px;
+            margin-top: 15px;
+            font-size: 16px;
         }
         .container {
             background-color: #fff;
@@ -76,7 +96,40 @@
     </style>
 </head>
 <body>
-    <div class="container">
+<div class="navbar navbar-default navbar-static-top">
+    <div class="containerr">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div>
+                @if(auth()->check())
+                    @if(auth()->user()->role == 'admin')
+                        <p class="navbar-text">Halo Admin</p>
+                    @elseif(auth()->user()->role == 'seller')
+                        <p class="navbar-text">Halo Seller</p>
+                    @elseif(auth()->user()->role == 'customer')
+                        <p class="navbar-text">Halo {{ auth()->user()->name }}</p>
+                    @endif
+                @endif
+            </div>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">LOGOUT</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container">
         <h2>Riwayat Pesanan</h2>
         <form action="{{ route('order.history') }}" method="GET">
             <div class="form-row">
@@ -97,7 +150,9 @@
                 </div>
             </div>
             <div class="form-group">
-                <button class="btn btn-primary" type="submit">Filter</button>
+                <div class="mt-5">
+                    <button class="btn btn-primary " type="submit">Filter</button>
+                </div>
                 @if(request()->has('status') || request()->has('from_date') || request()->has('to_date'))
                     <a href="{{ route('order.history') }}" class="btn btn-secondary ml-2">Hapus Filter</a>
                 @endif
@@ -147,6 +202,12 @@
         </div>
     </div>
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+<!-- Include jQuery and Bootstrap JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </body>
 </html>
+
+
+
