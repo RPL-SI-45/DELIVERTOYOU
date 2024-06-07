@@ -31,4 +31,12 @@ class menu_warungs extends Model
     {
         return $this->hasMany(PemesananItem::class, 'menu_id');
     }
+
+
+
+    public function pemesananItems() {
+        return $this->hasMany(Pemesananitem::class, 'menu_id');
+    }
+
 }
+
