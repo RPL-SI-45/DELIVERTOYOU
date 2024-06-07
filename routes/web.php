@@ -69,7 +69,7 @@ Route::middleware(['auth', 'redirectIfNotCustomerOrSeller'])->group(function () 
     Route::patch('/pemesanan/update-quantity/{id}', [PemesananController::class, 'updateQuantity'])->name('pemesanan.updateQuantity');
     Route::post('/submit-alamat', [PemesananController::class, 'submitAlamat'])->name('submit.alamat');
     #PROFIL
-    Route::get('/profil', [ProfileController::class, 'index']);
+    Route::get('/profilee', [ProfileController::class, 'index']);
     Route::get('/seller/{id}/edit', [SellerDashController::class, 'EditProfileToko']);
     Route::put('/seller/{id}', [SellerDashController::class, 'UpdateProfileToko']);  
     #KATEGORI ADMIN

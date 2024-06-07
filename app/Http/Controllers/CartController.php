@@ -12,30 +12,33 @@ class CartController extends Controller
     public function addToCart(Request $request, $id)
     {
         $menu_item = menu_warungs::find($id);
-
+    
         if (!$menu_item) {
-            return redirect()->back()->with('status', 'Menu tidak ditemukan.');
+            return response()->json(['status' => 'error', 'message' => 'Menu tidak ditemukan.']);
         }
-
+    
         $user = Auth::user();
         $existingCartItem = Cart::where('user_id', $user->id)->where('menu_id', $id)->first();
-
+    
         if ($existingCartItem) {
-            return redirect()->back()->with('status', 'Menu sudah ada di keranjang.');
+            return response()->json(['status' => 'exists', 'message' => 'Menu sudah ada di keranjang.']);
         }
-
+    
         Cart::create([
             'user_id' => $user->id,
             'menu_id' => $id,
             'quantity' => 1,
         ]);
-
-        return redirect()->back()->with('status', 'Berhasil Ditambahkan ke Keranjang.');
+    
+        return response()->json(['status' => 'added', 'message' => 'Berhasil Ditambahkan ke Keranjang.']);
     }
 
     public function index()
     {
-        $cart = Cart::where('user_id', Auth::id())->with('menu')->get();
+        $cart = Cart::where('user_id', Auth::id())
+            ->where('status', 'active')
+            ->with('menu')
+            ->get();
         return view('cart.index', compact('cart'));
     }
 

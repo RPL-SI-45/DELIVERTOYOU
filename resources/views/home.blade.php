@@ -205,7 +205,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/order/status">STATUS</a></li>
                 <li><a href="menu">MENU</a></li>
-                <li><a href="profil">PROFILE</a></li>
+                <li><a href="profilee">PROFILE</a></li>
                 <li><a href="categories">CATEGORIES</a></li>
                 <li><a href="{{ route('cart.index') }}">KERANJANG</a></li>
                 <li>
@@ -291,6 +291,7 @@
                 url: actionUrl,
                 data: formData,
                 success: function(response) {
+                    console.log(response);  // Tambahkan console.log untuk debug
                     if (response.status === 'exists') {
                         $('#notification').text('Menu sudah ada').css('background-color', '#f44336').fadeIn().delay(2000).fadeOut();
                     } else if (response.status === 'added') {
@@ -298,12 +299,14 @@
                     }
                 },
                 error: function(xhr, status, error) {
+                    console.log(xhr.responseText); // Tambahkan console.log untuk error
                     alert('Terjadi kesalahan, coba lagi.');
                 }
             });
         });
     });
 </script>
+
 
 </body>
 </html>
