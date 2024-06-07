@@ -66,12 +66,16 @@
         }
 
         .content-container {
+            background-image: url('/img_example/makanan.png');
             position: relative;
             text-align: center;
             margin-bottom: 20px;
+            height: 200px;
+            margin-top: -25px;
+            margin-left: -30px;
         }
 
-        .content-img {
+        .content-text {
             width: 100%;
             height: auto;
             display: block;
@@ -79,13 +83,15 @@
 
         .content-text {
             position: absolute;
-            bottom: 10px;
+            bottom: 25px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(0, 0, 0, 0.5);
             padding: 10px;
             text-align: center;
             border-radius: 5px;
+            margin-left: 20px;
+            color: #ccc;
         }
 
         .about {
@@ -224,7 +230,9 @@
 </div>
 
 <div class="content-container">
-    <img src="/img_example/makanan.png" class="content-img" alt="Content Image">
+    <div>
+        <h1 class="content-text">Selamat Datang di DeliverToYou</h1>
+    </div>
 </div>
 
 <div class="dropdownfilter">
