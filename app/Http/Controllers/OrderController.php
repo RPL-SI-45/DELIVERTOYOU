@@ -50,10 +50,19 @@ class OrderController extends Controller
     public function acc_konfirmasi(Request $request)
     {
         $id = $request->input('id');
-        $acc = 'Sudah dikonfirmasi';
-        Pemesanan::where('id', $id)->update(['status_pemesanan' => $acc]);
+        $diproses = $request->input('status_pemesanan');
+        
 
-        return redirect('/seller/status');
+        $diproses = 'Sudah dikonfirmasi';
+        $update = pemesanan::where('id', $id)->update(['status_pemesanan' => $diproses]);
+        
+        if ($update) {
+            return redirect('/seller/status');
+        } else {
+            return redirect()->back()->with('error', 'Gagal memperbarui status pemesanan.');
+
+
+         }
     }
 
     public function reject($id)

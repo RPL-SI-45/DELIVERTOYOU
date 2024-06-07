@@ -120,7 +120,7 @@
             <table class="table table-hover">
                 <thead class="table-dark">
                     <tr>
-                        <th>No</th>
+                        <th>ID</th>
                         <th>Nama Pelanggan</th>
                         <th>Order</th>
                         <th>Quantity</th>
@@ -151,9 +151,14 @@
                                 @if($order->status_pemesanan == 'Pesanan Ditolak')
                                     <span class="badge badge-danger">Pesanan ditolak</span>
                                 @else
-                                    <a href="{{ route('seller_status_update', ['id' => $order->id]) }}" class="btn btn-primary btn-sm">Konfirmasi Pesanan</a>
+                                     <form action="{{ route('seller_status_update', ['id' => $order->id]) }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $order->id }}">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    </form>
                                 @endif
                             </td>
+
                             <td>
                                 <a href="{{ route('seller.detail', ['id' => $order->id]) }}" class="btn btn-primary btn-sm">Detail</a>
                             </td>

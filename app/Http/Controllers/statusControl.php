@@ -25,18 +25,18 @@ class statusControl extends Controller
     {   
         $id_seller = auth()->id();
         
+        // Fetch pemesanan with related pemesananItems and menu_warungs
         $pemesanan = Pemesanan::with(['pemesananItems.menu_warungs'])
                         ->where('seller_id', $id_seller)
                         ->where('status_pemesanan', '!=', 'Pesanan Diterima dan selesai')
                         ->get();
     
-        $Pemesananitem = Pemesananitem::where('seller_id', $id_seller)
-                        ->whereIn('pemesanan_id', $pemesanan->pluck('id'))
-                        ->get();
-    
-        return view('kelola_status.seller_status', compact('pemesanan', 'Pemesananitem'));
+        return view('kelola_status.seller_status', compact('pemesanan'));
     }
-    
+
+
+
+
 
     public function order_status(Request $request)
     {
