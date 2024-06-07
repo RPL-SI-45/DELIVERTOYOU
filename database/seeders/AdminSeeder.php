@@ -20,6 +20,4 @@ class AdminSeeder extends Seeder
             'alamat' => 'Alamat Admin', // Ubah sesuai kebutuhan
         ]);
     }
-
 }
-

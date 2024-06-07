@@ -3,124 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Seller Menu</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href='https://fonts.googleapis.com/css?family=Biryani' rel='stylesheet'>
     
     <style>
-    .body {
-      font-family: Arial, sans-serif;
+        .font-style {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            color: black;
+        }
 
-    }
-    .card-container {
-        display: flex;
-        flex-wrap: wrap;
-    }
+        .navbar {
+            overflow: hidden;
+            background-color: #B49852;
+        }
 
-    .font-style {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        font-weight: bold;
-        color: black;
-    }
+        .navbar-logo img {
+            height: 40px;
+            margin-top: 10px;
+            margin-right: 15px;
+        }
 
+        .search-container {
+            display: inline-block;
+            position: absolute;
+            left: 45%;
+            top: 0;
+            transform: translateX(-45%);
+        }
 
-    .navbar {
-        overflow: hidden;
-        background-color: #B49852;
-    }
+        .search-container input[type=text] {
+            padding: 5px;
+            margin-top: 16px;
+            font-size: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 130px;
+        }
 
-    .navbar-logo img{
-        height: 40px;
-        margin-top: 10px;
-        margin-right: 15px;
-    }
+        .search-container button {
+            padding: 5px;
+            margin-top: 16px;
+            margin-left: 3px;
+            background: #ddd;
+            font-size: 9.5px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
 
-    .search-container {
-        display: inline-block;
-        position: absolute;
-        left: 45%;
-        top: 0;
-        transform: translateX(-45%);
-    }
+        .search-container button:hover {
+            background: #ccc;
+        }
 
-    .search-container input[type=text] {
-        padding: 5px;
-        margin-top: 16px;
-        font-size: 10px;
-        border: none;
-        border-radius: 5px;
-        width: 130px;
-    }
+        .content-container {
+            position: relative;
+            display: inline-block;
+        }
 
-    .search-container button {
-        padding: 5px;
-        margin-top: 16px;
-        margin-left: 3px;
-        background: #ddd;
-        font-size: 9.5px;
-        border: none;
-        cursor: pointer;
-        border-radius: 5px;
-    }
+        .content-text {
+            position: absolute;
+            bottom: 0;
+            left: 150px;
+            background-color: white;
+            padding: 10px;
+            text-align: center;
+        }
 
-    .search-container button:hover {
-        background: #ccc;
-    }
+        .about {
+            margin: 0;
+        }
 
-    .content-container {
-        position: relative;
-        display: inline-block;
-    }
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
 
-    .content-text {
-        position: absolute;
-        bottom: 0;
-        left: 150px;
-        background-color: white;
-        padding: 10px;
-        text-align: center;
-    }
+        .custom-card {
+            flex: 0 0 calc(33.333% - 10px);
+            margin: 5px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+            border-radius: 5px;
+            overflow: hidden;
+            background-color: #E7E4DC;
+        }
 
-    .table-container {
-      display: flex;
-      border: 1px solid #dee2e6;
-    }
-    .table-column {
-      display: flex;
-      flex-direction: column;
-      border-right: 1px solid #dee2e6;
-      padding: 10px;
-    }
-    .table-column:last-child {
-      border-right: none;
-    }
-    .table-cell {
-      display: flex;
-      align-items: center;
-      padding: 8px;
-      border-bottom: 1px solid #dee2e6;
-    }
-    .table-cell:last-child {
-      border-bottom: none;
-    }
-    .table-cell img {
-      max-width: 50px;
-      height: auto;
-      margin-right: 10px;
-    }
+        .custom-card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
 
-    .custom-img-size {
-      width: 100px;
-      height: auto; 
-    }
-  
-</style>
+        .custom-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
 
-    
+        .custom-card .card-body {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+
+        .action-button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-dark {
+            background-color: #343a40;
+            color: white;
+        }
+
+        .btn-dark:hover {
+            background-color: #23272b;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .custom-card {
+                flex: 0 0 calc(50% - 10px);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .custom-card {
+                flex: 0 0 calc(100% - 10px);
+            }
+
+            .search-container {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    </style>
 </head>
-
 <body>
+
 <div class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
@@ -164,8 +209,8 @@
         </div>
     </div>
     <div style="text-align: center;">
-    <a href="/seller/dash/1_month" type="button" class="btn btn-dark" style="display: inline-block; margin-right: 10px;">1 bulan yang lalu</a>
-    <a href="/seller/dash" type="button" class="btn btn-dark" style="display: inline-block;">Total Waktu</a>
+    <a href="/seller/dash/1_month" type="button" class="" style="display: inline-block; margin-right: 10px;">1 bulan yang lalu</a>
+    <a href="/seller/dash" type="button" class="" style="display: inline-block;">Total Waktu</a>
     </div>
         @foreach($SellerDash as $t)
                 <div class="container mt-5">
@@ -185,7 +230,14 @@
         @endforeach
 
 
-            
-            
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </body>
 </html>
+
+
+
+
+            
+            

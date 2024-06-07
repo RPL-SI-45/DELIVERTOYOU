@@ -10,10 +10,12 @@ return new class extends Migration
     {
         Schema::create('pemesanan_items', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('pemesanan_id');
-            $table->unsignedBigInteger('menu_id');
-            $table->decimal('harga', 10, 2);
-            $table->integer('quantity');
+            $table->unsignedBigInteger('pemesanan_id')->nullable();
+            $table->foreignId('seller_id')->constrained('users')->onDelete('cascade')->nullable();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade')->nullable();
+            $table->unsignedBigInteger('menu_id')->nullable();
+            $table->decimal('harga', 10, 2)->nullable();
+            $table->integer('quantity')->nullable();
             $table->decimal('total_harga', 10, 2)->default(0);
             $table->decimal('total_semua_menu', 10, 2)->default(0);
             $table->timestamps();

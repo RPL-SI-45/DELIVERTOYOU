@@ -147,7 +147,7 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="home">HOME</a></li>
+                <li><a href="/home">HOME</a></li>
                 <li><a href="menu">MENU</a></li>
                 <li><a href="categories">CATEGORIES</a></li>
                 <li><a href="about">ABOUT</a></li>
@@ -161,22 +161,24 @@
 <div class="container mt-5">
     <div class="table-container">
         <div class="table-column">
-        <img src="{{ asset('img_example/makanan.png') }}" alt="Image 3" class="custom-img-size">
-        <div class="table-cell font-weight-bold">CRISBAR</div>
-        <div class="table-cell">ID : {{ $pemesanan->id }}</div>
-        <div class="table-cell">Status : {{ $pemesanan->status_pemesanan }}</div>
-        <div class="table-cell">Alamat : {{ $pemesanan->alamat }}</div>
-        <div class="table-cell">Menu   : {{ $Pemesananitem->menu_id }}</div>
-        <div class="table-cell">Harga   : {{ $Pemesananitem->harga }}</div>
-        <div class="table-cell">Quantity   : {{ $Pemesananitem->quantity }}</div>
-        <div class="table-cell">Total  : {{ $Pemesananitem->total_harga }}</div>
-        <br>
+            <img src="{{ asset('img_example/makanan.png') }}" alt="Image 3" class="custom-img-size">
+            <div class="table-cell font-weight-bold">CRISBAR</div>
+            <div class="table-cell">ID : {{ $pemesanan->id }}</div>
+            <div class="table-cell">Status : {{ $pemesanan->status_pemesanan }}</div>
+            <div class="table-cell">Alamat : {{ $pemesanan->alamat }}</div>
+            
+            @foreach($pemesanan->pemesananItems as $pemesananItem)
+                <div class="table-cell">Menu: {{ $pemesananItem->menu_warungs ? $pemesananItem->menu_warungs->nama : 'Menu not found' }}</div>
+                <div class="table-cell">Harga: {{ $pemesananItem->harga }}</div>
+                <div class="table-cell">Quantity: {{ $pemesananItem->quantity }}</div>
+                <div class="table-cell">Total: {{ $pemesananItem->total_harga }}</div>
+                <br>
+            @endforeach
 
-        <a href="/seller/status" a type="button" class="btn btn-dark">Back</a>   
+            <a href="/seller/status" class="btn btn-dark">Back</a>
         </div>
     </div>
 </div>
-
 
 </body>
 </html>

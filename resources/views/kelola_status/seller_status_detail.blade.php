@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=
     , initial-scale=1.0">
-    <title>Document</title>
+    <title>Seller Status</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href='https://fonts.googleapis.com/css?family=Biryani' rel='stylesheet'>
     
-    <style>
+<style>
         body {
       font-family: Arial, sans-serif;
 
@@ -148,10 +148,10 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="home">HOME</a></li>
-                <li><a href="menu">MENU</a></li>
-                <li><a href="categories">CATEGORIES</a></li>
-                <li><a href="about">ABOUT</a></li>
+                <li><a href="/seller/dash">HOME</a></li>
+                <li><a href="/seller/menu">MENU</a></li>
+                <li><a href="/seller/order">PESANAN</a></li>
+                <li><a href="/seller/status">STATUS</a></li>
                 <li><a href="login">LOGIN</a></li>
             </ul>
         </div>
@@ -163,14 +163,20 @@
     <div class="table-container">
         <div class="table-column">
             <img src="{{ asset('img_example/makanan.png') }}" alt="Image 3" class="custom-img-size">
-            <div class="table-cell font-weight-bold">Nama Customer</div>
+            <div class="table-cell font-weight-bold">Nama Customer : {{ $pemesanan->user->name }}</div>
             <div class="table-cell">ID : {{ $pemesanan->id }}</div>
             <div class="table-cell">Status : {{ $pemesanan->status_pemesanan }}</div>
             <div class="table-cell">Alamat : {{ $pemesanan->alamat }}</div>
-            <div class="table-cell">Menu : {{ $pemesanan->menu }}</div>
-            <div class="table-cell">Harga : {{ $pemesanan->harga }}</div>
-            <div class="table-cell">Quantity : {{ $pemesanan->quantity }}</div>
-            <div class="table-cell">Total : {{ $pemesanan->total_harga }}</div>
+            <br>
+            @foreach($pemesanan->pemesananItems as $pemesananItem)
+                <div class="table-cell">Menu : {{ $pemesananItem->menu_warungs ? $pemesananItem->menu_warungs->nama : 'Menu not found' }}</div>
+                <div class="table-cell">Harga: {{ $pemesananItem->harga }}</div>
+                <div class="table-cell">Quantity: {{ $pemesananItem->quantity }}</div>
+                <div class="table-cell">Total: {{ $pemesananItem->total_harga }}</div>
+                <br>
+            @endforeach
+            <div class="table-cell">Grand Total: {{ $pemesananItem->total_semua_menu }}</div>
+
             <br>
             <form action="{{ route('up_to_cook') }}" method="POST" style="display: flex; align-items: center; gap: 10px;">
             @csrf

@@ -24,5 +24,4 @@ trait ItemComparison
 
         return true;
     }
-
 }

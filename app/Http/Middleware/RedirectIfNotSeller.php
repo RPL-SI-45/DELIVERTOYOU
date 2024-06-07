@@ -23,5 +23,4 @@ class RedirectIfNotSeller
 
         return redirect()->route('login')->with('error', 'Access denied.');
     }
-
 }

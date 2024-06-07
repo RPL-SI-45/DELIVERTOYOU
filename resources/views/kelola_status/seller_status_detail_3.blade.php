@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=
     , initial-scale=1.0">
-    <title>Document</title>
+    <title>Seller Status</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href='https://fonts.googleapis.com/css?family=Biryani' rel='stylesheet'>
-
     
-    <style>
+<style>
         body {
       font-family: Arial, sans-serif;
 
@@ -149,10 +148,10 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="home">HOME</a></li>
-                <li><a href="menu">MENU</a></li>
-                <li><a href="categories">CATEGORIES</a></li>
-                <li><a href="about">ABOUT</a></li>
+                <li><a href="/seller/dash">HOME</a></li>
+                <li><a href="/seller/menu">MENU</a></li>
+                <li><a href="/seller/order">PESANAN</a></li>
+                <li><a href="/seller/status">STATUS</a></li>
                 <li><a href="login">LOGIN</a></li>
             </ul>
         </div>
@@ -168,10 +167,14 @@
         <div class="table-cell">ID : {{ $t->id }}</div>
         <div class="table-cell">Status : {{ $t->status_pemesanan }}</div>
         <div class="table-cell">Alamat : {{ $t->alamat }}</div>
-        <div class="table-cell">Menu   : {{ $t->menu }}</div>
-        <div class="table-cell">Harga   : {{ $t->harga }}</div>
-        <div class="table-cell">Quantity   : {{ $t->Quantity }}</div>
-        <div class="table-cell">Total  : {{ $t->total_harga }}</div>
+        @foreach($pemesanan->pemesananItems as $pemesananItem)
+                <div class="table-cell">Menu: {{ $pemesananItem->menu_warungs ? $pemesananItem->menu_warungs->nama : 'Menu not found' }}</div>
+                <div class="table-cell">Harga: {{ $pemesananItem->harga }}</div>
+                <div class="table-cell">Quantity: {{ $pemesananItem->quantity }}</div>
+                <div class="table-cell">Total: {{ $pemesananItem->total_harga }}</div>
+                <br>
+        @endforeach
+
         <br>
 
             <form action="{{ route('seller_status') }}" method="POST">

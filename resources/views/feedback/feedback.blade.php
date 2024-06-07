@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href='https://fonts.googleapis.com/css?family=Biryani' rel='stylesheet'>
     <title>DeliverToYou</title>
-</head>
-<style>
+    <style>
         body {
             margin: 0;
             font-family: 'Biryani', sans-serif;
             font-size: 14px;
+            background-color: #f4f4f4;
         }
 
         .navbar {
@@ -57,7 +57,43 @@
         .search-container button:hover {
             background: #ccc;
         }
-</style>
+
+        .feedback-container {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .feedback-container h3 {
+            margin-bottom: 15px;
+        }
+
+        .feedback-container select,
+        .feedback-container input[type=text],
+        .feedback-container button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .feedback-container button {
+            background-color: #343a40;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .feedback-container button:hover {
+            background-color: #23272b;
+        }
+    </style>
+</head>
 <body>
 
 <div class="navbar navbar-default navbar-static-top">
@@ -71,7 +107,7 @@
             </button>
             <a href="#" class="navbar-logo"><img src="/img_example/logo.png" alt="logo"></a>
             <div class="search-container">
-                <form action="{{ route('search.filter') }}" method="GET">
+                <form action="" method="GET">
                     <input type="text" name="search" placeholder="Search..." value="{{ request()->search }}">
                     <button type="submit">Search</button>
                 </form>
@@ -88,22 +124,23 @@
     </div>
 </div>
 
-<form action="/postfeedback" method='POST' enctype="multipart/form-data">
-    @csrf
-    <input type="hidden" name="id" value="{{$pemesanan->id}}">
-    <h3>Rating</h3>  
-    <select name="rating" class="form-control">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-    </select>
-    <h3>Feedback</h3>  
-    <input type="text" name="feedback" placeholder="Boleh feedbacknya kk">
-    <button type="submit" class="btn btn-dark">Submit</button>
-
- </form>
+<div class="feedback-container">
+    <form action="/postfeedback" method='POST' enctype="multipart/form-data">
+        @csrf
+        <input type="hidden" name="id" value="{{$pemesanan->id}}">
+        <h3>Rating</h3>  
+        <select name="rating" class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+        <h3>Feedback</h3>  
+        <input type="text" name="feedback" placeholder="Boleh feedbacknya kk">
+        <button type="submit" class="btn btn-dark">Submit</button>
+    </form>
+</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

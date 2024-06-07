@@ -16,6 +16,8 @@ class PemesananItem extends Model
         'quantity',
         'total_harga',
         'total_semua_menu',
+        'seller_id',
+        'user_id',
     ];
 
     public function pemesanan()
@@ -34,7 +36,8 @@ class PemesananItem extends Model
         parent::save($options);
     }
 
-}
-
+    public function menu_warungs() {
+        return $this->belongsTo(menu_warungs::class, 'menu_id');
+    }
     
-
+}

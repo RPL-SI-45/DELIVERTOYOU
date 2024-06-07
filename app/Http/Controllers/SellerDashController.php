@@ -5,7 +5,6 @@ use App\Models\SellerDash;
 use App\Models\SellerDash1;
 use App\Models\SellerDash2;
 use App\Models\User;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
@@ -14,6 +13,7 @@ class SellerDashController extends Controller
 {
     public function index(Request $request)
     {
+        
         $SellerDash = SellerDash::all();
         return view('Sellerdash.Sellerdash', compact('SellerDash'));
     }
@@ -22,6 +22,7 @@ class SellerDashController extends Controller
     {
         $SellerDash2 = SellerDash2::all();
         return view('Sellerdash.Sellerdash3', compact('SellerDash2'));
+        
     }
 
     public function EditProfileToko($id)
@@ -65,6 +66,7 @@ class SellerDashController extends Controller
 
         return redirect('/seller/dash')->with('success', 'Profile updated successfully');
     }
-
 }
+
+
 
