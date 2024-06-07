@@ -3,7 +3,6 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href='https://fonts.googleapis.com/css?family=Biryani' rel='stylesheet'>
     <title>DeliverToYou</title>
@@ -83,36 +82,63 @@
             margin: 0;
         }
 
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
         .card-container {
             display: flex;
-            flex-direction: row;
-            justify-content: center;
-            margin-top: 20px;
             flex-wrap: wrap;
-            align-items: flex-start;
+            justify-content: space-around;
+            width: 100%;
         }
 
         .card .card-img-top {
-            height: 50px;
-            object-fit: contain;
-            margin-right: 300px;
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
         }
 
         .card {
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            transition: 0.3s;
-            width: 50rem;
-            margin: 15px;
-            padding: 20px;
-            text-align: right;
-            background-color: #E7E4DC;
+            width: 300px; /* Anda dapat menyesuaikan lebar kartu sesuai kebutuhan */
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .card-text {
-            text-align: right;
-            margin-left: 50px;
-            margin-top: -50px;
+            padding: 15px;
+            text-align: center;
         }
+
+        .add-to-cart-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 14px;
+            color: #fff;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #218838;
+        }
+
+
+        .card-text p {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        
     </style>
 </head>
 <body>
@@ -144,24 +170,46 @@
     </div>
 </div>
 
-
 <div class="content-container">
     <img src="/img_example/makanan.png" class="content-img" alt="Content Image">
     <div class="content-text">
-        <p class="about">NAMA WARUNG, ALAMAT</p></br>
+        @foreach($nama_toko as $toko)
+        <p class="about">{{$toko->nama_toko}}, {{$toko->alamat_toko}}</p></br>
+        @endforeach
     </div>
 </div>
+
+<div class="dropdownfilter">
+    <h3> Filter </h3>
+    <form action="{{ route('menuwarung.filter') }}" method="GET">
+        <select name="nama_kategori" class="form-control" onchange="this.form.submit()">
+            <option value="">Select Category</option>
+            @foreach($Kategori_admin as $key => $value)
+                <option value="{{ $value }}" {{ request()->nama_kategori == $key ? 'selected' : '' }}>{{ $value }}</option>
+            @endforeach
+        </select>
+    </form>
+</div>
+
 
 <div class="card-container">
     @foreach($menu_warungs as $t)
     <div class="card">
-        <a href=""><img src="{{ asset('gambar_menu/'.$t->gambar) }}" class="card-img-top"></a>
+        <a href="/customer/menu"><img src="{{ asset('gambar_menu/'.$t->gambar) }}" class="card-img-top" alt="{{ $t->nama }}"></a>
         <div class="card-text">
-            <p class="Harga">Rp. {{ $t->harga }}</p>
+            <p>{{ $t->nama }}</p>
+            <p>Rp. {{ $t->harga }}</p>
+            <p>{{ $t->deskripsi}}</p>
+            <form class="add-to-cart-form" data-id="{{ $t->id }}" action="{{ route('cart.add', $t->id) }}" method="POST">
+                @csrf
+                <button type="button" class="add-to-cart-btn">Tambah Keranjang</button>
+            </form>
         </div>
     </div>
     @endforeach
 </div>
+
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

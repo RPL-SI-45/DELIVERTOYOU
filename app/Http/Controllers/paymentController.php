@@ -7,6 +7,7 @@ use App\Models\PemesananItem;
 use App\Models\Pemesanan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class PaymentController extends Controller
 {
@@ -52,7 +53,8 @@ class PaymentController extends Controller
     public function showQrisForm($pemesananId)
     {
         $pemesanan = Pemesanan::findOrFail($pemesananId);
-        return view('payment.customerqris', compact('pemesanan'));
+        $qris = User::where('id', $pemesanan->seller_id)->get();
+        return view('payment.customerqris', compact('pemesanan','qris'));
     }
 
     public function storeQris(Request $request, $pemesananId)

@@ -20,4 +20,6 @@ class Cart extends Model
     {
         return $this->belongsTo(menu_warungs::class);
     }
+
 }
+

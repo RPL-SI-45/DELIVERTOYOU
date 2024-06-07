@@ -9,16 +9,10 @@ use App\Http\Controllers\CardController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderHistoryController;
-
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\FeedbackController;
-
 use App\Http\Controllers\SellerDashController;
 use App\Http\Controllers\SearchFilterMenu;
 use App\Http\Controllers\Auth\LoginController;
-
-
-
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
@@ -57,7 +51,7 @@ Route::middleware(['auth', 'redirectIfNotCustomerOrSeller'])->group(function () 
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
     #FEEDBACK
-    Route::get('/order/{id}/status/feedback',[FeedbackController::class,'index']);
+    Route::get('/order/{id}/history/feedback',[FeedbackController::class,'index']);
     Route::post('/postfeedback',[FeedbackController::class,'store']);
     #EDIT PROFIL
     Route::get('/edit-profile', 'UserController@editProfile')->name('edit-profile');
@@ -76,24 +70,33 @@ Route::middleware(['auth', 'redirectIfNotCustomerOrSeller'])->group(function () 
     Route::post('/submit-alamat', [PemesananController::class, 'submitAlamat'])->name('submit.alamat');
     #PROFIL
     Route::get('/profil', [ProfileController::class, 'index']);
+    Route::get('/seller/{id}/edit', [SellerDashController::class, 'EditProfileToko']);
+    Route::put('/seller/{id}', [SellerDashController::class, 'UpdateProfileToko']);  
+    #KATEGORI ADMIN
+    Route::get('/kategori_admin',[KategoriAdminController::class,'index']);
+    Route::get('/kategori_admin/create',[KategoriAdminController::class,'create']);
+    Route::post('/kategori_admin/store',[KategoriAdminController::class,'store']);
+    Route::get('/kategori_admin/{id}/edit',[KategoriAdminController::class,'edit']);
+    Route::put('/kategori_admin/{id}',[KategoriAdminController::class,'update']);
+    Route::delete('/kategori_admin/{id}',[KategoriAdminController::class,'destroy']);
     #HALAMAN UTAMA
-    Route::get('/customer/menu', [CardController::class, 'menuwarung']);
+    Route::get('/customer/{id}/menu', [CardController::class, 'menuwarung']);
     Route::get('/home', [CardController::class, 'halamanutama'])->name('home');
     Route::get('/customer/menu/search', [SearchFilterMenu::class, 'index'])->name('search.filter');
+    Route::get('home/filter', [CardController::class, 'filterAllByCategory'])->name('home.filter');
+    Route::get('/menuwarung', [CardController::class, 'menuwarung'])->name('menuwarung.filter');
+    Route::get('/menuwarung/filter', [CardController::class, 'filterByCategory'])->name('menuwarung.filter');
     #PAYMENT
     Route::get('/payment/{pemesananId}', [PaymentController::class, "index"])->name('payment.index');
     Route::post('/payment/store/{pemesananId}', [PaymentController::class, 'store'])->name('payment.store');
     Route::get('/payment/qris/{pemesananId}', [PaymentController::class, "showQrisForm"])->name('payment.qris');
     Route::post('/payment/qris/store/{pemesananId}', [PaymentController::class, "storeQris"])->name('payment.storeQris');
-    Route::get('/customer/status/{pemesananId}', [PaymentController::class, 'showStatus'])->name('customer.status');
     #KELOLA STATUS CUSTOMER
     Route::get('/order/status', [StatusControl::class, 'order_status'])->name('order.status');
     Route::get('/order/{id}/status/detail', [statusControl::class,'order_status_detail']);
     #RIWAYAT CUSTOMER
     Route::get('/order/history', [OrderHistoryController::class, 'custhistory'])->name('cust.history');
     Route::get('/order/{id}/history/detail', [OrderHistoryController::class, 'historydetail'])->name('history.detail');
-
-
 });
 
 Route::middleware(['auth', 'seller'])->group(function () {
@@ -124,6 +127,10 @@ Route::middleware(['auth', 'seller'])->group(function () {
     Route::get('seller/{id}/status/detail/3', [statusControl::class, 'seller_status_detail_3']);
     #RIWAYAT PENJUAL
     Route::get('/seller/orderhistory', [OrderHistoryController::class, 'index'])->name('order.history');
+    #PROFIL
+    Route::get('/profil', [ProfileController::class, 'index']);
+    Route::get('/seller/{id}/edit', [SellerDashController::class, 'EditProfileToko']);
+    Route::put('/seller/{id}', [SellerDashController::class, 'UpdateProfileToko']);
 });
 
 // KATEGORI ADMIN

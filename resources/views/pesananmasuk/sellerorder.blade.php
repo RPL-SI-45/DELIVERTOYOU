@@ -6,139 +6,89 @@
     <title>Pembayaran</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
-        .navbar {
-            overflow: hidden;
-            background-color: #B49852;
+        body {
+            background-color: #f8f9fa;
         }
-
-        .navbar-logo img {
-            height: 40px;
-            margin-top: 10px;
-            margin-right: 15px;
-        }
-
-        .search-container {
-            display: inline-block;
-            position: absolute;
-            left: 50%;
-            top: 0;
-            transform: translateX(-50%);
-        }
-
-        .search-container input[type=text] {
-            padding: 5px;
-            margin-top: 10px;
-            font-size: 12px;
-            border: none;
-            border-radius: 5px;
-            width: 130px;
-        }
-
-        .search-container button {
-            padding: 5px;
-            margin-top: 10px;
-            margin-left: 3px;
-            background: #ddd;
-            font-size: 12px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        .search-container button:hover {
-            background: #ccc;
-        }
-
-        .card-container {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
+        .container h1 {
             margin-top: 20px;
-            flex-wrap: wrap;
-            align-items: center;
+            margin-bottom: 20px;
+            color: #000000;
         }
-
-        .card {
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            transition: 0.3s;
-            width: 15rem;
-            margin: 7px;
+        .table-hover tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+        .table-container {
             padding: 20px;
-            text-align: center;
-            background-color: #E7E4DC;
+            background-color: #B49852;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-
-        .card:hover {
-            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        .badge-danger {
+            background-color: #dc3545;
         }
-
-        .card-text {
-            margin-top: 10px;
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
         }
     </style>
 </head>
 <body>
 
-<div class="navbar navbar-default navbar-static-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="#" class="navbar-logo"><img src="img_example/logo.png" alt="logo"></a>
-            <div class="search-container">
-                <input type="text" placeholder="Search...">
-                <button type="submit">Search</button>
-            </div>
-        </div>
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="home">HOME</a></li>
-                <li><a href="menu">MENU</a></li>
-                <li><a href="categories">CATEGORIES</a></li>
-                <li><a href="about">ABOUT</a></li>
-                <li><a href="login">LOGIN</a></li>
-            </ul>
+<div class="container">
+    <div class="table-container">
+        <h1>Menunggu Konfirmasi</h1>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Pelanggan</th>
+                        <th>Order</th>
+                        <th>Quantity</th>
+                        <th>Total Pesanan</th>
+                        <th>Alamat</th>
+                        <th>Status Pesanan</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($pemesanan as $order)
+                        <tr>
+                            <td>{{ $order->id }}</td>
+                            <td>{{ $order->nama_pelanggan }}</td>
+                            <td>
+                                @foreach($order->items as $item)
+                                    <div>{{ $item->menu->nama }}</div>
+                                @endforeach
+                            </td>
+                            <td>
+                                @foreach($order->items as $item)
+                                    <div>{{ $item->quantity }}</div>
+                                @endforeach
+                            </td>
+                            <td>{{ $order->items->sum('total_harga') }}</td>
+                            <td>{{ $order->alamat }}</td>
+                            <td>
+                                @if($order->status_pemesanan == 'Pesanan Ditolak')
+                                    <span class="badge bg-danger">Pesanan ditolak</span>
+                                @else
+                                    <a href="{{ route('seller_status_update', ['id' => $order->id]) }}" class="btn btn-primary btn-sm">Konfirmasi Pesanan</a>
+                                @endif
+                            </td>
+                            <td>
+                                <a href="{{ route('seller.detail', ['id' => $order->id]) }}" class="btn btn-primary btn-sm">Detail</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
 
-<div class ="container">
-    <h1>Menunggu Konfirmasi</h1>
-    <table class="table table-hover" border="1">
-        <tr>
-            <th>No</th>
-            <th>Nama Pelanggan</th>
-            <th>Order</th>
-            <th>Harga</th>
-            <th>Total Harga</th>
-            <th>Alamat</th>
-            <th>Status Pesanan</th>
-        </tr>
-        @foreach($pemesanan as $p)
-         <tr>
-            <td>{{$p->id}}</td>
-            <td>{{$p->nama_pelanggan}}</td>
-            <td>{{$p->menu}}</td>
-            <td>{{$p->harga}}</td>
-            <td>{{$p->total_harga}}</td>
-            <td>{{$p->alamat}}</td>
-            <td>
-                @if($p->status_pemesanan == 'Pesanan Ditolak')
-                    <span class="badge bg-danger">Pesanan ditolak</span>
-                @else
-                    <a href="/seller/status/{{ $p->id }}/update" type="button" class="btn btn-primary">Konfirmasi Pesanan</a>
-                @endif
-            </td>
-            <td>
-                <a href="{{route('seller.detail', ['id' => $p->id])}}" class="btn btn-primary">Detail</a>
-            </td>
-         </tr>
-        @endforeach
-    </table>
-</div>
 </body>
 </html>

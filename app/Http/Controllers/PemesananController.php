@@ -35,6 +35,9 @@ class PemesananController extends Controller
             return redirect()->back()->with('status', 'Keranjang Anda kosong.');
         }
 
+        $firstCartItem = $cartItems->first();
+        $sellerId = $firstCartItem->menu->seller_id;
+
         $latestPemesanan = Pemesanan::with('items')
             ->where('user_id', $user->id)
             ->where('status', '!=', 'completed')
@@ -47,6 +50,7 @@ class PemesananController extends Controller
     
         $pemesanan = Pemesanan::create([
             'user_id' => $user->id,
+            'seller_id' => $sellerId,
             'nama_pelanggan' => $user->name,
         ]);
         
@@ -136,14 +140,12 @@ class PemesananController extends Controller
     {
         $user = Auth::user();
         $pemesanan = Pemesanan::where('user_id', $user->id)->where('id', $id)->first();
-
         if ($pemesanan) {
             $pemesanan->status = 'completed';
             $pemesanan->save();
 
             // Update status keranjang terkait menjadi completed
             Cart::where('user_id', $user->id)->where('status', 'active')->update(['status' => 'completed']);
-
             return redirect()->route('pemesanan.index')->with('status', 'Pemesanan telah selesai.');
         }
 
@@ -168,4 +170,6 @@ class PemesananController extends Controller
 
         return redirect()->back()->with('status', 'Alamat berhasil disimpan.');
     }
+
 }
+

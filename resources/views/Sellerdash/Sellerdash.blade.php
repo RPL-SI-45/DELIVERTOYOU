@@ -154,10 +154,12 @@
             <p class="lead">Kelola pesanan Anda dengan mudah, pantau performa penjualan, dan maksimalkan potensi bisnis Anda.</p>
             <hr class="my-4">
             <p>Gunakan alat dan fitur yang tersedia untuk meningkatkan penjualan Anda.</p>
-            <a class="btn btn-dark" href="/seller/status" role="button">Lihat Pesanan</a>
+            <a class="btn btn-dark" href="/seller/order" role="button">Lihat Pesanan</a>
+            <a class="btn btn-dark" href="/seller/orderhistory" role="button">Riwayat Pesanan</a>
             <div class="text-center my-5">
             <a href="/seller/menu/input" class="btn btn-dark">Tambah Makanan & Minuman Baru</a>
             <a href="/seller/menu" class="btn btn-dark">Kelola Menu</a>
+            <a href="/seller/{{ auth()->user()->id }}/edit" class="btn btn-dark">Edit Profil Toko</a>
             </div>
         </div>
     </div>
