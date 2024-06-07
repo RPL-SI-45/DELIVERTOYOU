@@ -9,6 +9,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderHistoryController;
 
 
+
 class Pemesanan extends Model
 {
     public $table = "pemesanan";
@@ -34,9 +35,8 @@ class Pemesanan extends Model
     {
         return $this->hasOne(Payment::class);
     }
-  
-    public function pesananmasuk() { 
-        return $this->belongsTo(PesananMasuk::class, 'pesananmasuk_id'); 
+public function pesananmasuk() { 
+    return $this->belongsTo(PesananMasuk::class, 'pesananmasuk_id'); 
     }
 
 
