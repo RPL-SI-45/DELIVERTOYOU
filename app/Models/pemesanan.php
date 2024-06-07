@@ -8,16 +8,22 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderHistoryController;
 
-
 class Pemesanan extends Model
 {
     public $table = "pemesanan";
     use HasFactory;
-    
-    
 
 
-    protected $fillable = ['user_id', 'seller_id', 'nama_pelanggan', 'alamat', 'status_pemesanan', 'rating', 'feedback', 'confirmation_at'];
+    protected $fillable = [
+        'user_id', // Tambahkan user_id ke fillable
+        'seller_id',
+        'nama_pelanggan',
+        'alamat',
+        'status_pemesanan',
+        'rating',
+        'feedback',
+        'confirmation_at',
+    ];   
     
     public function user()
     {
@@ -30,16 +36,10 @@ class Pemesanan extends Model
         return $this->belongsTo(User::class, 'seller_id');
     }
   
-    public function payment()
-    {
-        return $this->hasOne(Payment::class);
-    }
-  
     public function pesananmasuk() { 
         return $this->belongsTo(PesananMasuk::class, 'pesananmasuk_id'); 
     }
-
-
+  
     public function payment()
     {
         return $this->hasOne(Payment::class, 'pemesanan_id'); 
@@ -50,3 +50,4 @@ class Pemesanan extends Model
         return $this->hasMany(PemesananItem::class, 'pemesanan_id'); 
     }
 }
+

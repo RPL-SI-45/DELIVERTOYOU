@@ -159,7 +159,6 @@
             <div class="text-center my-5">
             <a href="/seller/menu/input" class="btn btn-dark">Tambah Makanan & Minuman Baru</a>
             <a href="/seller/menu" class="btn btn-dark">Kelola Menu</a>
-
             <a href="/seller/{{ auth()->user()->id }}/edit" class="btn btn-dark">Edit Profil Toko</a>
             </div>
         </div>

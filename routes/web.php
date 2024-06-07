@@ -132,6 +132,7 @@ Route::middleware(['auth', 'seller'])->group(function () {
     Route::get('/seller/{id}/edit', [SellerDashController::class, 'EditProfileToko']);
     Route::put('/seller/{id}', [SellerDashController::class, 'UpdateProfileToko']);
 });
+
 // KATEGORI ADMIN
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/kategori_admin', [KategoriAdminController::class, 'index'])->name('kategori_admin.index');
@@ -141,4 +142,3 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('/kategori_admin/{id}', [KategoriAdminController::class, 'update'])->name('kategori_admin.update');
     Route::delete('/kategori_admin/{id}', [KategoriAdminController::class, 'destroy'])->name('kategori_admin.destroy');
 });
-

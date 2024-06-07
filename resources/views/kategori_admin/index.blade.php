@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href='https://fonts.googleapis.com/css?family=Biryani' rel='stylesheet'>
     <title>DeliverToYou</title>
-=======
     <style>
         body {
             margin: 0;
@@ -160,4 +159,3 @@
 
 </body>
 </html>
-

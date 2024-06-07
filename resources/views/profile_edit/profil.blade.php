@@ -123,9 +123,6 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="home">HOME</a></li>
-                <li><a href="menu">MENU</a></li>
-                <li><a href="/profil">PROFIL</a></li>
-                <li><a href="login">LOGIN</a></li>
             </ul>
         </div>
     </div>
