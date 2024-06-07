@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href='https://fonts.googleapis.com/css?family=Biryani' rel='stylesheet'>
     <title>DeliverToYou</title>
-=======
     <style>
         body {
             margin: 0;
@@ -129,9 +128,7 @@
 <div style="text-align: center;">
     <button style="background-color: #4CAF50; color: white; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; margin-bottom: 10px;" onclick="window.location.href='/kategori_admin/create'">Tambah Kategori</button>
     <table border="1" style="margin: 0 auto; border-collapse: collapse;">
-    <button class="btn-primary" onclick="window.location.href='/kategori_admin/create'">Tambah Kategori</button>
     <table>
-
         <tr>
             <th>ID</th>
             <th>Kategori</th>
