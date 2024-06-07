@@ -14,7 +14,7 @@ use Illuminate\Validation\Rule;
 class ProfileController extends Controller
 {
     public function index(){
-        return view('profile_edit.profil');
+        return view('edit_profile.profil');
     }
 
     public function updateProfile(Request $request)

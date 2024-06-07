@@ -6,15 +6,17 @@ use App\Models\Payment;
 use App\Models\PemesananItem;
 use App\Models\Pemesanan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class PaymentController extends Controller
 {
     public function index($pemesananId)
     {
         $pemesanan = Pemesanan::findOrFail($pemesananId);
-        $pemesananItem = PemesananItem::where('pemesanan_id', $pemesananId)->first();
+        $pemesananItem = $pemesanan->items->first();
         return view('payment.customerpayment', compact('pemesanan', 'pemesananItem'));
-    }
+    }    
 
     public function store(Request $request, $pemesananId)
     {
@@ -40,14 +42,19 @@ class PaymentController extends Controller
                 'total_bayar' => $total_bayar,
             ]);
 
-            return redirect()->route('customer.status', ['pemesananId' => $pemesananId]);
+            // Update status pemesanan menjadi completed
+            $pemesanan->status = 'completed';
+            $pemesanan->save();
+
+            return redirect()->route('order.status', ['pemesananId' => $pemesananId]);
         }
     }
 
     public function showQrisForm($pemesananId)
     {
         $pemesanan = Pemesanan::findOrFail($pemesananId);
-        return view('payment.customerqris', compact('pemesanan'));
+        $qris = User::where('id', $pemesanan->seller_id)->get();
+        return view('payment.customerqris', compact('pemesanan','qris'));
     }
 
     public function storeQris(Request $request, $pemesananId)
@@ -85,14 +92,33 @@ class PaymentController extends Controller
             'bukti' => $filename,
         ]);
 
+        // Update status pemesanan menjadi completed
+        $pemesanan->status = 'completed';
+        $pemesanan->save();
+
         // Redirect ke halaman konfirmasi pembayaran diterima
-        //return redirect()->route('customer.status', $pemesananId);
-        return redirect('order/status');
+        return redirect()->route('order.status', ['pemesananId' => $pemesananId]);
     }
 
     public function showStatus($pemesananId)
     {
         $pemesanan = Pemesanan::findOrFail($pemesananId);
-        return view('payment.customerstatus', compact('pemesanan'));
+        return view('order.status', compact('pemesanan'));
+    }
+
+    public function completePayment(Request $request, $pemesananId)
+    {
+        // Logika untuk memproses pembayaran
+        $paymentSuccessful = true; // Contoh, sesuaikan dengan logika sebenarnya
+
+        if ($paymentSuccessful) {
+            $pemesanan = Pemesanan::find($pemesananId);
+            $pemesanan->status = 'completed';
+            $pemesanan->save();
+            
+            return redirect()->route('payment.index', ['pemesananId' => $pemesananId])->with('success', 'Pembayaran berhasil dan status pemesanan sudah diperbarui.');
+        }
+
+        return redirect()->route('pemesanan.index')->with('error', 'Pembayaran gagal.');
     }
 }

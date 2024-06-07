@@ -11,16 +11,12 @@ class OrderController extends Controller
 {
     public function sellerOrder()
     {
-
-        $pemesanan = Pemesanan::all();
-        return view('pesananmasuk.sellerorder', compact('pemesanan'));
-       
-        
-        // Mengambil data pembayaran
+        $pemesanan = Pemesanan::where('status_pemesanan', '!=', 'Pesanan Diterima dan selesai')->get();
         $payment = Payment::all();
         
         return view('pesananmasuk.sellerorder', compact('pemesanan', 'payment'));
     }
+    
 
     public function sellerDetail($id)
     {

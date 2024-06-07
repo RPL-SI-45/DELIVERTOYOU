@@ -50,7 +50,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="total_amount">Total Bayar</label>
-                        <input type="number" name="total_amount" id="total_amount" class="form-control" value="{{ $pemesanan->total_harga }}" readonly>
+                        <input type="number" name="total_amount" id="total_amount" class="form-control" value="{{ $pemesananItem->total_semua_menu }}" readonly>
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Submit</button>
                 </form>

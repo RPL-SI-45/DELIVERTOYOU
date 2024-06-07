@@ -35,6 +35,9 @@ class PemesananController extends Controller
             return redirect()->back()->with('status', 'Keranjang Anda kosong.');
         }
 
+        $firstCartItem = $cartItems->first();
+        $sellerId = $firstCartItem->menu->seller_id;
+
         $latestPemesanan = Pemesanan::with('items')
             ->where('user_id', $user->id)
             ->where('status', '!=', 'completed')
@@ -65,8 +68,9 @@ class PemesananController extends Controller
                 'harga' => $item->menu->harga,
                 'quantity' => $item->quantity,
                 'total_harga' => $totalHargaItem,
-                'total_semua_menu' => 0,
-                'seller_id' => $sellerId, // Set sementara sebagai 0, akan diperbarui di bawah
+                'seller_id' => $sellerId,
+                'user_id' => $user->id,
+                'total_semua_menu' => 0, // Set sementara sebagai 0, akan diperbarui di bawah
             ]);
         }
     

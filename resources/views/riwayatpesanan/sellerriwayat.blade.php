@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -103,36 +104,46 @@
             </div>
         </form>
         <div class="table-responsive">
-            <table class="table table-bordered table-hover mt-3">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nama Pelanggan</th>
-                        <th>Menu</th>
-                        <th>Harga</th>
-                        <th>Quantity</th>
-                        <th>Total Harga</th>
-                        <th>Alamat</th>
-                        <th>Status Pemesanan</th>
-                        <th>Tanggal Pemesanan</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($pemesanan as $pm)
+            @if($pemesanan->isEmpty())
+                <p class="text-center">Tidak ada pesanan yang ditemukan.</p>
+            @else
+                <table class="table table-bordered table-hover mt-3">
+                    <thead>
                         <tr>
-                            <td>{{ $pm->id }}</td>
-                            <td>{{ $pm->nama_pelanggan }}</td>
-                            <td>{{ $pm->menu }}</td>
-                            <td>{{ $pm->harga }}</td>
-                            <td>{{ $pm->quantity }}</td>
-                            <td>{{ $pm->total_harga }}</td>
-                            <td>{{ $pm->alamat }}</td>
-                            <td>{{ $pm->status_pemesanan }}</td>
-                            <td>{{ $pm->created_at }}</td>
+                            <th>ID</th>
+                            <th>Nama Pelanggan</th>
+                            <th>Menu</th>
+                            <th>Quantity</th>
+                            <th>Total Pesanan</th>
+                            <th>Alamat</th>
+                            <th>Status Pemesanan</th>
+                            <th>Tanggal Pemesanan</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach($pemesanan as $pm)
+                            <tr>
+                                <td>{{ $pm->id }}</td>
+                                <td>{{ $pm->nama_pelanggan }}</td>
+                                <td>
+                                    @foreach($pm->items as $item)
+                                        <div>{{ $item->menu->nama }}</div>
+                                    @endforeach
+                                </td>
+                                <td>
+                                    @foreach($pm->items as $item)
+                                        <div>{{ $item->quantity }}</div>
+                                    @endforeach
+                                </td>
+                                <td>{{ $pm->items->sum('total_semua_menu') }}</td>
+                                <td>{{ $pm->alamat }}</td>
+                                <td>{{ $pm->status_pemesanan }}</td>
+                                <td>{{ $pm->created_at }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @endif
         </div>
     </div>
 

@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Seller Menu Input</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href='https://fonts.googleapis.com/css?family=Biryani' rel='stylesheet'>
     <style>
@@ -108,11 +107,13 @@
         .card {
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
             transition: 0.3s;
-            width: 15rem;
+            width: 30rem;
             margin: 7px;
             padding: 20px;
             text-align: center;
             background-color: #E7E4DC;
+            margin: 0 auto; /* Added */
+            float: none; /* Added */
 
         }
 
@@ -124,6 +125,21 @@
             margin-top: 10px;
         }
 
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .search-container {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Additional Styles */
+        .intro-text {
+            margin: 20px 0;
+            text-align: center;
+            font-family: 'Biryani', sans-serif;
+            color: #333;
+        }
     </style>
 </head>
 <body>
@@ -145,49 +161,60 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="home">HOME</a></li>
-                <li><a href="menu">MENU</a></li>
-                <li><a href="categories">CATEGORIES</a></li>
-                <li><a href="about">ABOUT</a></li>
+            <li><a href="/seller/dash">HOME</a></li>
+                <li><a href="/seller/menu">MENU</a></li>
+                <li><a href="/seller/order">PESANAN</a></li>
+                <li><a href="/seller/status">STATUS</a></li>
                 <li><a href="login">LOGIN</a></li>
             </ul>
         </div>
     </div>
 </div>
 
+<div class="card cardstyle">
+    <div class="intro-text">
+        <h2>Input Menu</h2>
+        <p>Anda dapat menambahkan menu yang diinginkan ke Warung anda.</p>
+    </div>
 
     <form action="/post" method='POST' enctype="multipart/form-data">
     @csrf
+        <div class="form-group">
+            <label for="nama_kategori">Kategori</label>
+            <select name="nama_kategori" class="form-control" id="nama_kategori">
+                @foreach($Kategori_admin as $value)
+                    <option value="{{ $value }}">{{ $value }}</option>
+                @endforeach
+            </select>
+        </div>
 
-    <h1> Kategori</h1>  
-    <select name="nama_kategori" class="form-control">
-    @foreach($Kategori_admin as $value)
-         <option value="{{ $value }}">{{ $value }}</option>
-     @endforeach
-    </select>
-    <h1> Nama</h1>  
-    <input type="text" name="nama" placeholder="Nama">
-    <h1> Harga </h1> 
-    <input type="text" name="harga" placeholder="Harga">
-    <h1> Deskirpsi </h1> 
-    <input type="text" name="deskripsi" placeholder="Deskripsi"> <br>
-    <br>
-    
-    <div class="form-group">
-        <label for="exampleFormControlFile1">Gambar menu</label>
-        <input type="file" class="form-control-file" id="exampleFormControlFile1" name="gambar">
-    </div>
+        <div class="form-group">
+            <label for="nama">Nama</label>
+            <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama">
+        </div>
 
-    <br>
+        <div class="form-group">
+            <label for="harga">Harga</label>
+            <input type="text" name="harga" class="form-control" id="harga" placeholder="Harga">
+        </div>
 
-    <button type="submit" class="btn btn-success">Submit</button>
-    <a href="/seller/menu" button type="button" class="btn btn-danger">Cancel</button>
-    
+        <div class="form-group">
+            <label for="deskripsi">Deskripsi</label>
+            <input type="text" name="deskripsi" class="form-control" id="deskripsi" placeholder="Deskripsi">
+        </div>
 
+        <div class="form-group">
+            <label for="exampleFormControlFile1">Gambar menu</label>
+            <input type="file" class="form-control-file" id="exampleFormControlFile1" name="gambar">
+        </div>
+
+        <button type="submit" class="btn btn-success">Submit</button>
+        <a href="/seller/menu" class="btn btn-danger">Cancel</a>
+    </form>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </body>
 </html>
-
-
-
-

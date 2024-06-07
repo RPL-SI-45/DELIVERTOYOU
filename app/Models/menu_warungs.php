@@ -19,4 +19,8 @@ class menu_warungs extends Model
         'gambar',  
         'seller_id',];
     protected $guarded= ['id'];
+
+    public function pemesananItems() {
+        return $this->hasMany(Pemesananitem::class, 'menu_id');
+    }
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>Document</title>
+    <title>Seller Status</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -171,65 +171,71 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="home">HOME</a></li>
-                <li><a href="menu">MENU</a></li>
-                <li><a href="categories">CATEGORIES</a></li>
-                <li><a href="about">ABOUT</a></li>
+                <li><a href="/seller/dash">HOME</a></li>
+                <li><a href="/seller/menu">MENU</a></li>
+                <li><a href="/seller/order">PESANAN</a></li>
+                <li><a href="/seller/status">STATUS</a></li>
                 <li><a href="login">LOGIN</a></li>
             </ul>
         </div>
     </div>
 </div>
 
-            @foreach($pemesanan as $t)
-                @foreach($Pemesananitem as $m)
+<div class="text-center mt-3">
+    <a href="/seller/orderhistory" class="btn btn-secondary btn-lg btn-block">Lihat Riwayat Pesanan</a>
+</div>
+
+
+@php
+    $displayedPemesananIds = [];
+@endphp
+
+@foreach($pemesanan as $t)
+    @if($t->pemesananItems->isNotEmpty())
+        @foreach($t->pemesananItems as $m)
+            @if (!in_array($t->id, $displayedPemesananIds))
+                @php
+                    array_push($displayedPemesananIds, $t->id);
+                @endphp
                 <div class="container mt-5">
-                 <div class="table-container">
-                  <div class="table-column">
-                     <img src="{{ asset('img_example/makanan.png') }}" alt="Image 3" class="custom-img-size">
-                    <div class="table-cell font-weight-bold">Customer : {{ $t->nama_pelanggan }}</div>
-                    <div class="table-cell">ID : {{ $t->id }}</div>
-                    <div class="table-cell">Status : {{ $t->status_pemesanan }}</div>
-                    <div class="table-cell">Total  : {{ $m->total_harga }}</div>
- 
+                    <div class="table-container">
+                        <div class="table-column">
+                            <img src="{{ asset('img_example/makanan.png') }}" alt="Image 3" class="custom-img-size">
+                            <div class="table-cell font-weight-bold">Customer : {{ $t->nama_pelanggan }}</div>
+                            <div class="table-cell">ID : {{ $t->id }}</div>
+                            <div class="table-cell">Status : {{ $t->status_pemesanan }}</div>
+                            <div class="table-cell">Total : {{ $m->total_semua_menu }}</div>
 
-                    <?php
-                    $diproses = $t->status_pemesanan;
-                    $id = $t->id;
+                            <?php
+                                $diproses = $t->status_pemesanan;
+                                $id = $t->id;
 
-                    switch ($diproses) {
-                        case 'Sudah dikonfirmasi':
-                            $route = "{$id}/status/detail";
-                            break;
-                        case 'Sedang Dimasak oleh Ahlinya':
-                            $route = "{$id}/status/detail/1";
-                            break;
-                        case 'Sedang diantar oleh driver professional':
-                            $route = "{$id}/status/detail/2";
-                            break;
-                        case 'Pesanan Diterima dan selesai':
-                            $route = "{$id}/status/detail/3";
-                        default:
-                            // Rute default jika tidak ada kecocokan
-                            $route = "/home";
-                            break;  
-                        } 
-                    ?>  
-                
-                    <a href="<?= $route ?>" a type="button" class="btn btn-dark">Detail</a>   
-
-                
-                    
-                   </div>
-                  </div>
-                 </div>
+                                switch ($diproses) {
+                                    case 'Sudah dikonfirmasi':
+                                        $route = "{$id}/status/detail";
+                                        break;
+                                    case 'Sedang Dimasak oleh Ahlinya':
+                                        $route = "{$id}/status/detail/1";
+                                        break;
+                                    case 'Sedang diantar oleh driver professional':
+                                        $route = "{$id}/status/detail/2";
+                                        break;
+                                    case 'Pesanan Diterima dan selesai':
+                                        $route = "{$id}/status/detail/3";
+                                        break;
+                                    default:
+                                        // Rute default jika tidak ada kecocokan
+                                        $route = "/home";
+                                        break;  
+                                } 
+                            ?>  
+                            <a href="<?= $route ?>" a type="button" class="btn btn-dark">Detail</a>   
+                        </div>
+                    </div>
                 </div>
-                @endforeach
-            @endforeach
-
-    
-
-
-    
+            @endif
+        @endforeach
+    @endif
+@endforeach 
 </body>
 </html>

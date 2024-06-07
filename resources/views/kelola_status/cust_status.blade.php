@@ -182,25 +182,31 @@
     </div>
 </div>
 
-            @foreach($pemesanan as $t)
-                @foreach($Pemesananitem as $m)
-                <div class="container mt-5">
-                 <div class="table-container">
-                  <div class="table-column">
-                     <img src="{{ asset('img_example/makanan.png') }}" alt="Image 3" class="custom-img-size">
-                    <div class="table-cell font-weight-bold">CRISBAR</div>
+@foreach($pemesanan as $t)
+    @if($t->pemesananItems->isNotEmpty())
+        @php $firstItem = $t->pemesananItems->first(); @endphp
+        <div class="container mt-5">
+            <div class="table-container">
+                <div class="table-column">
+                    <img src="{{ asset('img_example/makanan.png') }}" alt="Image 3" class="custom-img-size">
+                    <div class="table-cell font-weight-bold">{{ $t->user->nama_toko }}</div>
                     <div class="table-cell">ID : {{ $t->id }}</div>
-                    <div class="table-cell">Menu : {{ $t->menu }}</div>
+                    <div class="table-cell">
+                        Menu :
+                        @if($firstItem->menu_warungs)
+                            {{ $firstItem->menu_warungs->nama }}
+                        @else
+                            Menu not found
+                        @endif
+                    </div>
                     <div class="table-cell">Status : {{ $t->status_pemesanan }}</div>
-                    <div class="table-cell">Total  : {{ $m->total_harga }}</div>
-
-                    <a href="/order/{{$t->id}}/status/detail" a type="button" class="btn btn-dark">Detail</a>   
-
-                  </div>
-                 </div>
-                </div> 
-                @endforeach
-            @endforeach  
+                    <div class="table-cell">Total : {{ $firstItem->total_harga }}</div>
+                    <a href="/order/{{ $t->id }}/status/detail" type="button" class="btn btn-dark">Detail</a>
+                </div>
+            </div>
+        </div>
+    @endif
+@endforeach
 
             
       

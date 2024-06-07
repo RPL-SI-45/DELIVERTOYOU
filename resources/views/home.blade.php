@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href='https://fonts.googleapis.com/css?family=Biryani' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <title>DeliverToYou</title>
     <style>
         body {
@@ -152,7 +154,6 @@
             background-color: #218838;
         }
 
-
         .card-text p {
             margin: 0;
             font-size: 16px;
@@ -178,7 +179,7 @@
             border-radius: 5px;
             z-index: 1000;
         }
-            </style>
+    </style>
 </head>
 <body>
 <div class="navbar navbar-default navbar-static-top">
@@ -190,21 +191,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <li>
-                <div>
-                @if(auth()->check())
+            @if(auth()->check())
+                <p class="navbar-text">
                     @if(auth()->user()->role == 'seller')
-                        <p class="navbar-text">Halo Seller</p>
+                        Halo Seller
                     @elseif(auth()->user()->role == 'customer')
-                        <p class="navbar-text">Halo {{ auth()->user()->name }}</p>
+                        Halo {{ auth()->user()->name }}
                     @endif
-                @endif
-                </div>
-            </li>
-            <div class="search-container">
-                <input type="text" placeholder="Search...">
-                <button type="submit">Search</button>
-            </div>
+                </p>
+            @endif
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -229,21 +224,32 @@
 </div>
 
 <div class="content-container">
-    <img src="img_example/makanan.png" class="content-img" alt="Content Image">
+    <img src="/img_example/makanan.png" class="content-img" alt="Content Image">
 </div>
 
+<div class="dropdownfilter">
+    <h3> Filter </h3>
+    <form action="{{ route('home.filter') }}" method="GET">
+        <select name="nama_kategori" class="form-control" onchange="this.form.submit()">
+            <option value="">Select Category</option>
+            @foreach($Kategori_admin as $key => $value)
+                <option value="{{ $value }}" {{ request()->nama_kategori == $key ? 'selected' : '' }}>{{ $value }}</option>
+            @endforeach
+        </select>
+    </form>
+</div>
 
 <div class="card-container">
     @foreach($menu_warungs as $t)
     <div class="card">
-        <a href="/customer/menu"><img src="{{ asset('gambar_menu/'.$t->gambar) }}" class="card-img-top" alt="{{ $t->nama }}"></a>
+        <a href="/customer/{{$t->seller_id}}/menu"><img src="{{ asset('gambar_menu/'.$t->gambar) }}" class="card-img-top" alt="{{ $t->nama }}"></a>
         <div class="card-text">
             <p>{{ $t->nama }}</p>
             <p>Rp. {{ $t->harga }}</p>
             <p>{{ $t->deskripsi}}</p>
             <form class="add-to-cart-form" data-id="{{ $t->id }}" action="{{ route('cart.add', $t->id) }}" method="POST">
                 @csrf
-                <button type="button" class="add-to-cart-btn">Tambah Keranjang</button>
+                <button type="submit" class="add-to-cart-btn">Tambah Keranjang</button>
             </form>
         </div>
     </div>
@@ -254,10 +260,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<head>
-    <!-- jQuery CDN -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
 <script>
     $(document).ready(function() {
         $('#search-button').on('click', function(e) {
@@ -272,12 +274,14 @@
                 }
             });
         });
-    });
-</script>
 
-<script>
-    $(document).ready(function() {
-        $('.add-to-cart-btn').click(function() {
+        var status = "{{ session('status') }}";
+        if (status) {
+            $('#notification').text(status).css('background-color', '#4CAF50').fadeIn().delay(2000).fadeOut();
+        }
+
+        $('.add-to-cart-btn').click(function(e) {
+            e.preventDefault();
             var form = $(this).closest('form');
             var formData = form.serialize();
             var actionUrl = form.attr('action');
@@ -300,5 +304,6 @@
         });
     });
 </script>
+
 </body>
 </html>

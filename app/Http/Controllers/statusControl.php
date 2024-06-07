@@ -7,6 +7,7 @@ use App\Models\SellerDash;
 use App\Models\SellerDash1;
 use App\Models\SellerDash2;
 use App\Models\Pemesananitem;
+use App\Models\menu_warungs;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -22,15 +23,25 @@ class statusControl extends Controller
 
     public function seller_status()
     {   
-        $pemesanan = pemesanan::all();
-        $Pemesananitem = Pemesananitem::all();
-        return view('kelola_status.seller_status',compact(['pemesanan','Pemesananitem']));
+        $id_seller = auth()->id();
+        
+        $pemesanan = Pemesanan::with(['pemesananItems.menu_warungs'])
+                        ->where('seller_id', $id_seller)
+                        ->where('status_pemesanan', '!=', 'Pesanan Diterima dan selesai')
+                        ->get();
+    
+        $Pemesananitem = Pemesananitem::where('seller_id', $id_seller)
+                        ->whereIn('pemesanan_id', $pemesanan->pluck('id'))
+                        ->get();
+    
+        return view('kelola_status.seller_status', compact('pemesanan', 'Pemesananitem'));
     }
+    
 
     public function order_status(Request $request)
     {
-        // Mendapatkan id_user yang saat ini masuk
-        $id_user = auth()->id(); // Anda mungkin perlu menyesuaikan ini dengan cara Anda mengotentikasi pengguna
+        $pemesanan = Pemesanan::with('user')->where('status_pemesanan', '!=', 'Pesanan Diterima dan selesai')->get();
+        $id_user = auth()->id(); 
     
         // Mengambil pemesanan yang terkait dengan id_user yang sedang masuk
         $pemesanan = Pemesanan::where('user_id', $id_user)->get();
@@ -41,25 +52,33 @@ class statusControl extends Controller
 
 
     public function order_status_detail(Request $request)
-    {
-        $pemesanan = pemesanan::findOrFail($request->id); 
-        $Pemesananitem = Pemesananitem::findOrFail($request->id); 
-        //$Pemesananitem = PemesananItem::all();
+    {   
+      
+        $pemesanan = Pemesanan::findOrFail($request->id);
+
+       
+        $Pemesananitem = Pemesananitem::where('pemesanan_id', $request->id)
+                                        ->with('menu_warungs')
+                                        ->get();
         return view('kelola_status.cust_status_detail', compact('pemesanan','Pemesananitem'));
     }
 
     public function seller_status_detail(Request $request)
-    {
-        $pemesanan = pemesanan::findOrFail($request->id); 
-        $Pemesananitem = Pemesananitem::findOrFail($request->id); 
-        return view('kelola_status.seller_status_detail',compact(['pemesanan']));
+    {   
+        $pemesanan = Pemesanan::findOrFail($request->id);
+
+       
+        $Pemesananitem = Pemesananitem::where('pemesanan_id', $request->id)
+                                        ->with('menu_warungs')
+                                        ->get();
+        return view('kelola_status.seller_status_detail',compact(['pemesanan','Pemesananitem']));
 
     }
 
 
     public function up_to_cook(Request $request)
-    {
-        // Validasi input request
+    {   
+
         $request->validate([
             'id' => 'required|integer|exists:pemesanan,id',
         ]);
@@ -80,7 +99,11 @@ class statusControl extends Controller
     
     public function seller_status_detail_1(Request $request)
     {
-        $pemesanan = pemesanan::findOrFail($request->id); 
+        $pemesanan = Pemesanan::findOrFail($request->id);
+       
+        $Pemesananitem = Pemesananitem::where('pemesanan_id', $request->id)
+                                        ->with('menu_warungs')
+                                        ->get();
         return view('kelola_status.seller_status_detail_1',compact(['pemesanan']));
 
     }
@@ -104,8 +127,12 @@ class statusControl extends Controller
 
     public function seller_status_detail_2(Request $request)
     {
+        $pemesanan = Pemesanan::findOrFail($request->id);
 
-        $pemesanan = pemesanan::findOrFail($request->id); 
+       
+        $Pemesananitem = Pemesananitem::where('pemesanan_id', $request->id)
+                                        ->with('menu_warungs')
+                                        ->get();
         return view('kelola_status.seller_status_detail_2',compact(['pemesanan']));
 
     }
@@ -122,8 +149,11 @@ class statusControl extends Controller
         $pemesanan->save();
     
         // Mengambil semua data
-        $totalCountAll = pemesanan::where('status_pemesanan', 'Pesanan Diterima dan selesai')->count();
-        session(['totalOrders' => $totalCountAll]);
+        $totalCountAll = Pemesanan::where('status_pemesanan', 'Pesanan Diterima dan selesai')
+        ->whereHas('pemesananitems')
+        ->count();
+         session(['totalOrders' => $totalCountAll]);
+    
 
         $totalAmountAll = Pemesanan::where('status_pemesanan', 'Pesanan Diterima dan selesai')
         ->whereHas('pemesananitems')
@@ -151,10 +181,10 @@ class statusControl extends Controller
         $tanggalHariIni = Carbon::now();
     
         $countLastOneMonth = Pemesanan::where('status_pemesanan', 'Pesanan Diterima dan selesai')
-                                      ->where('confirmation_at', '>=', $tanggalSatuBulanLalu)
-                                      ->where('confirmation_at', '<=', $tanggalHariIni)
-                                      ->count();
-    
+        ->where('confirmation_at', '>=', $tanggalSatuBulanLalu)
+        ->where('confirmation_at', '<=', $tanggalHariIni)
+        ->withCount('pemesananitems')
+        ->count();
 
         $totalAmountLastOneMonth = Pemesanan::where('status_pemesanan', 'Pesanan Diterima dan selesai')
             ->where('confirmation_at', '>=', $tanggalSatuBulanLalu)
@@ -184,11 +214,6 @@ class statusControl extends Controller
         return redirect('seller/status');
     }
     
-    
-    
-    
-    
-
     public function seller_status_detail_3()
     {
         $pemesanan = pemesanan::all();

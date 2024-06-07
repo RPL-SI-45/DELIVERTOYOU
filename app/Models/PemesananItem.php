@@ -35,5 +35,9 @@ class PemesananItem extends Model
         $this->total_harga = $this->harga * $this->quantity;
         parent::save($options);
     }
+
+    public function menu_warungs() {
+        return $this->belongsTo(menu_warungs::class, 'menu_id');
+    }
     
 }
