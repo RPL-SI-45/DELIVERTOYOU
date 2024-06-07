@@ -2,17 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pesanan Detail</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Biryani' rel='stylesheet'>
+    <title>DeliverToYou</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            margin: 0;
+            font-family: 'Biryani', sans-serif;
+            font-size: 14px;
+            background-color: #f5f5f5;
+        }
+
+        .navbar {
+            background-color: #B49852;
+            border: none;
+            border-radius: 0;
+        }
+
+        .navbar-logo img {
+            height: 40px;
+            margin-top: 5px;
+        }
+
+        .navbar-text {
+            color: #fff;
+            margin-right: 15px;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+        .containerr {
+            margin-top: 50px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .container {
-            background-color: #B49852;
+            background-color: #ffff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -59,6 +85,39 @@
     </style>
 </head>
 <body>
+<div class="navbar navbar-default navbar-static-top">
+    <div class="containerr">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div>
+                @if(auth()->check())
+                    @if(auth()->user()->role == 'admin')
+                        <p class="navbar-text">Halo Admin</p>
+                    @elseif(auth()->user()->role == 'seller')
+                        <p class="navbar-text">Halo Seller</p>
+                    @elseif(auth()->user()->role == 'customer')
+                        <p class="navbar-text">Halo {{ auth()->user()->name }}</p>
+                    @endif
+                @endif
+            </div>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">LOGOUT</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 <div class="container">
     <h1 class="mb-4">Detail Pesanan</h1>
     <div class="table-responsive">
@@ -76,26 +135,30 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($pemesanan->items as $item)
+                @foreach($pemesanan->items as $index => $item)
                 <tr>
-                    <td>{{ $pemesanan->id }}</td>
-                    <td>{{ $pemesanan->nama_pelanggan }}</td>
+                    @if($index == 0)
+                        <td rowspan="{{ count($pemesanan->items) }}">{{ $pemesanan->id }}</td>
+                        <td rowspan="{{ count($pemesanan->items) }}">{{ $pemesanan->nama_pelanggan }}</td>
+                    @endif
                     <td>{{ $item->menu->nama }}</td>
                     <td>{{ $item->quantity }}</td>
-                    <td>
-                        @if($pemesanan->payment)
-                            {{ $pemesanan->payment->metode }}
-                        @endif
-                    </td>
-                    <td>
-                        @if($pemesanan->payment && $pemesanan->payment->metode == 'QRIS' && $pemesanan->payment->bukti)
-                            <img src="{{ asset('bukti/bayar/' . $pemesanan->payment->bukti) }}" alt="Bukti Pembayaran QRIS" class="img-thumbnail">
-                        @else
-                            Tidak ada
-                        @endif
-                    </td>
-                    <td>{{ $item->total_semua_menu }}</td>
-                    <td>{{ $pemesanan->status_pemesanan }}</td>
+                    @if($index == 0)
+                        <td rowspan="{{ count($pemesanan->items) }}">
+                            @if($pemesanan->payment)
+                                {{ $pemesanan->payment->metode }}
+                            @endif
+                        </td>
+                        <td rowspan="{{ count($pemesanan->items) }}">
+                            @if($pemesanan->payment && $pemesanan->payment->metode == 'QRIS' && $pemesanan->payment->bukti)
+                                <img src="{{ asset('bukti/bayar/' . $pemesanan->payment->bukti) }}" alt="Bukti Pembayaran QRIS" class="img-thumbnail">
+                            @else
+                                Tidak ada
+                            @endif
+                        </td>
+                        <td rowspan="{{ count($pemesanan->items) }}">{{ $pemesanan->items->sum('total_semua_menu') }}</td>
+                        <td rowspan="{{ count($pemesanan->items) }}">{{ $pemesanan->status_pemesanan }}</td>
+                    @endif
                 </tr>
                 @endforeach
             </tbody>
@@ -106,6 +169,10 @@
         <a href="{{ route('seller.reject', ['id' => $pemesanan->id]) }}" class="btn btn-danger">Tolak</a>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+<!-- Include jQuery and Bootstrap JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </body>
 </html>

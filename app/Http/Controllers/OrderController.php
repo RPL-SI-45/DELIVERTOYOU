@@ -1,50 +1,58 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pemesanan;
-use App\Models\PemesananItem;
 use App\Models\Payment;
-use App\Models\PesananMasuk;
-use App\Models\MenuWarung;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
     public function sellerOrder()
     {
-        // Get all orders with related pemesanan items and menu
-        $pemesanan = Pemesanan::with(['items.menu'])->get();
-        
-        return view('pesananmasuk.sellerorder', compact('pemesanan'));
+        $role = Auth::user()->role;
+
+        if ($role == 'seller') {
+            $pemesanan = Pemesanan::where('seller_id', Auth::user()->id)
+                                    ->where('status_pemesanan', 'Menunggu konfirmasi')
+                                    ->with('items.menu') // Ensure related items and menu are loaded
+                                    ->get();
+        } else {
+            $pemesanan = collect(); // empty collection if not seller
+        }
+
+        // Mengambil data pembayaran
+        $payment = Payment::all();
+
+        return view('pesananmasuk.sellerorder', compact('pemesanan', 'payment'));
     }
 
     public function sellerDetail($id)
     {
-        // Get the order with related pemesanan items and menu
-        $pemesanan = Pemesanan::with(['items.menu'])->findOrFail($id); 
-        
-        return view('pesananmasuk.sellerdetail', compact('pemesanan')); 
+        // Mengambil detail pemesanan berdasarkan ID
+        $pemesanan = Pemesanan::with('items.menu')->findOrFail($id);
+
+        return view('pesananmasuk.sellerdetail', compact('pemesanan'));
     }
 
     public function update(Request $request, $id)
     {
-        // Update order status
+        // Melakukan update status pesanan
         $order = Pemesanan::findOrFail($id);
-        $order->status_pemesanan = 'sedang berlangsung';
+        $order->status_pemesanan = 'Sedang berlangsung';
         $order->save();
 
         return redirect()->route('seller.order')->with('berhasil', 'Order dikonfirmasi');
     }
-    
+
     public function acc_konfirmasi(Request $request)
     {
         $id = $request->input('id');
         $acc = 'Sudah dikonfirmasi';
-        
         Pemesanan::where('id', $id)->update(['status_pemesanan' => $acc]);
 
-        //return redirect()->route('seller/status')->with('berhasil', 'Order telah dikonfirmasi');
-        return redirect('seller/status');
+        return redirect('/seller/status');
     }
 
     public function reject($id)
@@ -53,7 +61,7 @@ class OrderController extends Controller
 
         $pemesanan->status_pemesanan = 'Pesanan Ditolak';
         $pemesanan->save();
-        
+
         return redirect()->route('seller.order')->with('status', 'Pesanan ditolak');
     }
 }

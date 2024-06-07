@@ -197,6 +197,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+            <div>
             @if(auth()->check())
                 <p class="navbar-text">
                     @if(auth()->user()->role == 'seller')
@@ -204,8 +205,8 @@
                     @elseif(auth()->user()->role == 'customer')
                         Halo {{ auth()->user()->name }}
                     @endif
-                </p>
-            @endif
+                @endif
+            </div>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -234,7 +235,6 @@
         <h1 class="content-text">Selamat Datang di DeliverToYou</h1>
     </div>
 </div>
-
 <div class="dropdownfilter">
     <h3> Filter </h3>
     <form action="{{ route('home.filter') }}" method="GET">
@@ -246,7 +246,6 @@
         </select>
     </form>
 </div>
-
 <div class="card-container">
     @foreach($menu_warungs as $t)
     <div class="card">
@@ -287,7 +286,6 @@
         if (status) {
             $('#notification').text(status).css('background-color', '#4CAF50').fadeIn().delay(2000).fadeOut();
         }
-
         $('.add-to-cart-btn').click(function(e) {
             e.preventDefault();
             var form = $(this).closest('form');

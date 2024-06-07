@@ -33,5 +33,8 @@ class PemesananItem extends Model
         $this->total_harga = $this->harga * $this->quantity;
         parent::save($options);
     }
-    
+
 }
+
+    
+

@@ -14,8 +14,7 @@ class Pemesanan extends Model
     public $table = "pemesanan";
     use HasFactory;
     
-    
-
+  
 
     protected $fillable = ['user_id', 'seller_id', 'nama_pelanggan', 'alamat', 'status_pemesanan', 'rating', 'feedback', 'confirmation_at'];
     
@@ -30,18 +29,19 @@ class Pemesanan extends Model
         return $this->belongsTo(User::class, 'seller_id');
     }
   
-    public function payment()
-    {
-        return $this->hasOne(Payment::class);
-    }
-  
     public function pesananmasuk() { 
         return $this->belongsTo(PesananMasuk::class, 'pesananmasuk_id'); 
     }
 
 
+    public function payment()
+    {
+        return $this->hasOne(Payment::class, 'pemesanan_id'); 
+    }
+
     public function items()
     {
-        return $this->hasMany(PemesananItem::class);
+        return $this->hasMany(PemesananItem::class, 'pemesanan_id'); 
     }
 }
+

@@ -47,7 +47,7 @@ class FeedbackController extends Controller
             ]);
         }
         
-        return redirect('order/status');
+        return redirect('order/history');
         
 
     }

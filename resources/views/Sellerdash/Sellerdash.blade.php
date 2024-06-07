@@ -7,8 +7,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href='https://fonts.googleapis.com/css?family=Biryani' rel='stylesheet'>
     
-
-
     <style>
     .body {
       font-family: Arial, sans-serif;
@@ -140,11 +138,12 @@
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="home">HOME</a></li>
-                    <li><a href="menu">MENU</a></li>
-                    <li><a href="categories">CATEGORIES</a></li>
-                    <li><a href="about">ABOUT</a></li>
-                    <li><a href="login">LOGIN</a></li>
+                <li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">LOGOUT</a>
+                </li>
                 </ul>
             </div>
         </div>
@@ -155,11 +154,11 @@
             <p class="lead">Kelola pesanan Anda dengan mudah, pantau performa penjualan, dan maksimalkan potensi bisnis Anda.</p>
             <hr class="my-4">
             <p>Gunakan alat dan fitur yang tersedia untuk meningkatkan penjualan Anda.</p>
-            <a class="btn btn-dark" href="/seller/status" role="button">Lihat Pesanan</a>
-            <!-- <div class="text-center my-5"> -->
+            <a class="btn btn-dark" href="/seller/order" role="button">Lihat Pesanan</a>
+            <a class="btn btn-dark" href="/seller/orderhistory" role="button">Riwayat Pesanan</a>
+            <div class="text-center my-5">
             <a href="/seller/menu/input" class="btn btn-dark">Tambah Makanan & Minuman Baru</a>
             <a href="/seller/menu" class="btn btn-dark">Kelola Menu</a>
-            
             <a href="/seller/{{ auth()->user()->id }}/edit" class="btn btn-dark">Edit Profil Toko</a>
             </div>
         </div>
@@ -168,8 +167,7 @@
     <a href="/seller/dash/1_month" type="button" class="btn btn-dark" style="display: inline-block; margin-right: 10px;">1 bulan yang lalu</a>
     <a href="/seller/dash" type="button" class="btn btn-dark" style="display: inline-block;">Total Waktu</a>
     </div>
-
-            @foreach($SellerDash as $t)
+        @foreach($SellerDash as $t)
                 <div class="container mt-5">
                  <div class="table-container">
                   <div class="table-column">
@@ -184,7 +182,7 @@
                    </div>
                   </div>
                 </div>   
-            @endforeach
+        @endforeach
 
 
             

@@ -70,6 +70,10 @@ class Kernel extends HttpKernel
         // ...
         'redirectIfNotCustomerOrSeller' => \App\Http\Middleware\RedirectIfNotCustomerOrSeller::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
+        'admin' => \App\Http\Middleware\AdminMiddleware::class,
+        'seller' => \App\Http\Middleware\RedirectIfNotSeller::class,
+        
     ];
     
 }
+

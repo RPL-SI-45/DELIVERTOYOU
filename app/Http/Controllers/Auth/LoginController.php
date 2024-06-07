@@ -14,14 +14,22 @@ class LoginController extends Controller
     }
 
     public function login(Request $request)
-    {   
-    $credentials = $request->only('email', 'password');
-    if (Auth::attempt($credentials)) {
-        // Jika autentikasi berhasil, arahkan pengguna ke halaman yang diminta sebelumnya
-        return redirect()->intended(route('home'));
-    }
-    // Jika autentikasi gagal, arahkan kembali ke halaman login dengan pesan error yang spesifik
-    return redirect()->route('login')->with('error', 'Invalid email or password.');
+    {
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            
+            if ($user->role === 'admin') {
+                return redirect()->route('kategori_admin.index');
+            }
+    
+            if ($user->role === 'seller') {
+                return redirect()->route('seller.dash');
+            }
+    
+            return redirect()->intended(route('home'));
+        }
+        return redirect()->route('login')->with('error', 'Invalid email or password.');
     }
 
     public function logout(Request $request)
