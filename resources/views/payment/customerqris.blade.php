@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DeliverToYou</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href='https://fonts.googleapis.com/css?family=Biryani' rel='stylesheet'>
-    <title>DeliverToYou</title>
     <style>
         body {
             margin: 0;
@@ -18,6 +18,7 @@
             background-color: #B49852;
             border: none;
             border-radius: 0;
+            margin-bottom: 0; /* Hindari margin bawah pada navbar */
         }
 
         .navbar-logo img {
@@ -31,38 +32,51 @@
             margin-top: 15px;
             font-size: 16px;
         }
+
         .payment-form {
             background-color: #ffffff;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
         .payment-form h2 {
             margin-bottom: 20px;
             color: #343a40;
         }
+
         .form-group label {
             font-weight: 500;
         }
+
         .btn-primary {
             background-color: #007bff;
             border-color: #007bff;
         }
+
         .btn-primary:hover {
             background-color: #0056b3;
             border-color: #0056b3;
         }
+
         .form-group img {
             max-width: 100%;
             height: auto;
             display: block;
             margin: 0 auto 15px auto;
         }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .payment-form {
+                padding: 20px; /* Mengurangi padding pada layar kecil */
+            }
+        }
     </style>
 </head>
 <body>
 <div class="navbar navbar-default navbar-static-top">
-    <div class="containerr">
+    <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>

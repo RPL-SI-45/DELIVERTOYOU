@@ -7,36 +7,72 @@
     <link href='https://fonts.googleapis.com/css?family=Biryani' rel='stylesheet'>
     <title>DeliverToYou</title>
     <style>
-        body {
+        .font-style {
             margin: 0;
-            font-family: 'Biryani', sans-serif;
-            font-size: 14px;
-            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            color: black;
         }
 
         .navbar {
+            overflow: hidden;
             background-color: #B49852;
-            border: none;
-            border-radius: 0;
         }
 
         .navbar-logo img {
             height: 40px;
-            margin-top: 5px;
-        }
-
-        .navbar-text {
-            color: #fff;
+            margin-top: 10px;
             margin-right: 15px;
-            margin-top: 15px;
-            font-size: 16px;
         }
 
-        .container h1 {
-            margin-top: 20px;
-            margin-bottom: 20px;
-            color: #000000;
+        .search-container {
+            display: inline-block;
+            position: absolute;
+            left: 45%;
+            top: 0;
+            transform: translateX(-45%);
+        }
+
+        .search-container input[type=text] {
+            padding: 5px;
+            margin-top: 16px;
+            font-size: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 130px;
+        }
+
+        .search-container button {
+            padding: 5px;
+            margin-top: 16px;
+            margin-left: 3px;
+            background: #ddd;
+            font-size: 9.5px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .search-container button:hover {
+            background: #ccc;
+        }
+
+        content-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .content-text {
+            position: absolute;
+            bottom: 0;
+            left: 150px;
+            background-color: white;
+            padding: 10px;
             text-align: center;
+        }
+
+        .about {
+            margin: 0;
         }
 
         .table-hover tbody tr:hover {
@@ -77,11 +113,18 @@
             background-color: #000000;
             color: #ffffff;
         }
+        @media (max-width: 576px) {
+
+            .search-container {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
     </style>
 </head>
 <body>
 <div class="navbar navbar-default navbar-static-top">
-    <div class="containerr">
+    <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -89,26 +132,19 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <div>
-                @if(auth()->check())
-                    @if(auth()->user()->role == 'admin')
-                        <p class="navbar-text">Halo Admin</p>
-                    @elseif(auth()->user()->role == 'seller')
-                        <p class="navbar-text">Halo Seller</p>
-                    @elseif(auth()->user()->role == 'customer')
-                        <p class="navbar-text">Halo {{ auth()->user()->name }}</p>
-                    @endif
-                @endif
+            <a href="#" class="navbar-logo"><img src="{{ asset('img_example/logo.png') }}" alt="logo"></a>
+            <div class="search-container">
+                <input type="text" placeholder="Search...">
+                <button type="submit">Search</button>
             </div>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">LOGOUT</a>
-                </li>
+                <li><a href="/seller/dash">HOME</a></li>
+                <li><a href="/seller/menu">MENU</a></li>
+                <li><a href="/seller/order">PESANAN</a></li>
+                <li><a href="/seller/status">STATUS</a></li>
+                <li><a href="login">LOGIN</a></li>
             </ul>
         </div>
     </div>

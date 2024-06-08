@@ -182,6 +182,10 @@
     </div>
 </div>
 
+<div class="text-center mt-3">
+    <a href="/order/history" class="btn btn-secondary btn-lg btn-block">Lihat Riwayat Pesanan</a>
+</div>
+
 @foreach($pemesanan as $t)
     @if($t->pemesananItems->isNotEmpty())
         @php $firstItem = $t->pemesananItems->first(); @endphp
