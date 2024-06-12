@@ -159,8 +159,6 @@
             </button>
             <a href="#" class="navbar-logo"><img src="{{ asset('img_example/logo.png') }}" alt="logo"></a>
             <div class="search-container">
-                <input type="text" placeholder="Search...">
-                <button type="submit">Search</button>
             </div>
         </div>
         <div class="collapse navbar-collapse">
