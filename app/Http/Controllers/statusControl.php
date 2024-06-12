@@ -8,6 +8,7 @@ use App\Models\SellerDash1;
 use App\Models\SellerDash2;
 use App\Models\Pemesananitem;
 use App\Models\menu_warungs;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -36,31 +37,38 @@ class statusControl extends Controller
 
 
 
-
-
-    public function order_status(Request $request)
-    {
-        $pemesanan = Pemesanan::with('user')->where('status_pemesanan', '!=', 'Pesanan Diterima dan selesai')->get();
-        $id_user = auth()->id(); 
+public function order_status(Request $request)
+{
+    $id_user = Auth::id(); 
     
-        // Mengambil pemesanan yang terkait dengan id_user yang sedang masuk
-        $pemesanan = Pemesanan::where('user_id', $id_user)->get();
-        $Pemesananitem = Pemesananitem::where('user_id', $id_user)->get();
+    $pemesanan = Pemesanan::with('user')
+        ->where('user_id', $id_user)
+        ->where('status_pemesanan', '!=', 'Pesanan Diterima dan selesai')
+        ->get();
+
+    $Pemesananitem = Pemesananitem::where('user_id', $id_user)->get();
     
-        return view('kelola_status.cust_status', compact('pemesanan','Pemesananitem'));
+    $user = User::find($id_user);
+
+    if (!$user) {
+        return redirect()->back()->with('error', 'User not found');
     }
+
+    return view('kelola_status.cust_status', compact('pemesanan', 'Pemesananitem', 'user'));
+}
 
 
     public function order_status_detail(Request $request)
     {   
-      
-        $pemesanan = Pemesanan::findOrFail($request->id);
+        $pemesanan = Pemesanan::findOrFail($request->id)
+                                ->with('menu_warungs');  
 
-       
-        $Pemesananitem = Pemesananitem::where('pemesanan_id', $request->id)
-                                        ->with('menu_warungs')
+        $Pemesananitems = Pemesananitem::where('pemesanan_id', $request->id)
                                         ->get();
-        return view('kelola_status.cust_status_detail', compact('pemesanan','Pemesananitem'));
+        
+        return view('kelola_status.cust_status_detail', compact('pemesanan', 'Pemesananitems'));
+        
+        
     }
 
     public function seller_status_detail(Request $request)

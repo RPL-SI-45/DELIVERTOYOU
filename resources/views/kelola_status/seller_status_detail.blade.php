@@ -159,36 +159,33 @@
 </div>
 
 
-<div class="container mt-5">
-    <div class="table-container">
-        <div class="table-column">
-            <img src="{{ asset('img_example/makanan.png') }}" alt="Image 3" class="custom-img-size">
-            <div class="table-cell font-weight-bold">Nama Customer : {{ $pemesanan->user->name }}</div>
-            <div class="table-cell">ID : {{ $pemesanan->id }}</div>
-            <div class="table-cell">Status : {{ $pemesanan->status_pemesanan }}</div>
-            <div class="table-cell">Alamat : {{ $pemesanan->alamat }}</div>
-            <br>
-            @foreach($pemesanan->pemesananItems as $pemesananItem)
-                <div class="table-cell">Menu : {{ $pemesananItem->menu_warungs ? $pemesananItem->menu_warungs->nama : 'Menu not found' }}</div>
-                <div class="table-cell">Harga: {{ $pemesananItem->harga }}</div>
-                <div class="table-cell">Quantity: {{ $pemesananItem->quantity }}</div>
-                <div class="table-cell">Total: {{ $pemesananItem->total_harga }}</div>
-                <br>
-            @endforeach
-            <div class="table-cell">Grand Total: {{ $pemesananItem->total_semua_menu }}</div>
-
-            <br>
-            <form action="{{ route('up_to_cook') }}" method="POST" style="display: flex; align-items: center; gap: 10px;">
-            @csrf
-            <input type="hidden" name="id" value="{{ $pemesanan->id }}">
-            <button type="submit" class="btn btn-primary" style="margin: 0;">Update</button>
-            </form>
-            <a href="/seller/status" class="btn btn-dark" style="display: flex; align-items: center; gap: 10px;">Back</a>
-
+<div class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#" class="navbar-logo"><img src="{{ asset('img_example/logo.png') }}" alt="logo"></a>
+            <div class="search-container">
+                <input type="text" placeholder="Search...">
+                <button type="submit">Search</button>
+            </div>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+            <li><a href="/home">HOME</a></li>
+                <li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">LOGOUT</a>
+                </li>
         </div>
     </div>
 </div>
-
  
 
 

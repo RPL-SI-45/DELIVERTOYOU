@@ -192,41 +192,47 @@
         </div>
     </div>
     <div class="container mt-5">
-        <div class="jumbotron text-center">
-            <h1 class="display-4">Selamat Datang di Dashboard Penjual DelivertoYou!</h1>
-            <p class="lead">Kelola pesanan Anda dengan mudah, pantau performa penjualan, dan maksimalkan potensi bisnis Anda.</p>
-            <hr class="my-4">
-            <p>Gunakan alat dan fitur yang tersedia untuk meningkatkan penjualan Anda.</p>
-            <a class="btn btn-dark" href="/seller/order" role="button">Lihat Pesanan</a>
-            <a class="btn btn-dark" href="/seller/orderhistory" role="button">Riwayat Pesanan</a>
-            <div class="text-center my-5">
-            <a href="/seller/menu/input" class="btn btn-dark">Tambah Makanan & Minuman Baru</a>
-            <a href="/seller/menu" class="btn btn-dark">Kelola Menu</a>
-            <a href="/seller/{{ auth()->user()->id }}/edit" class="btn btn-dark">Edit Profil Toko</a>
-            </div>
-        </div>
+    <div class="jumbotron text-center">
+        <h1 class="display-4">Selamat Datang di Dashboard Penjual DelivertoYou!</h1>
+        <p class="lead">Kelola pesanan Anda dengan mudah, pantau performa penjualan, dan maksimalkan potensi bisnis Anda.</p>
+        <hr class="my-4">
+        <p>Gunakan alat dan fitur yang tersedia untuk meningkatkan penjualan Anda.</p>
+        <a class="btn btn-light text-dark" href="/seller/order" role="button">Lihat Pesanan</a>
+        <a class="btn btn-light text-dark" href="/seller/orderhistory" role="button">Riwayat Pesanan</a>
+        <a href="/seller/status" class="btn btn-light text-dark">Status Pesanan</a>
+        <a href="/seller/menu/input" class="btn btn-light text-dark">Tambah Makanan & Minuman Baru</a>
+        <a href="/seller/menu" class="btn btn-light text-dark">Kelola Menu</a>
+        <a href="/seller/{{ auth()->user()->id }}/edit" class="btn btn-light text-dark">Edit Profil Toko</a>
     </div>
+</div>
+
     <div style="text-align: center;">
     <a href="/seller/dash/1_month" type="button" class="" style="display: inline-block; margin-right: 10px;">1 bulan yang lalu</a>
     <a href="/seller/dash" type="button" class="" style="display: inline-block;">Total Waktu</a>
     </div>
-        @foreach($SellerDash as $t)
-                <div class="container mt-5">
-                 <div class="table-container">
-                  <div class="table-column">
-                    <img src="{{ asset('img_example/makanan.png') }}" alt="Image 3" class="custom-img-size">
-                    <h2>Performa Penjualan</h2>
-                    <div class="card-header">    Total Pendapatan Anda</div>
-                    <div class="table-cell font-weight-bold"> Rp.{{$t->Total_harga}}</div>
-                    <div class="card-header">    Total Pemesanan yang terselesaikan</div>
-                    <div class="table-cell font-weight-bold"> {{$t->Total_pemesanan}}</div>
-                    <div class="card-header">    Rating</div>
-                    <div class="table-cell font-weight-bold">Total Rating : {{$t->Total_rating}}</div>
-                   </div>
-                  </div>
-                </div>   
-        @endforeach
-
+    
+    @foreach($SellerDash as $t)
+<div style="margin-top: 20px;">
+    <div style="display: flex; justify-content: center;">
+        <div style="background-color: #f9f9f9; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <img src="{{ asset('img_example/makanan.png') }}" alt="Image 3" style="width: 100px; height: auto; margin-bottom: 20px;">
+            <h2 style="text-align: center;">Performa Penjualan</h2>
+            <div style="background-color: #fff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin-bottom: 10px;">
+                <div style="background-color: #f0f0f0; padding: 10px; border-bottom: 1px solid #ddd;">Total Pendapatan Anda</div>
+                <div style="padding: 10px;">Rp. {{$t->Total_harga}}</div>
+            </div>
+            <div style="background-color: #fff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin-bottom: 10px;">
+                <div style="background-color: #f0f0f0; padding: 10px; border-bottom: 1px solid #ddd;">Total Pemesanan yang terselesaikan</div>
+                <div style="padding: 10px;">{{$t->Total_pemesanan}}</div>
+            </div>
+            <div style="background-color: #fff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin-bottom: 10px;">
+                <div style="background-color: #f0f0f0; padding: 10px; border-bottom: 1px solid #ddd;">Rating</div>
+                <div style="padding: 10px;">Total Rating : {{$t->Total_rating}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

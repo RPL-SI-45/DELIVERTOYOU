@@ -162,7 +162,7 @@
     <div class="table-container">
         <div class="table-column">
             <img src="{{ asset('img_example/makanan.png') }}" alt="Image 3" class="custom-img-size">
-            <div class="table-cell font-weight-bold">CRISBAR</div>
+            <div class="table-cell font-weight-bold">{{ $pemesanan->user->nama_toko }}</div>
             <div class="table-cell">ID : {{ $pemesanan->id }}</div>
             <div class="table-cell">Status : {{ $pemesanan->status_pemesanan }}</div>
             <div class="table-cell">Alamat : {{ $pemesanan->alamat }}</div>
@@ -175,7 +175,7 @@
                 <br>
             @endforeach
 
-            <a href="/seller/status" class="btn btn-dark">Back</a>
+            <a href="/order/status" class="btn btn-dark">Back</a>
         </div>
     </div>
 </div>

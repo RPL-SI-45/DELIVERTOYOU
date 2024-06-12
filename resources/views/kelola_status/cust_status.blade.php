@@ -186,13 +186,19 @@
 </div>
 
 @foreach($pemesanan as $t)
-    @if($t->pemesananItems->isNotEmpty())
-        @php $firstItem = $t->pemesananItems->first(); @endphp
+    @if($t->pemesananitems->isNotEmpty())
+        @php $firstItem = $t->pemesananitems->first(); @endphp
         <div class="container mt-5">
             <div class="table-container">
                 <div class="table-column">
                     <img src="{{ asset('img_example/makanan.png') }}" alt="Image 3" class="custom-img-size">
-                    <div class="table-cell font-weight-bold">{{ $t->user->nama_toko }}</div>
+                    <div class="table-cell font-weight-bold">
+                        @if($firstItem->user)
+                            {{ $firstItem->user->nama_toko }}
+                        @else
+                            Crisbar
+                        @endif
+                    </div>
                     <div class="table-cell">ID : {{ $t->id }}</div>
                     <div class="table-cell">
                         Menu :
@@ -210,6 +216,8 @@
         </div>
     @endif
 @endforeach
+
+
 
             
       
