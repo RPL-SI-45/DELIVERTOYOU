@@ -169,7 +169,12 @@
                 <li><a href="/seller/menu">MENU</a></li>
                 <li><a href="/seller/order">PESANAN</a></li>
                 <li><a href="/seller/status">STATUS</a></li>
-                <li><a href="login">LOGIN</a></li>
+                <li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">LOGOUT</a>
+                </li>
             </ul>
         </div>
     </div>

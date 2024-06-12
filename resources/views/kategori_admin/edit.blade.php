@@ -61,7 +61,6 @@
 
         input[type="submit"]:hover {
             background-color: #45a049;
->>>>>>> main
         }
     </style>
 </head>
@@ -116,3 +115,5 @@
 
 </body>
 </html>
+
+

@@ -108,17 +108,18 @@
             <a href="#" class="navbar-logo"><img src="/img_example/logo.png" alt="logo"></a>
             <div class="search-container">
                 <form action="" method="GET">
-                    <input type="text" name="search" placeholder="Search..." value="{{ request()->search }}">
-                    <button type="submit">Search</button>
                 </form>
             </div>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/home">HOME</a></li>
-                <li><a href="menu">MENU</a></li>
-                <li><a href="/profil">PROFIL</a></li>
-                <li><a href="login">LOGIN</a></li>
+                <li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">LOGOUT</a>
+                </li>
             </ul>
         </div>
     </div>
